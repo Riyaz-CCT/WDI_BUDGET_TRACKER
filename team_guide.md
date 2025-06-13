@@ -41,6 +41,6 @@ git push origin page-yourpage-memberX
 ---
 
 ## 📌 Notes
-- One branch per member/page
+- One branch per member
 - Always open a PR (no direct pushes to `main`)
 

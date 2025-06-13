@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX/UI</title>
+    <link rel="stylesheet" href="dashboard_styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body>
+
+    <!--SIDE BAR STARTS HERE-->
+    <div class="sidebar">
+        <div class="logo"></div>
+        <ul class="menu">
+            <li class="active">
+                <a href="#">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-wallet"></i>
+                    <span>My Expenses</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-user"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--SIDE BAR ENDS HERE-->
+
+    <!--MAIN STARTS HERE(Contains header-(title,profile,etc),graphs,table)-->
+
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <span>Primary</span>
+                <h2>Dashboard</h2>
+            </div>
+        <div class="user--info">
+            <div class="search--box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <img src="/WDI_Budget Tracker/pfp.png" alt="pfp"/>
+        </div>    
+    </div>
+    
+    <div class="graph--container">
+    <!-- Switch buttons in top-right -->
+    <div class="chart-switch">
+        <button onclick="prevChart()"><</button>
+        <button onclick="nextChart()">></button>
+    </div>
+
+    <!-- Canvas for each chart -->
+    <canvas id="barChart" class="chart-canvas"></canvas>
+    <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
+    <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
+    </div>
+
+    <!--TABLE WRAPPER STARTS HERE-->
+    <div class="tabular--wrapper">
+        <h3 class="main--title">Finance Data</h3>
+        <div class="table--container">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>    
+                <tr>
+                    <td>2025-06-01</td>
+                    <td>Food</td>
+                    <td>Lunch at Cafe Coffee Day</td>
+                    <td>Expense</td>
+                    <td>$12</td>
+                </tr>
+                <tr>
+                    <td>2025-06-03</td>
+                    <td>Transportation</td>
+                    <td>Uber ride to office</td>
+                    <td>Expense</td>
+                    <td>$8</td>
+                </tr>
+                <tr>
+                    <td>2025-06-05</td>
+                    <td>Groceries</td>
+                    <td>Monthly grocery shopping at Walmart</td>
+                    <td>Expense</td>
+                    <td>$94</td>
+                </tr>
+                <tr>
+                    <td>2025-06-07</td>
+                    <td>Entertainment</td>
+                    <td>Netflix monthly subscription</td>
+                    <td>Expense</td>
+                    <td>$15.99</td>
+                </tr>
+                <tr>
+                    <td>2025-06-10</td>
+                    <td>Salary</td>
+                    <td>June salary credited</td>
+                    <td>Income</td>
+                    <td>$2,500</td>
+                </tr>
+                <tr>
+                    <td>2025-06-11</td>
+                    <td>Freelancing</td>
+                    <td>Website design project payment</td>
+                    <td>Income</td>
+                    <td>$600</td>
+                </tr>
+                <tr>
+                    <td>2025-06-12</td>
+                    <td>Health</td>
+                    <td>Doctor consultation and medicine</td>
+                    <td>Expense</td>
+                    <td>$45</td>
+                </tr>
+                <tr>
+                    <td>2025-06-13</td>
+                    <td>Utilities</td>
+                    <td>Electricity and internet bills</td>
+                    <td>Expense</td>
+                    <td>$120</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">Total Income: $3,100 | Total Expense: $294.99</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        </div>
+    </div>  
+    <!--TABLE WRAPPER ENDS HERE-->  
+
+    </div>
+    <!--MAIN ENDS HERE-->
+
+  <!--CHART SCRIPT STARTS HERE-->  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const chartIds = ['barChart', 'lineChart', 'pieChart'];
+    let currentIndex = 0;
+
+    function showChart(index) {
+      chartIds.forEach((id, i) => {
+        const canvas = document.getElementById(id);
+        canvas.style.display = i === index ? 'block' : 'none';
+      });
+    }
+
+    function nextChart() {
+      currentIndex = (currentIndex + 1) % chartIds.length;
+      showChart(currentIndex);
+    }
+
+    function prevChart() {
+      currentIndex = (currentIndex - 1 + chartIds.length) % chartIds.length;
+      showChart(currentIndex);
+    }
+
+    // Chart.js setup
+    const barCtx = document.getElementById('barChart').getContext('2d');
+    const lineCtx = document.getElementById('lineChart').getContext('2d');
+    const pieCtx = document.getElementById('pieChart').getContext('2d');
+
+    new Chart(barCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+        datasets: [{
+          label: 'Bar Earnings',
+          data: [200, 150, 300, 250],
+          backgroundColor: 'rgba(113,99,186,0.6)',
+          borderColor: 'rgba(113,99,186,1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+        datasets: [{
+          label: 'Website Revenue',
+          data: [100, 200, 150, 300],
+          borderColor: 'rgba(113, 99, 186, 1)',         // Primary purple
+          backgroundColor: 'rgba(113, 99, 186, 0.2)',   // Soft transparent purple
+          pointBackgroundColor: 'rgba(113, 99, 186, 1)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgba(113, 99, 186, 1)',
+          borderWidth: 2,
+          tension: 0.4  // for smooth curves
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            ticks: {
+              color: '#555'  // soft dark gray for readability
+            },
+            grid: {
+              color: '#eee'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#555'
+            },
+            grid: {
+              color: '#eee'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(113, 99, 186, 1)',  // purple text in legend
+              font: {
+                weight: 'bold'
+              }
+            }
+          }
+        }
+      }
+    });
+      
+
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Rent', 'Groceries', 'Utilities'],
+        datasets: [{
+          label: 'Website Theme Pie',
+          data: [300, 200, 100],
+          backgroundColor: [
+            'rgba(113, 99, 186, 1)',     // Primary purple
+            'rgba(178, 162, 255, 0.8)',  // Soft lavender (light variant)
+            'rgba(237, 237, 237, 1)'     // Light gray (same as your .search--box bg)
+          ],
+          borderColor: '#fff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+  </script>
+  <!--CHART SCRIPT ENDS HERE-->
+</body>
+</html>

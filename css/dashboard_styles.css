@@ -90,8 +90,10 @@ body{
   position: relative;
   background:#ebe9e9;
   width:100%;
-  padding: 1rem;
+  padding: 1rem 2.5rem;
 }
+
+
 
 .header--wrapper img{
   height: 50px;
@@ -145,6 +147,67 @@ body{
 .search--box i:hover{
   transform:scale(1.2);
 }
+
+/**STATS CONTAINER STARTS HERE**/
+
+
+.stats-cards-container{
+  width: 100%;
+  height:200px;
+  background-color: #fff;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+.stats-cards-container .card-title{
+    color:rgba(113,99,186,255);
+
+}
+
+.stats-cards-slider{
+  display: flex;
+  flex-direction: row;
+  gap:20px;
+  
+}
+
+.stats-cards{
+  height: 130px;
+  width: 100%;
+  background-color:rgb(156, 203, 241);
+  border-radius: 10px;
+  padding: 1rem;  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  background-color: rgba(113,99,186,255); /* subtle highlight */
+  
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+
+.stats-cards:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-color: rgba(62, 28, 230, 0.6);
+  
+}
+
+.stats-cards span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/**STATS CONTAINER ENDS HERE**/
+
+
 /*GRAPH CONTAINER*/
 .graph--container {
   position: relative;
@@ -194,7 +257,7 @@ body{
   background-color: #fff;
   margin-top: 1rem;
   border-radius: 10px;
-  padding:2rem
+  padding:2rem;
 }
 .main--title{
   color: rgba(113,99,186,255);

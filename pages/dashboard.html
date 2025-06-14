@@ -57,7 +57,7 @@
     <!--SIDE BAR ENDS HERE-->
 
     <!--MAIN STARTS HERE(Contains header-(title,profile,etc),graphs,table)-->
-
+    
     <div class="main--content">
         <div class="header--wrapper">
             <div class="header--title">
@@ -72,18 +72,40 @@
             <img src="/assests/profile.png" alt="profile picture here"/>
         </div>    
     </div>
+
+    <div class="stats-cards-container">
+        <h3 class="card-title">Monthly Overview</h3>
+        <div class="stats-cards-slider">
+            <div class="stats-cards">
+                <p>Income</p>
+                <span>$72,450</span>
+            </div>
+            <div class="stats-cards">
+                <p>Expense</p>
+                <span>$48,920</span>
+            </div>
+            <div class="stats-cards">
+                <p>Net Balance</p>
+                <span>$23,530</span>
+            </div>
+            <div class="stats-cards">
+                <p>Savings</p>
+                <span>$15,000</span>
+            </div>
+        </div>
+    </div>
     
     <div class="graph--container">
-    <!-- Switch buttons in top-right -->
-    <div class="chart-switch">
-        <button onclick="prevChart()"><</button>
-        <button onclick="nextChart()">></button>
-    </div>
+        <!-- Switch buttons in top-right -->
+        <div class="chart-switch">
+            <button onclick="prevChart()"><</button>
+            <button onclick="nextChart()">></button>
+        </div>
 
-    <!-- Canvas for each chart -->
-    <canvas id="barChart" class="chart-canvas"></canvas>
-    <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
-    <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
+        <!-- Canvas for each chart -->
+        <canvas id="barChart" class="chart-canvas"></canvas>
+        <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
+        <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
     </div>
 
     <!--TABLE WRAPPER STARTS HERE-->

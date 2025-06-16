@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left Section -->
+      <div class="left-section">
+        <div class="expenses-card-left">
+          <div class="card-header">
+            <img src="/assests/money-bag.png" alt="icon" />
+            <span>This Month Expenses</span>
+          </div>
+          <h2>$12,000</h2>
+          <button class="rate-btn">
+            <img src="up-arrow.png" alt="icon" /> 12%
+          </button>
+
+          <div class="graph">
+            <div class="line"></div>
+            <div class="bar"></div>
+            <div class="days">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span class="active">Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="expenses-card-right">
+          <div class="card-header">
+            <img src="/assests/money-bag.png" alt="icon" />
+            <span>This Month Expenses</span>
+          </div>
+          <h2>$12,000</h2>
+          <button class="rate-btn">
+            <img src="up-arrow.png" alt="icon" /> 12%
+          </button>
+
+          <div class="graph">
+            <div class="line"></div>
+            <div class="bar"></div>
+            <div class="days">
+              <span>Mon</span>
+              <span>Tue</span>
+              <span>Wed</span>
+              <span class="active">Thu</span>
+              <span>Fri</span>
+              <span>Sat</span>
+              <span>Sun</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Section -->
+      <div class="right-section">
+        <div class="logo">
+          <img src="/assests/money-bag.png" alt="logo" />
+          <span>FinTrack Pro</span>
+        </div>
+        <h1>Join the FinTrack Pro Family!</h1>
+        <p class="subtext">Log in to continue your financial journey.</p>
+
+        <form id="signup-form">
+          <div class="input-row">
+            <input type="text" placeholder="Full Name *" required />
+            <input type="text" placeholder="Phone Number *" required />
+          </div>
+          <input type="email" placeholder="Email *" required />
+          <div class="input-row">
+            <input type="password" placeholder="Password *" required />
+            <input type="password" placeholder="Re-enter Your Password *" required />
+          </div>
+
+          <!-- ✅ Correct submit button -->
+          <button type="submit" class="sign-in">Sign Up!</button>
+
+          <p class="login-text">
+            Already have an account? <a href="login.html">Log In</a>
+          </p>
+          <button type="button" class="google-btn">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
+              alt="Google Icon"
+            />
+            Sign up with Google
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ✅ JS: Redirect after form submission -->
+    <script>
+      document.getElementById("signup-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Optional: Add validation here later
+        window.location.href = "dashboard.html";
+      });
+    </script>
+  </body>
+</html>

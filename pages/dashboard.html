@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Meta tags for character encoding, browser compatibility, and responsive design -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title shown on browser tab -->
     <title>UX/UI</title>
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/dashboard_styles.css">
+
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
 </head>
 
 <body>
 
-    <!--SIDE BAR STARTS HERE-->
+    <!-- ===================== SIDEBAR START ===================== -->
     <div class="sidebar">
+        <!-- Logo section -->
         <div class="logo">
-            <img src="/assests/budget.png" alt="">
-           <p>FinTrack Pro</p>
+            <img src="/assests/budget.png" alt="Logo">
+            <p>FinTrack Pro</p>
         </div>
+
+        <!-- Sidebar navigation menu -->
         <ul class="menu">
+            <!-- Active menu item -->
             <li class="active">
                 <a href="#">
                     <i class="fas fa-chart-line"></i>
@@ -49,6 +60,7 @@
                     <span>Settings</span>
                 </a>
             </li>
+            <!-- Logout option -->
             <li class="logout">
                 <a href="#">
                     <i class="fas fa-sign-out-alt"></i>
@@ -57,154 +69,163 @@
             </li>
         </ul>
     </div>
-    <!--SIDE BAR ENDS HERE-->
+    <!-- ===================== SIDEBAR END ===================== -->
 
-    <!--MAIN STARTS HERE(Contains header-(title,profile,etc),graphs,table)-->
-    
+    <!-- ===================== MAIN CONTENT START ===================== -->
     <div class="main--content">
+
+        <!-- ========== HEADER START ========== -->
         <div class="header--wrapper">
             <div class="header--title">
                 <span>Primary</span>
                 <h2>Dashboard</h2>
             </div>
-        <div class="user--info">
-            <!--
-            <div class="search--box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" placeholder="Search">
-            </div>
-            -->
-            <img src="/assests/profile.png" alt="profile picture here"/>
-        </div>    
 
-    </div>
-
-    <div class="stats-cards-container">
-        <h3 class="card-title">Monthly Overview</h3>
-        <div class="stats-cards-slider">
-            <div class="stats-cards">
-                <p>Income</p>
-                <span>$72,450</span>
-            </div>
-            <div class="stats-cards">
-                <p>Expense</p>
-                <span>$48,920</span>
-            </div>
-            <div class="stats-cards">
-                <p>Net Balance</p>
-                <span>$23,530</span>
-            </div>
-            <div class="stats-cards">
-                <p>Savings</p>
-                <span>$15,000</span>
+            <div class="user--info">
+                <!-- Optional search box (currently commented out) -->
+                <!--
+                <div class="search--box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+                -->
+                <img src="/assests/profile.png" alt="profile picture here" />
             </div>
         </div>
-    </div>
-    
-    <div class="graph--container">
-        <!-- Switch buttons in top-right -->
-        <div class="chart-switch">
-            <button onclick="prevChart()"><</button>
-            <button onclick="nextChart()">></button>
+        <!-- ========== HEADER END ========== -->
+
+        <!-- ========== STATS CARDS SECTION ========== -->
+        <div class="stats-cards-container">
+            <h3 class="card-title">Monthly Overview</h3>
+            <div class="stats-cards-slider">
+                <div class="stats-cards">
+                    <p>Income</p>
+                    <span>$72,450</span>
+                </div>
+                <div class="stats-cards">
+                    <p>Expense</p>
+                    <span>$48,920</span>
+                </div>
+                <div class="stats-cards">
+                    <p>Net Balance</p>
+                    <span>$23,530</span>
+                </div>
+                <div class="stats-cards">
+                    <p>Savings</p>
+                    <span>$15,000</span>
+                </div>
+            </div>
         </div>
+        <!-- ========== STATS CARDS END ========== -->
 
-        <!-- Canvas for each chart -->
-        <canvas id="barChart" class="chart-canvas"></canvas>
-        <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
-        <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
-    </div>
+        <!-- ========== CHART SECTION START ========== -->
+        <div class="graph--container">
+            <!-- Chart toggle buttons -->
+            <div class="chart-switch">
+                <button onclick="prevChart()"><</button>
+                <button onclick="nextChart()">></button>
+            </div>
 
-    <!--TABLE WRAPPER STARTS HERE-->
-    <div class="tabular--wrapper">
-        <h3 class="main--title">Finance Data</h3>
-        <div class="table--container">
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Transaction Type</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>    
-                <tr>
-                    <td>2025-06-01</td>
-                    <td>Food</td>
-                    <td>Lunch at Cafe Coffee Day</td>
-                    <td>Expense</td>
-                    <td>$12</td>
-                </tr>
-                <tr>
-                    <td>2025-06-03</td>
-                    <td>Transportation</td>
-                    <td>Uber ride to office</td>
-                    <td>Expense</td>
-                    <td>$8</td>
-                </tr>
-                <tr>
-                    <td>2025-06-05</td>
-                    <td>Groceries</td>
-                    <td>Monthly grocery shopping at Walmart</td>
-                    <td>Expense</td>
-                    <td>$94</td>
-                </tr>
-                <tr>
-                    <td>2025-06-07</td>
-                    <td>Entertainment</td>
-                    <td>Netflix monthly subscription</td>
-                    <td>Expense</td>
-                    <td>$15.99</td>
-                </tr>
-                <tr>
-                    <td>2025-06-10</td>
-                    <td>Salary</td>
-                    <td>June salary credited</td>
-                    <td>Income</td>
-                    <td>$2,500</td>
-                </tr>
-                <tr>
-                    <td>2025-06-11</td>
-                    <td>Freelancing</td>
-                    <td>Website design project payment</td>
-                    <td>Income</td>
-                    <td>$600</td>
-                </tr>
-                <tr>
-                    <td>2025-06-12</td>
-                    <td>Health</td>
-                    <td>Doctor consultation and medicine</td>
-                    <td>Expense</td>
-                    <td>$45</td>
-                </tr>
-                <tr>
-                    <td>2025-06-13</td>
-                    <td>Utilities</td>
-                    <td>Electricity and internet bills</td>
-                    <td>Expense</td>
-                    <td>$120</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">Total Income: $3,100 | Total Expense: $294.99</td>
-                </tr>
-            </tfoot>
-        </table>
-
+            <!-- Chart canvases -->
+            <canvas id="barChart" class="chart-canvas"></canvas>
+            <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
+            <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
         </div>
-    </div>  
-    <!--TABLE WRAPPER ENDS HERE-->  
+        <!-- ========== CHART SECTION END ========== -->
+
+        <!-- ========== TABLE SECTION START ========== -->
+        <div class="tabular--wrapper">
+            <h3 class="main--title">Finance Data</h3>
+            <div class="table--container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Transaction Type</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2025-06-01</td>
+                            <td>Food</td>
+                            <td>Lunch at Cafe Coffee Day</td>
+                            <td>Expense</td>
+                            <td>$12</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-03</td>
+                            <td>Transportation</td>
+                            <td>Uber ride to office</td>
+                            <td>Expense</td>
+                            <td>$8</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-05</td>
+                            <td>Groceries</td>
+                            <td>Monthly grocery shopping at Walmart</td>
+                            <td>Expense</td>
+                            <td>$94</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-07</td>
+                            <td>Entertainment</td>
+                            <td>Netflix monthly subscription</td>
+                            <td>Expense</td>
+                            <td>$15.99</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-10</td>
+                            <td>Salary</td>
+                            <td>June salary credited</td>
+                            <td>Income</td>
+                            <td>$2,500</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-11</td>
+                            <td>Freelancing</td>
+                            <td>Website design project payment</td>
+                            <td>Income</td>
+                            <td>$600</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-12</td>
+                            <td>Health</td>
+                            <td>Doctor consultation and medicine</td>
+                            <td>Expense</td>
+                            <td>$45</td>
+                        </tr>
+                        <tr>
+                            <td>2025-06-13</td>
+                            <td>Utilities</td>
+                            <td>Electricity and internet bills</td>
+                            <td>Expense</td>
+                            <td>$120</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">Total Income: $3,100 | Total Expense: $294.99</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- ========== TABLE SECTION END ========== -->
 
     </div>
-    <!--MAIN ENDS HERE-->
+    <!-- ===================== MAIN CONTENT END ===================== -->
 
-  <!--CHART SCRIPT STARTS HERE-->  
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/js/chart.js"></script>
-  <!--CHART SCRIPT STARTS HERE-->  
-    
+    <!-- ===================== SCRIPT SECTION ===================== -->
+    <!-- Chart.js library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom chart logic -->
+    <script src="/js/chart.js"></script>
+    <!-- ===================== SCRIPT SECTION END ===================== -->
+
 </body>
+
 </html>

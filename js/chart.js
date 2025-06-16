@@ -1,6 +1,12 @@
-const chartIds = ['barChart', 'lineChart', 'pieChart'];
-let currentIndex = 1; // Show line chart by default
+// ======================= CHART DISPLAY LOGIC =======================
 
+// IDs of all chart canvases in order
+const chartIds = ['barChart', 'lineChart', 'pieChart'];
+
+// Default to showing the second chart (line chart)
+let currentIndex = 1;
+
+// Function to display the chart corresponding to the given index
 function showChart(index) {
     chartIds.forEach((id, i) => {
         const canvas = document.getElementById(id);
@@ -8,21 +14,28 @@ function showChart(index) {
     });
 }
 
+// Function to show the next chart in the list
 function nextChart() {
     currentIndex = (currentIndex + 1) % chartIds.length;
     showChart(currentIndex);
 }
 
+// Function to show the previous chart in the list
 function prevChart() {
     currentIndex = (currentIndex - 1 + chartIds.length) % chartIds.length;
     showChart(currentIndex);
 }
 
-// Chart.js setup
+
+// ======================= CHART INITIALIZATION =======================
+
+// Get context of each canvas element to draw charts on them
 const barCtx = document.getElementById('barChart').getContext('2d');
 const lineCtx = document.getElementById('lineChart').getContext('2d');
 const pieCtx = document.getElementById('pieChart').getContext('2d');
 
+
+// ----------------------- BAR CHART -----------------------
 new Chart(barCtx, {
     type: 'bar',
     data: {
@@ -41,6 +54,8 @@ new Chart(barCtx, {
     }
 });
 
+
+// ----------------------- LINE CHART -----------------------
 new Chart(lineCtx, {
     type: 'line',
     data: {
@@ -49,13 +64,13 @@ new Chart(lineCtx, {
             label: 'Website Revenue',
             data: [100, 200, 150, 300],
             borderColor: 'rgba(113, 99, 186, 1)',         // Primary purple
-            backgroundColor: 'rgba(113, 99, 186, 0.2)',   // Soft transparent purple
+            backgroundColor: 'rgba(113, 99, 186, 0.2)',   // Light purple fill
             pointBackgroundColor: 'rgba(113, 99, 186, 1)',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(113, 99, 186, 1)',
             borderWidth: 2,
-            tension: 0.4  // for smooth curves
+            tension: 0.4 // Smooth curves
         }]
     },
     options: {
@@ -64,7 +79,7 @@ new Chart(lineCtx, {
         scales: {
             y: {
                 ticks: {
-                    color: '#555'  // soft dark gray for readability
+                    color: '#555' // Soft gray
                 },
                 grid: {
                     color: '#eee'
@@ -82,7 +97,7 @@ new Chart(lineCtx, {
         plugins: {
             legend: {
                 labels: {
-                    color: 'rgba(113, 99, 186, 1)',  // purple text in legend
+                    color: 'rgba(113, 99, 186, 1)',
                     font: {
                         weight: 'bold'
                     }
@@ -92,6 +107,8 @@ new Chart(lineCtx, {
     }
 });
 
+
+// ----------------------- PIE CHART -----------------------
 new Chart(pieCtx, {
     type: 'pie',
     data: {
@@ -101,8 +118,8 @@ new Chart(pieCtx, {
             data: [300, 200, 100],
             backgroundColor: [
                 'rgba(113, 99, 186, 1)',     // Primary purple
-                'rgba(178, 162, 255, 0.8)',  // Soft lavender (light variant)
-                'rgba(237, 237, 237, 1)'     // Light gray (same as your .search--box bg)
+                'rgba(178, 162, 255, 0.8)',  // Soft lavender
+                'rgba(237, 237, 237, 1)'     // Light gray
             ],
             borderColor: '#fff',
             borderWidth: 2
@@ -114,5 +131,8 @@ new Chart(pieCtx, {
     }
 });
 
-// Show line chart on initial load
+
+// ======================= INITIAL CHART DISPLAY =======================
+
+// Display the default selected chart (line chart)
 showChart(currentIndex);

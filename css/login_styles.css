@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 
 body, html {
@@ -15,9 +15,23 @@ body, html {
 }
 
 /* LEFT SECTION */
+/* .left-section {
+  flex: 1;
+  background: linear-gradient(to bottom, #f4d6f1, #f9f3d7);
+  padding: 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+ */
+
+
+
 .left-section {
   flex: 1;
-  background: linear-gradient(to bottom,rgba(113, 99, 186, 200), #f5f3ff);
+  background-image: url("/assests/1332.jpg"); /* Replace with actual image path */
+  background-size: cover; /* Makes sure the image covers the whole section */
+  background-position: center; /* Centers the image */
   padding: 0px;
   display: flex;
   align-items: flex-end;
@@ -81,7 +95,7 @@ form input {
 
 .forgot {
   font-size: 13px;
-  color: #d7e764;
+  color: rgba(113, 99, 186, 1);
   text-align: right;
   text-decoration: none;
   margin-bottom: 20px;
@@ -101,7 +115,7 @@ margin-top: 50px;
 
 
 .submit{
-  background: #d7e764;
+  background: rgba(113, 99, 186, 1);
   border: none;
   padding: 14px;
   border-radius: 8px;
@@ -109,17 +123,33 @@ margin-top: 50px;
   margin-bottom: 15px;
   cursor: pointer;
   font-weight: 700;
+  color: #fff;
 }
 
+.submit:hover {
+  background: rgb(85, 65, 182); /* Slightly lighter */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+
 .sign-in {
-  background: #d7e764;
+  background: rgba(113, 99, 186, 1);
   border: none;
   padding: 14px;
   border-radius: 8px;
   font-size: 16px;
   margin-bottom: 15px;
   cursor: pointer;
+  color: #fff;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
+
+.sign-in:hover {
+  background: rgb(85, 65, 182); /* Slightly lighter */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
 
 .or {
   text-align: center;
@@ -135,7 +165,7 @@ margin-top: 50px;
 }
 
 .signup a {
-  color: #d7e764;
+  color: rgba(113, 99, 186, 1);
   text-decoration: none;
   font-weight: bold;
 }
@@ -175,7 +205,7 @@ margin-top: 50px;
 
 
 .login-text a {
-  color: #c7df56;
+  color: rgba(113, 99, 186, 1);
   text-decoration: none;
   text-align: center;
   margin: 10px 0;
@@ -187,28 +217,6 @@ margin-top: 50px;
 /*EXPENSES CARDS */
 
 
-.expenses-card-right {
-  background: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  width: 350px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  
-  
-  margin: 10px 0 10px 10px;
-}
-
-
-.expenses-card-left {
-  background: #fff;
-  border-radius: 15px;
-  padding: 30px;
-  width: 350px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  
-  
-  margin: 0px 0 350px 0px;
-}
 
 
 .card-header {
@@ -266,7 +274,7 @@ margin-top: 50px;
   left: 48%;
   width: 10px;
   height: 70px;
-  background: #d7e764;
+  background: rgb(133, 122, 184);
   border-radius: 10px;
 }
 
@@ -275,11 +283,11 @@ margin-top: 50px;
   justify-content: space-between;
   margin-top: 10px;
   font-size: 14px;
-  color: #555;
+  color: #000000;
 }
 
 .graph .days .active {
-  color: #c3cc00;
+  color: rgba(113, 99, 186, 1);
   font-weight: bold;
 }
 
@@ -300,26 +308,23 @@ margin-top: 50px;
 
 
 
-/*EEEEEEXXXPENSEEE*/
+/*EXPENSE cards*/
 
 .expenses-card-left {
   width: 350px;
   padding: 20px;
-  background: white;
+  background: rgba(233, 229, 255, 0.865);
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
 
-
-  
-  
   margin: 0px 0 350px 0px;
 }
 
 .expenses-card-right {
   width: 350px;
   padding: 20px;
-  background: white;
+  background: rgba(233, 229, 255, 0.865);
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', sans-serif;
@@ -327,10 +332,6 @@ margin-top: 50px;
 
   
   border-radius: 15px;
-  
-  
-
-  
   
   margin: 10px 0 10px 10px;
 }
@@ -372,7 +373,7 @@ margin-top: 50px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  background: linear-gradient(to top, #f5fdf7, #ecfdf5);
+  background: linear-gradient(to top, #ffffff, rgb(204, 197, 237));
   padding: 0 6px;
   border-radius: 10px;
   position: relative;
@@ -380,20 +381,20 @@ margin-top: 50px;
 
 .bar {
   width: 10px;
-  background: linear-gradient(to top, #6ee7b7, #34d399);
+  background: linear-gradient(to top, #a26ee7, rgb(99, 89, 154));
   height: var(--height);
   border-radius: 6px;
   transition: all 0.3s;
 }
 
 .bar.today {
-  background: #22c55e;
+  background: #5538a6;
 }
 
 .days-labels {
   margin-top: 10px;
   font-size: 12px;
-  color: #6b7280;
+  color: #04060a;
   display: flex;
   justify-content: space-between;
   padding: 0 6px;

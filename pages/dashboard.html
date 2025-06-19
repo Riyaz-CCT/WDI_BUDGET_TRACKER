@@ -12,6 +12,7 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/css/dashboard_styles.css">
+  <link rel="stylesheet" href="/css/responsive_dashboard.css">
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,6 +21,10 @@
 <body>
 
   <!-- ===================== SIDEBAR START ===================== -->
+  <!-- Sidebar Toggle Button (visible on small screens only) -->
+  <!-- Sidebar Toggle Button (visible on small screens only) -->
+  <!-- Sidebar Toggle Button (visible on small screens only) -->
+
   <div class="sidebar">
     <!-- Logo section -->
     <div class="logo">
@@ -37,15 +42,9 @@
         </a>
       </li>
       <li>
-        <a href="#">
-          <i class="fas fa-wallet"></i>
-          <span>Expenses</span>
-        </a>
-      </li>
-      <li>
         <a href="categories.html">
           <i class="fas fa-list-alt"></i>
-          <span>Categories</span>
+          <span>Expenses</span>
         </a>
       </li>
       <li>
@@ -54,13 +53,7 @@
           <span>My Profile</span>
         </a>
       </li>
-      <li>
-        <a href="#">
-          <i class="fas fa-cog"></i>
-          <span>Settings</span>
-        </a>
-      </li>
-      <!-- Logout option -->
+<!-- Logout option -->
       <li class="logout">
         <a href="#" id="logout-link">
           <i class="fas fa-sign-out-alt"></i>
@@ -73,12 +66,11 @@
 
   <!-- ===================== MAIN CONTENT START ===================== -->
   <div class="main--content">
-
     <!-- ========== HEADER START ========== -->
     <div class="header--wrapper">
+        <button id="toggle-btn">☰</button>
       <div class="header--title">
-        <span>Primary</span>
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
       </div>
 
       <div class="user--info">
@@ -227,6 +219,14 @@
     });
   </script>
   <!-- ===================== SCRIPT SECTION END ===================== -->
+<script>
+  const toggleBtn = document.getElementById('toggle-btn');
+  const sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('show');
+  });
+</script>
 
 </body>
 

@@ -399,3 +399,105 @@ margin-top: 50px;
   justify-content: space-between;
   padding: 0 6px;
 }
+
+
+
+/* ========== RESPONSIVENESS ========== */
+
+/* Tablets (768px and below) */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-section,
+  .right-section {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .right-section {
+    padding: 40px 30px;
+  }
+
+  .logo span {
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  /* Reduce card size */
+  .expenses-card-left,
+  .expenses-card-right {
+    width: 80%;
+    margin: 10px auto;
+    padding: 16px;
+  }
+
+  .expense-amount {
+    font-size: 24px;
+  }
+
+  .expense-title {
+    font-size: 13px;
+  }
+}
+
+
+/* Mobiles (480px and below) */
+@media (max-width: 480px) {
+  .right-section {
+    padding: 30px 20px;
+  }
+
+  .logo img {
+    width: 24px;
+  }
+
+  .logo span {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .submit,
+  .sign-in,
+  .google-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  /* Reduce card size more */
+  .expenses-card-left,
+  .expenses-card-right {
+    width: 90%;
+    margin: 10px auto;
+    padding: 14px;
+  }
+
+  .expense-title {
+    font-size: 12px;
+  }
+
+  .expense-amount {
+    font-size: 20px;
+  }
+
+  .expense-change {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .graph .days {
+    font-size: 11px;
+  }
+}

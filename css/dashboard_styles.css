@@ -130,11 +130,10 @@ body {
 
 .main--content {
   position: relative;
-  background-color: var(--primary-bg);
+  background-color: var(--primary-bg); /* ✅ KEEP this */
   width: 100%;
   padding: 1rem 2.5rem;
 }
-
 
 /* ====================== HEADER ====================== */
 .header--wrapper {
@@ -206,11 +205,44 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Style wrapper to align heading and buttons on the same row */
+.stats-top-section {
+  display: flex;
+  justify-content: space-between; /* Push heading left, buttons right */
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0;
+}
+
+/* Round, padded buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rounded-btn {
+  padding: 8px 16px;
+  color: var(--primary-color);
+  background-color: var(--text-light);
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px solid var(--primary-color);
+}
+
+.rounded-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+
+
 .stats-cards-container {
   width: 59.2%;
   height: 200px;
-  /*background-color: var(--white);*/
-  background-color: #f6f8fc;
+  background-color: var(--primary-bg);
+  /*background-color: #f6f8fc;*/
   margin-bottom: 1rem;
   border-radius: 10px;
   padding-top: 1rem;
@@ -269,6 +301,88 @@ body {
   color: var(--primary-color);
 }
 
+
+/* ===== Progress Trackers in New Section ===== */
+.new_section {
+  width: 40%;
+  height: 200px;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Progress Bar Styles === */
+
+.progress-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.goal-progress-wrapper {
+  margin-top: 1rem;
+}
+
+.progress-row {
+  margin-bottom: 1.5rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-title {
+  font-weight: 500;
+  color: var(--text-dark, #333);
+}
+
+.progress-percent {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.progress-percent.green {
+  color: #2e7d32;
+}
+
+.progress-percent.red {
+  color: #ef5350;
+}
+
+.progress-bar-container {
+  background-color: #f1f3f6;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+/* Colors */
+.progress-bar-fill.green {
+  background-color: #2e7d32;
+}
+.progress-bar-fill.red {
+  background-color: #ef5350;
+}
+.progress-bar-fill.yellow {
+  background-color: #fbc02d;
+}
+
+.progress-subtext {
+  font-size: 13px;
+  color: #666;
+}
 
 
 /* ====================== CHART AREA ====================== */
@@ -404,9 +518,9 @@ body {
 /* ====================== CHART + TABLE SECTION STYLING ====================== */
 .section-3 {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
   margin-top: 2rem;
-  flex-wrap: wrap;
 }
 
 /* Left chart container */

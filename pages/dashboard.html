@@ -7,34 +7,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Title shown on browser tab -->
+  <!-- Page title shown on the browser tab -->
   <title>UX/UI</title>
 
-  <!-- Custom CSS -->
+  <!-- External CSS styles -->
   <link rel="stylesheet" href="/css/dashboard_styles.css">
   <link rel="stylesheet" href="/css/responsive_dashboard.css">
 
-  <!-- Font Awesome Icons -->
+  <!-- Font Awesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
   <!-- ===================== SIDEBAR START ===================== -->
-  <!-- Sidebar Toggle Button (visible on small screens only) -->
-  <!-- Sidebar Toggle Button (visible on small screens only) -->
-  <!-- Sidebar Toggle Button (visible on small screens only) -->
-
   <div class="sidebar">
-    <!-- Logo section -->
+    <!-- Sidebar Logo Section -->
     <div class="logo">
       <img src="/assests/budget.png" alt="Logo">
       <p>FinTrack Pro</p>
     </div>
 
-    <!-- Sidebar navigation menu -->
+    <!-- Sidebar Navigation Menu -->
     <ul class="menu">
-      <!-- Active menu item -->
       <li class="active">
         <a href="#">
           <i class="fas fa-chart-line"></i>
@@ -53,7 +48,6 @@
           <span>My Profile</span>
         </a>
       </li>
-<!-- Logout option -->
       <li class="logout">
         <a href="#" id="logout-link">
           <i class="fas fa-sign-out-alt"></i>
@@ -65,168 +59,195 @@
   <!-- ===================== SIDEBAR END ===================== -->
 
   <!-- ===================== MAIN CONTENT START ===================== -->
-  <div class="main--content">
+  <div class="main-container">
+
     <!-- ========== HEADER START ========== -->
     <div class="header--wrapper">
-        <button id="toggle-btn">☰</button>
+      <button id="toggle-btn">☰</button>
       <div class="header--title">
         <h1>Dashboard</h1>
       </div>
-
       <div class="user--info">
         <img src="/assests/profile.png" alt="profile picture here" />
       </div>
     </div>
     <!-- ========== HEADER END ========== -->
 
-    <!-- ========== STATS CARDS SECTION ========== -->
-    <div class="stats-cards-container">
-      <h3 class="card-title">Monthly Overview</h3>
-      <div class="stats-cards-slider">
-        <div class="stats-cards">
-          <p>Income</p>
-          <span>$72,450</span>
+    <div class="main--content">
+      <div class="section-1">
+
+        <!-- ========== STATS CARDS SECTION ========== -->
+        <div class="stats-cards-container">
+          <h3 class="card-title">Monthly Overview</h3>
+          <div class="stats-cards-slider">
+            <div class="stats-cards">
+              <p>Income</p>
+              <span>$72,450</span>
+              <p class="growth up" style="color:#2e7d32">+1.97%</p>
+            </div>
+            <div class="stats-cards">
+              <p>Expense</p>
+              <span>$48,920</span>
+              <p class="growth down" style="color:#ef5350">-7.35%</p>
+            </div>
+            <div class="stats-cards">
+              <p>Savings</p>
+              <span>$23,530</span>
+              <p class="growth down" style="color:#ef5350">-5.30%</p>
+            </div>
+            <div class="stats-cards">
+              <p>Balance</p>
+              <span>$15,000</span>
+              <p class="growth up" style="color:#2e7d32">+1.97%</p>
+            </div>
+          </div>
         </div>
-        <div class="stats-cards">
-          <p>Expense</p>
-          <span>$48,920</span>
+
+        <!-- ========== NEW SECTION NEXT TO CARDS ========== -->
+        <div class="new_section">
+          <h3>New Section</h3>
+          <p>Some custom content here...</p>
         </div>
-        <div class="stats-cards">
-          <p>Net Balance</p>
-          <span>$23,530</span>
-        </div>
-        <div class="stats-cards">
-          <p>Savings</p>
-          <span>$15,000</span>
-        </div>
+
       </div>
-    </div>
-    <!-- ========== STATS CARDS END ========== -->
 
-    <!-- ========== CHART SECTION START ========== -->
-    <div class="graph--container">
-      <!-- Chart toggle buttons -->
-      <div class="chart-switch">
-        <button onclick="prevChart()"><</button>
-        <button onclick="nextChart()">></button>
+    </div>
+      <!-- ========== CHART SECTION START ========== -->
+      <div class="graph--container">
+
+        <!-- ======== CHART CONTAINER 1 (60%) ======== -->
+        <div class="graph--container-1">
+
+          <!-- Dropdown to switch line chart type -->
+          <div class="chart-dropdown">
+            <select id="rangeSelect" onchange="handleRangeChange(this.value)">
+              <option value="monthly" selected>Monthly</option>
+              <option value="weekly">Weekly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+
+          <!-- Main chart canvases -->
+          <canvas id="barChart" class="chart-canvas"></canvas>
+          <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
+          <canvas id="altChart" class="chart-canvas" style="display: none;"></canvas>
+        </div>
+
+        <!-- ======== CHART CONTAINER 2 (40%) ======== -->
+        <div class="graph--container-2">
+          <div class="chart-dropdown">
+            <select id="pieRangeSelect" onchange="handlePieRangeChange(this.value)">
+              <option value="monthly" selected>Summary</option>
+              <option value="weekly">Method</option>
+              <option value="yearly">Categories</option>
+            </select>
+          </div>
+          <!-- Pie chart canvas -->
+          <canvas id="summaryPieChart" class="chart-canvas"></canvas>
+        </div>
+
       </div>
+      <!-- ========== CHART SECTION END ========== -->
 
-      <!-- Chart canvases -->
-      <canvas id="barChart" class="chart-canvas"></canvas>
-      <canvas id="lineChart" class="chart-canvas" style="display: none;"></canvas>
-      <canvas id="pieChart" class="chart-canvas" style="display: none;"></canvas>
-    </div>
-    <!-- ========== CHART SECTION END ========== -->
+      <!-- ===================== CHART + TABLE SECTION START ===================== -->
+      <div class="section-3">
 
-    <!-- ========== TABLE SECTION START ========== -->
-    <div class="tabular--wrapper">
-      <h3 class="main--title">Recent Data</h3>
-      <div class="table--container">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Category</th>
-              <th>Description</th>
-              <th>Transaction Type</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2025-06-01</td>
-              <td>Food</td>
-              <td>Lunch at Cafe Coffee Day</td>
-              <td>Expense</td>
-              <td>$12</td>
-            </tr>
-            <tr>
-              <td>2025-06-03</td>
-              <td>Transportation</td>
-              <td>Uber ride to office</td>
-              <td>Expense</td>
-              <td>$8</td>
-            </tr>
-            <tr>
-              <td>2025-06-05</td>
-              <td>Groceries</td>
-              <td>Monthly grocery shopping at Walmart</td>
-              <td>Expense</td>
-              <td>$94</td>
-            </tr>
-            <tr>
-              <td>2025-06-07</td>
-              <td>Entertainment</td>
-              <td>Netflix monthly subscription</td>
-              <td>Expense</td>
-              <td>$15.99</td>
-            </tr>
-            <tr>
-              <td>2025-06-10</td>
-              <td>Salary</td>
-              <td>June salary credited</td>
-              <td>Income</td>
-              <td>$2,500</td>
-            </tr>
-            <tr>
-              <td>2025-06-11</td>
-              <td>Freelancing</td>
-              <td>Website design project payment</td>
-              <td>Income</td>
-              <td>$600</td>
-            </tr>
-            <tr>
-              <td>2025-06-12</td>
-              <td>Health</td>
-              <td>Doctor consultation and medicine</td>
-              <td>Expense</td>
-              <td>$45</td>
-            </tr>
-            <tr>
-              <td>2025-06-13</td>
-              <td>Utilities</td>
-              <td>Electricity and internet bills</td>
-              <td>Expense</td>
-              <td>$120</td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="5">Total Expense: $48,920</td>
-            </tr>
-          </tfoot>
-        </table>
+        <!-- ======== CHART: Alternate Bar Chart ======== -->
+        <div class="graph--container-3">
+          <div class="chart-dropdown">
+            <select id="bar2RangeSelect" onchange="handleBar2RangeChange(this.value)">
+              <option value="monthly" selected>Monthly</option>
+              <option value="weekly">Weekly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+          <canvas id="barChart2" class="chart-canvas"></canvas>
+        </div>
+
+        <!-- ======== TABLE: Recent Transactions ======== -->
+        <div class="tabular--wrapper">
+          <h3 class="main--title">Recent Data</h3>
+          <div class="table--container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+        </div>
+
       </div>
-    </div>
-    <!-- ========== TABLE SECTION END ========== -->
+      <!-- ===================== CHART + TABLE SECTION END ===================== -->
 
+    </div>
   </div>
   <!-- ===================== MAIN CONTENT END ===================== -->
 
-  <!-- ===================== SCRIPT SECTION ===================== -->
-  <!-- Chart.js library from CDN -->
+  <!-- ===================== SCRIPT SECTION START ===================== -->
+
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Custom chart logic -->
+  <!-- Fetch and populate table from JSON -->
+  <script>
+    fetch("data.json")
+      .then(res => res.json())
+      .then(json => {
+        const recent_transactions = json.recent_transactions;
+        populateTable(recent_transactions);
+      });
+
+    function populateTable(tableData) {
+      const tbody = document.querySelector(".table--container tbody");
+      const tfoot = document.querySelector(".table--container tfoot");
+
+      // Clear existing table data
+      tbody.innerHTML = "";
+      tfoot.innerHTML = "";
+
+      let total = 0;
+
+      tableData.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row.item}</td><td>$${row.amount.toFixed(2)}</td>`;
+        tbody.appendChild(tr);
+        total += row.amount;
+      });
+
+      // Append total to table footer
+      const totalRow = document.createElement("tr");
+      totalRow.innerHTML = `<td colspan="2">Total: $${total.toFixed(2)}</td>`;
+      tfoot.appendChild(totalRow);
+    }
+  </script>
+
+  <!-- Chart rendering logic (chart.js) -->
   <script src="/js/chart.js"></script>
 
-  <!-- Logout script -->
+  <!-- Logout redirect script -->
   <script>
     document.getElementById("logout-link").addEventListener("click", function (e) {
       e.preventDefault();
-      // You can clear session or token here if needed
       window.location.href = "login.html";
     });
   </script>
-  <!-- ===================== SCRIPT SECTION END ===================== -->
-<script>
-  const toggleBtn = document.getElementById('toggle-btn');
-  const sidebar = document.querySelector('.sidebar');
 
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('show');
-  });
-</script>
+  <!-- Sidebar toggle for mobile -->
+  <script>
+    const toggleBtn = document.getElementById('toggle-btn');
+    const sidebar = document.querySelector('.sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+    });
+  </script>
+
+  <!-- ===================== SCRIPT SECTION END ===================== -->
 
 </body>
 

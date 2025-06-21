@@ -1,16 +1,17 @@
 /* ====================== ROOT CSS VARIABLES ====================== */
 :root {
-  --primary-color: rgba(113, 99, 186, 255); /* Primary theme color (purple) */
-  --primary-bg: #f5f3ff;                    /* Light background for main content */
-  --white: #fff;                            /* White color */
-  --hover-bg: #dcd8f3;                      /* Background on hover for sidebar items and cards */
-  --text-dark: #333;                        /* Dark text color for table content */
-  --text-light: #fff;                       /* Light text color */
-  --table-alt-row: #fff;                    /* Table alternate row background */
-  --table-even-row: #f5f3ff;                /* Table even row background */
-  --search-bg: #f5f3ff;                     /* Search box background */
-  --card-hover-shadow: rgba(0, 0, 0, 0.15);  /* Shadow for hover effect on cards */
+  --primary-color: #3949ab;          /* Deep indigo (more professional & accessible) */
+  --primary-bg: #f4f6fa;             /* Very light cool gray background */
+  --white: #ffffff;                  /* Pure white */
+  --hover-bg: #e8eaf6;               /* Indigo-tinted light hover */
+  --text-dark: #2c2c2c;              /* Dark gray for readability */
+  --text-light: #ffffff;             /* White for text on dark elements */
+  --table-alt-row: #ffffff;          /* Alternating white row */
+  --table-even-row: #f0f1f6;         /* Soft cool gray */
+  --search-bg: #e8eaf6;              /* Same as hover-bg for consistency */
+  --card-hover-shadow: rgba(57, 73, 171, 0.2); /* Shadow with primary color tone */
 }
+
 
 /* ====================== GLOBAL RESET & FONT ====================== */
 * {
@@ -24,7 +25,9 @@
 
 /* ====================== BODY LAYOUT ====================== */
 body {
-  display: flex; /* Enables horizontal layout for sidebar and main content */
+  display: flex;
+  flex-direction: row; /* sidebar + main */
+  margin: 0;
 }
 
 /* ====================== SIDEBAR ====================== */
@@ -117,6 +120,14 @@ body {
 }
 
 /* ====================== MAIN CONTENT ====================== */
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+
 .main--content {
   position: relative;
   background-color: var(--primary-bg);
@@ -124,16 +135,20 @@ body {
   padding: 1rem 2.5rem;
 }
 
+
 /* ====================== HEADER ====================== */
 .header--wrapper {
+  position: sticky; /* Or use fixed for always visible header */
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   background: var(--white);
-  border-radius: 10px;
+  border-radius: 0; /* Remove rounded corners if sticking to top */
   padding: 10px 2rem;
-  margin-bottom: 1rem;
+  margin: 0; /* REMOVE margin to stick to the top */
 }
 
 .header--wrapper img {
@@ -184,13 +199,22 @@ body {
 }
 
 /* ====================== STATS CARD CONTAINER ====================== */
+.section-1 {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .stats-cards-container {
-  width: 100%;
+  width: 59.2%;
   height: 200px;
-  background-color: var(--white);
+  /*background-color: var(--white);*/
+  background-color: #f6f8fc;
   margin-bottom: 1rem;
   border-radius: 10px;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -215,9 +239,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--text-light);
-  background-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--white);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  
 }
 
 .stats-cards:hover {
@@ -233,24 +259,116 @@ body {
   font-weight: bold;
 }
 
+.new_section {
+  width: 40%;
+  height: 200px;
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  color: var(--primary-color);
+}
+
+
+
 /* ====================== CHART AREA ====================== */
+/* ====================== CHART AREA ====================== */
+
 .graph--container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Container 1 - 60% width */
+.graph--container-1 {
+  background: var(--white);
+  width: 60%;
+  height: 350px;
+  border-radius: 10px;
+  padding: 1rem;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--white);
-  width: 100%;
-  height: 350px;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  
+}
+.chart-dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
 }
 
+.chart-dropdown select {
+  padding: 6px 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.chart-dropdown select:hover {
+  outline: none;
+  box-shadow: 0 0 3px var(--primary-color);
+}
+
+
+
+/* Container 2 - 40% width */
+.graph--container-2 {
+  background: var(--white);
+  width: 40%;
+  height: 350px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  position: relative;
+  
+
+}
+
+.graph--container-2 .chart-dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background-color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.graph--container-2 .chart-dropdown select {
+  padding: 6px 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.graph--container-2 .chart-dropdown select:hover {
+  outline: none;
+  box-shadow: 0 0 3px var(--primary-color);
+}
+
+
+/* Chart Canvas Styling */
 .chart-canvas {
   width: 100% !important;
   height: 100% !important;
 }
+
 
 .chart-switch {
   position: absolute;
@@ -277,65 +395,111 @@ body {
 }
 
 /* ====================== TABLE WRAPPER ====================== */
-.tabular--wrapper {
-  background-color: var(--white);
-  margin-top: 1rem;
-  border-radius: 10px;
-  padding: 2rem;
-}
 
 .main--title {
   color: var(--primary-color);
   margin-bottom: 0.8rem;
 }
 
+/* ====================== CHART + TABLE SECTION STYLING ====================== */
+.section-3 {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Left chart container */
+.graph--container-3 {
+  background: var(--white);
+  width: 59.2%;
+  height: 350px;
+  border-radius: 10px;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tabular--wrapper {
+  background-color: var(--white);
+  width: 39%;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  height: 350px;
+  overflow: auto;
+
+  /* Hide scrollbars */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE 10+ */
+}
+
+.tabular--wrapper::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Opera */
+}
+
 .table--container {
   width: 100%;
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 14px;
+  min-width: 300px;
 }
 
 thead {
-  background-color: var(--primary-color);
-  color: var(--text-light);
+  background-color: var(--white);
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--hover-bg);
 }
 
 th {
-  padding: 15px;
   text-align: left;
+  padding: 12px 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-tbody {
-  background-color: var(--table-even-row);
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--hover-bg);
 }
 
 td {
-  padding: 15px;
-  font-size: 14px;
+  padding: 12px 8px;
   color: var(--text-dark);
-}
-
-tr:nth-child(even) {
-  background: var(--table-alt-row);
+  font-weight: 400;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 tfoot {
-  background: var(--primary-color);
+  background-color: var(--white);
   font-weight: bold;
-  color: var(--text-light);
+  border-top: 2px solid var(--hover-bg);
 }
 
 tfoot td {
-  padding: 15px;
-  color: var(--text-light);
+  padding: 12px 8px;
+  color: var(--primary-color);
 }
 
-.table--container button {
-  color: green;
-  background: none;
-  cursor: pointer;
+@media (max-width: 768px) {
+  .section-3 {
+    flex-direction: column;
+  }
+
+  .graph--container-3,
+  .tabular--wrapper {
+    width: 100%;
+  }
 }
-  

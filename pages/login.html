@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FINTrack Pro</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/login_styles.css" />
   </head>
   <body>
     <div class="container">
@@ -14,7 +14,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> May 2025 Expenses
           </div>
-          <div class="expense-amount">₹2,000</div>
+          <div class="expense-amount">$2,000</div>
           <div class="expense-change"><span>⬆️</span> 5%</div>
 
           <div class="graph-container">
@@ -28,8 +28,8 @@
           </div>
 
           <div class="days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span> <span>Thu</span
-            ><span>Fri</span><span>Sat</span><span>Sun</span>
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
+            <span>Fri</span><span>Sat</span><span>Sun</span>
           </div>
         </div>
 
@@ -37,7 +37,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> June 2025 Expenses
           </div>
-          <div class="expense-amount">₹12,000</div>
+          <div class="expense-amount">$12,000</div>
           <div class="expense-change"><span>⬆️</span> 12%</div>
 
           <div class="graph-container">
@@ -51,8 +51,8 @@
           </div>
 
           <div class="days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span> <span>Thu</span
-            ><span>Fri</span><span>Sat</span><span>Sun</span>
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
+            <span>Fri</span><span>Sat</span><span>Sun</span>
           </div>
         </div>
       </div>
@@ -60,20 +60,25 @@
       <!-- Right Section -->
       <div class="right-section">
         <div class="logo">
-          <img src="img/money-bag.png" alt="logo" />
+          <img src="/assests/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
         <h1>Welcome To FinTrack Pro!</h1>
         <p class="subtext">Log in to continue your financial journey.</p>
 
-        <form>
+        <form id="login-form">
           <label>Email <span>*</span></label>
-          <input type="email" placeholder="Type your email Here" />
+          <input type="email" placeholder="Type your email Here" required />
 
           <label>Password <span>*</span></label>
-          <input type="password" placeholder="Please Enter your Password" />
+          <input
+            type="password"
+            placeholder="Please Enter your Password"
+            required
+          />
           <a href="forgot-password.html" class="forgot">Forgot Password?</a>
 
+          <!-- Corrected button -->
           <button type="submit" class="sign-in">Sign In</button>
 
           <p class="signup">
@@ -89,5 +94,16 @@
         </form>
       </div>
     </div>
+
+    <!-- ✅ JavaScript to handle login redirection -->
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent form default submission
+          // You can add real authentication here later
+          window.location.href = "dashboard.html"; // Redirect to dashboard
+        });
+    </script>
   </body>
 </html>

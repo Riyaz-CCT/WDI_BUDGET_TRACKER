@@ -501,3 +501,60 @@ margin-top: 50px;
     font-size: 11px;
   }
 }
+
+
+
+
+/* ERROR TEXT IN Signup FORM */
+.error-message {
+  color: #e63946;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+
+
+/* PASSWORD */
+
+
+.password-hint ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.password-hint li {
+  margin-bottom: 3px;
+  list-style-type: disc;
+}
+
+.password-hint {
+  color: #501111;
+  font-size: 13px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+
+
+/* show and re enter PASSWORD  */
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+}

@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="/css/login_styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
   </head>
   <body>
     <div class="container">
@@ -75,45 +71,22 @@
             <input type="text" placeholder="Full Name *" required />
             <input type="text" placeholder="Phone Number *" required />
           </div>
-
           <input type="email" placeholder="Email *" required />
-
           <div class="input-row">
-            <div class="password-wrapper">
-              <input
-                type="password"
-                id="password"
-                placeholder="Password *"
-                required
-              />
-              <span class="toggle-password" id="togglePassword">
-                <i class="fa-solid fa-eye"></i>
-              </span>
-            </div>
-
-            <div class="password-wrapper">
-              <input
-                type="password"
-                id="confirm-password"
-                placeholder="Re-enter Your Password *"
-                required
-              />
-              <span class="toggle-password" id="toggleConfirmPassword">
-                <i class="fa-solid fa-eye"></i>
-              </span>
-            </div>
+            <input type="password" placeholder="Password *" required />
+            <input
+              type="password"
+              placeholder="Re-enter Your Password *"
+              required
+            />
           </div>
 
-          <!-- Error message div -->
-          <div id="password-error" class="error-message"></div>
-
-          <!--  submit button -->
+          <!-- ✅ Correct submit button -->
           <button type="submit" class="sign-in">Sign Up!</button>
 
           <p class="login-text">
             Already have an account? <a href="login.html">Log In</a>
           </p>
-
           <button type="button" class="google-btn">
             <img
               src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
@@ -125,70 +98,14 @@
       </div>
     </div>
 
-    <!--  Redirect after form submission -->
+    <!-- ✅ JS: Redirect after form submission -->
     <script>
-      // Password validation on form submit
       document
         .getElementById("signup-form")
         .addEventListener("submit", function (e) {
           e.preventDefault();
-
-          let password = document.getElementById("password").value;
-          let confirmPassword =
-            document.getElementById("confirm-password").value;
-          let errorDiv = document.getElementById("password-error");
-
-          // Password regex pattern
-          let passwordPattern =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,12}$/;
-
-          // Check if password matches criteria
-          if (!passwordPattern.test(password)) {
-            errorDiv.innerHTML =
-              "Password must be 8–12 characters, include at least 1 uppercase, 1 lowercase, 1 number, and 1 special character !@#$%^&.";
-            return;
-          }
-
-          // Check if passwords match
-          if (password !== confirmPassword) {
-            errorDiv.innerHTML = "Passwords do not match.";
-            return;
-          }
-
-          // If everything’s valid, clear errors and redirect
-          errorDiv.innerHTML = "";
-          window.location.href = "profile.html";
-        });
-
-      // Toggle visibility for main password
-      document
-        .getElementById("togglePassword")
-        .addEventListener("click", function () {
-          let passwordField = document.getElementById("password");
-          let icon = this.querySelector("i");
-          let type =
-            passwordField.getAttribute("type") === "password"
-              ? "text"
-              : "password";
-          passwordField.setAttribute("type", type);
-          icon.classList.toggle("fa-eye");
-          icon.classList.toggle("fa-eye-slash");
-        });
-
-      // Toggle visibility for confirm password
-      document
-        .getElementById("toggleConfirmPassword")
-        .addEventListener("click", function () {
-          let confirmPasswordField =
-            document.getElementById("confirm-password");
-          let icon = this.querySelector("i");
-          let type =
-            confirmPasswordField.getAttribute("type") === "password"
-              ? "text"
-              : "password";
-          confirmPasswordField.setAttribute("type", type);
-          icon.classList.toggle("fa-eye");
-          icon.classList.toggle("fa-eye-slash");
+          // Optional: Add validation here later
+          window.location.href = "dashboard.html";
         });
     </script>
   </body>

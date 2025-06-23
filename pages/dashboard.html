@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <!-- ===================== SIDEBAR ===================== -->
+    <!-- ===================== SIDEBAR STARTS HERE===================== -->
     <div class="sidebar">
       <div class="logo">
         <img src="/assests/budget.png" alt="Logo" />
@@ -33,8 +33,9 @@
         </li>
       </ul>
     </div>
-
-    <!-- ===================== MAIN ===================== -->
+    <!-- ===================== SIDEBAR ENDS HERE ===================== -->
+    
+    <!-- ===================== MAIN STARTS HERE===================== -->
     <div class="main-container">
       <div class="header--wrapper">
         <button id="toggle-btn">☰</button>
@@ -42,12 +43,12 @@
           <h1>Dashboard</h1>
         </div>
         <div class="user--info">
-          <img src="/assests/profile.png" alt="profile picture" />
+          <a href="profile.html"><img src="/assests/profile.png" alt="profile picture" /></a>
         </div>
       </div>
 
       <div class="main--content">
-        <!-- ========== SECTION 1: Stats + Extra ========== -->
+        <!-- ========== SECTION 1: Stats + Progress Bar ========== -->
         <div class="section-1">
           <div class="stats-cards-container">
             <!-- New Flexbox Wrapper for Title + Buttons -->
@@ -87,7 +88,7 @@
           </div>
 
           <!-- ========== New Section: Progress Bars ========== -->
-          <div class="new_section">
+          <div class="progress-bar-section">
             <h3 class="progress-header">Goal Progress</h3>
 
             <div class="goal-progress-wrapper">
@@ -98,7 +99,7 @@
                   <span class="progress-percent">93.21%</i></span>
                 </div>
                 <div class="progress-bar-container">
-                  <div class="progress-bar-fill" style="width: 93.2%;" data-percent="93.21" data-type="expense"></div>
+                  <div class="progress-bar-fill" style="width: 93.2%;" data-percent="93.21%" data-type="expense"></div>
                 </div>
                 <p class="progress-subtext">93.21% of your monthly budget used.</p>
               </div>
@@ -117,9 +118,10 @@
             </div>  <!--✅ ADDED: closing tag for goal-progress-wrapper -->
           </div> <!-- ✅ ADDED: closing tag for new_section -->
         </div>
+        <!-- ========== SECTION 1 ENDS HERE ========== -->
 
         <!-- ========== SECTION 2: Charts ========== -->
-        <div class="graph--container">
+        <div class="section-2">
           <div class="graph--container-1">
             <div class="chart-dropdown">
               <select id="rangeSelect" onchange="handleRangeChange(this.value)">
@@ -144,8 +146,9 @@
             <canvas id="summaryPieChart" class="chart-canvas"></canvas>
           </div>
         </div>
+        <!-- ========== SECTION 2 ENDS HERE ========== -->
 
-        <!-- ========== SECTION 3: Chart + Table ========== -->
+        <!-- ========== SECTION 3: Chart + Table STARTS HERE ========== -->
         <div class="section-3">
           <div class="graph--container-3">
             <div class="chart-dropdown">
@@ -159,7 +162,7 @@
           </div>
 
           <div class="tabular--wrapper">
-            <h3 class="main--title">Recent Data</h3>
+            <h3 class="main--title">Recent Transactions</h3>
             <div class="table--container">
               <table>
                 <thead>
@@ -174,8 +177,12 @@
             </div>
           </div>
         </div>
+        <!-- ========== SECTION 3 ENDS HERE ========== -->
+
       </div> <!-- .main--content -->
     </div> <!-- .main-container -->
+    <!-- ===================== MAIN ENDS HERE===================== -->
+    
 
     <!-- ===================== SCRIPTS ===================== -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

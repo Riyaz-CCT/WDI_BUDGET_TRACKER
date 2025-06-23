@@ -30,7 +30,7 @@ body {
   margin: 0;
 }
 
-/* ====================== SIDEBAR ====================== */
+/* ====================== SIDEBAR STARTS HERE====================== */
 .sidebar {
   position: sticky;
   height: 100vh;
@@ -118,8 +118,9 @@ body {
   left: 0;
   width: 100%;
 }
+/* ====================== SIDEBAR ENDS HERE====================== */
 
-/* ====================== MAIN CONTENT ====================== */
+/* ====================== MAIN CONTENT STARTS HERE====================== */
 
 .main-container {
   display: flex;
@@ -171,38 +172,12 @@ body {
   color: var(--primary-color);
 }
 
-/* ====================== SEARCH BOX ====================== */
-.search--box {
-  background: var(--search-bg);
-  border-radius: 15px;
-  color: var(--primary-color);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 12px;
-}
-
-.search--box input {
-  background: transparent;
-  padding: 10px;
-}
-
-.search--box i {
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.5s ease-out;
-}
-
-.search--box i:hover {
-  transform: scale(1.2);
-}
-
-/* ====================== STATS CARD CONTAINER ====================== */
+/* ====================== SECTION 1:STARTS HERE ====================== */
 .section-1 {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 /* Style wrapper to align heading and buttons on the same row */
@@ -236,7 +211,7 @@ body {
   background-color: var(--hover-bg);
 }
 
-
+/* ====================== STATS CARD CONTAINER ====================== */
 
 .stats-cards-container {
   width: 59.2%;
@@ -302,8 +277,8 @@ body {
 }
 
 
-/* ===== Progress Trackers in New Section ===== */
-.new_section {
+/* ====================== SECTION 1:PROGRESS BAR SECTION====================== */
+.progress-bar-section {
   width: 40%;
   height: 200px;
   background-color: var(--white);
@@ -385,13 +360,16 @@ body {
 }
 
 
-/* ====================== CHART AREA ====================== */
+/* ====================== SECTION 1 ENDS HERE ====================== */
+
+/* ====================== SECTION 2 STARTS HERE ====================== */
+
 /* ====================== CHART AREA ====================== */
 
-.graph--container {
+.section-2 {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
   margin-bottom: 1rem;
 }
@@ -447,8 +425,6 @@ body {
   align-items: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
   position: relative;
-  
-
 }
 
 .graph--container-2 .chart-dropdown {
@@ -507,15 +483,10 @@ body {
   background-color: var(--primary-bg);
   color: var(--primary-color);
 }
+/* ====================== SECTION 2 ENDS HERE ====================== */
 
-/* ====================== TABLE WRAPPER ====================== */
 
-.main--title {
-  color: var(--primary-color);
-  margin-bottom: 0.8rem;
-}
-
-/* ====================== CHART + TABLE SECTION STYLING ====================== */
+/* ====================== SECTION 3:CHART + TABLE STARTS HERE ====================== */
 .section-3 {
   display: flex;
   flex-wrap: wrap;
@@ -523,7 +494,7 @@ body {
   margin-top: 2rem;
 }
 
-/* Left chart container */
+/* ======================  SECTION 3:CHART STARTS HERE ====================== */
 .graph--container-3 {
   background: var(--white);
   width: 59.2%;
@@ -537,6 +508,15 @@ body {
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
+/* ====================== SECTION 3:CHART ENDS HERE ====================== */
+
+
+/* ====================== SECTION 3:TABLE WRAPPER STARTS HERE====================== */
+
+.main--title {
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+}
 
 .tabular--wrapper {
   background-color: var(--white);
@@ -548,12 +528,12 @@ body {
   overflow: auto;
 
   /* Hide scrollbars */
-  scrollbar-width: none;          /* Firefox */
-  -ms-overflow-style: none;       /* IE 10+ */
+  scrollbar-width: none;          
+  -ms-overflow-style: none;       
 }
 
 .tabular--wrapper::-webkit-scrollbar {
-  display: none;                  /* Chrome, Safari, Opera */
+  display: none;                  
 }
 
 .table--container {
@@ -617,3 +597,7 @@ tfoot td {
     width: 100%;
   }
 }
+/* ====================== SECTION 3:TABLE WRAPPER ENDS HERE ====================== */
+/* ====================== SECTION 3 ENDS HERE ====================== */
+
+/* ====================== MAIN CONTENT ENDS HERE====================== */

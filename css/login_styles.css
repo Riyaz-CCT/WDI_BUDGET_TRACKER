@@ -558,3 +558,109 @@ margin-top: 50px;
   font-size: 18px;
   color: #555;
 }
+
+
+
+/* Profile page  */
+body {
+        background: #f8f9ff;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .profile-header {
+        position: relative;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-pic {
+        width: 120px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #d6d6ff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: block;
+        margin: 0 auto;
+}
+
+
+      .edit-icon {
+        position: absolute;
+        top: 5px;
+        right: 115px;
+        background: #fff;
+        border-radius: 50%;
+        padding: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .edit-icon:hover {
+        background: #efefff;
+      }
+
+      .profile-info {
+        background: linear-gradient(135deg, #ecebff, #f8f9ff);
+        border-radius: 16px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .profile-info p {
+        font-size: 18px;
+        margin: 18px 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .profile-actions {
+        display: flex;
+        gap: 14px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .sign-in,
+      .google-btn {
+        flex: 1;
+        text-align: center;
+        background: #7f6eff;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 16px;
+      }
+
+      .sign-in:hover,
+      .google-btn:hover {
+        background: #685bda;
+      }
+
+      .go-dashboard {
+        background: #bdb8ff;
+      }
+
+      .go-dashboard:hover {
+        background: #a9a3f7;
+      }
+
+      .container {
+        display: flex;
+        padding: 30px;
+        gap: 30px;
+      }
+
+      .left-section {
+        flex: 1;
+      }
+
+      .right-section {
+        flex: 1;
+      }
+    

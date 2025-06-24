@@ -1,0 +1,209 @@
+/* ====================== ROOT CSS VARIABLES ====================== */
+:root {
+  --primary-color: #3949ab;          /* Deep indigo (more professional & accessible) */
+  --primary-bg: #f4f6fa;             /* Very light cool gray background */
+  --white: #ffffff;                  /* Pure white */
+  --hover-bg: #e8eaf6;               /* Indigo-tinted light hover */
+  --text-dark: #2c2c2c;              /* Dark gray for readability */
+  --text-light: #ffffff;             /* White for text on dark elements */
+  --table-alt-row: #ffffff;          /* Alternating white row */
+  --table-even-row: #f0f1f6;         /* Soft cool gray */
+  --search-bg: #e8eaf6;              /* Same as hover-bg for consistency */
+  --card-hover-shadow: rgba(57, 73, 171, 0.2); /* Shadow with primary color tone */
+}
+
+
+/* ====================== GLOBAL RESET & FONT ====================== */
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ====================== BODY LAYOUT ====================== */
+body {
+  display: flex;
+  flex-direction: row; /* sidebar + main */
+  margin: 0;
+}
+
+
+/* ====================== SIDEBAR STARTS HERE====================== */
+.sidebar {
+  position: sticky;
+  height: 100vh;
+  width: 110px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0 1.7rem;
+  color: var(--text-light);
+  overflow: hidden;
+  background-color: var(--white);
+  transition: all 0.5s linear;
+}
+
+.sidebar:hover {
+  width: 240px; /* Expand sidebar on hover */
+  transition: 0.5s;
+}
+
+/* ====================== MENU LINKS ====================== */
+.menu {
+  height: 86%;
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 1rem;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu li:hover,
+.active {
+  background-color: var(--hover-bg); /* Highlight item on hover or if active */
+}
+
+.menu a {
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu a span {
+  overflow: hidden;
+}
+
+.menu a i {
+  font-size: 1.2rem;
+}
+
+/* ====================== LOGOUT POSITIONING ====================== */
+.logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+/* ====================== SIDEBAR ENDS HERE====================== */
+
+
+
+
+
+
+
+/*--------------------Profile Content------------------------*/
+
+body {
+  background: #f8f9ff;
+  font-family: "Poppins", sans-serif;
+  }
+
+ .profile-header {
+        position: relative;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-pic {
+        width: 120px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #d6d6ff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        display: block;
+        margin: 0 auto;
+}
+
+
+      .edit-icon {
+        position: absolute;
+        top: 5px;
+        right: 115px;
+        background: #fff;
+        border-radius: 50%;
+        padding: 6px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .edit-icon:hover {
+        background: #efefff;
+      }
+
+      .profile-info {
+        background: linear-gradient(135deg, #ecebff, #f8f9ff);
+        border-radius: 16px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+
+      .profile-info p {
+        font-size: 18px;
+        margin: 18px 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .profile-actions {
+        display: flex;
+        gap: 14px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .sign-in,
+      .google-btn {
+        flex: 1;
+        text-align: center;
+        background: #7f6eff;
+        color: #fff;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 16px;
+      }
+
+      .sign-in:hover,
+      .google-btn:hover {
+        background: #685bda;
+      }
+
+      .go-dashboard {
+        background: #bdb8ff;
+      }
+
+      .go-dashboard:hover {
+        background: #a9a3f7;
+      }
+
+  .container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  }
+
+  .left-section {
+    flex: 1;
+  }
+
+  .right-section {
+    flex: 1;
+  }
+    

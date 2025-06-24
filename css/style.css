@@ -1,17 +1,17 @@
 body{
     font-family:"Poppins",sans-serif;
-    background-color:#fff
+    background-color:#ffffff; 
     padding:20px;
 }
 #show-modal{
     display: none;
 }
 .open-button{
-    background-color:rgb(133,99,186,255);
+    background-color:#3949ab;
     padding:10px 20px;
     border:none;
     border-radius:6px;
-    color:#fff;
+    color:#ffffff; 
     cursor:pointer;
     display:inline-block;
 }
@@ -32,7 +32,7 @@ body{
     pointer-events:auto;
 }
 .modal-box{
-    background-color:#fff;
+    background-color:#ffffff; 
     padding:20px;
     width:350px;
     border-radius:8px;
@@ -61,7 +61,7 @@ input[type="file"]{
 }
 .add-category{
     font-size: 12px;
-    color:rgb(133,99,186,255);
+    color:#3949ab;
     text-decoration: none;
     display: inline-block;
     margin-bottom: 10px;
@@ -80,18 +80,18 @@ input[type="file"]{
     border-radius:4px;
     cursor:pointer;
     margin-left:5px;
-    color:#fff
+    color:#ffffff; 
 }
 .cancel-button{
-    background-color: #666;
+    background-color:#2c2c2c;
 }
 .save-button {
-    background-color:rgb(133,99,186,255);
+    background-color:#3949ab;
 }
 .close-button{
     position:absolute;
     top: 10px; right:15px;
     font-size:20px;
     cursor:pointer;
-    color:#666;
+    color:#2c2c2c;
 }

@@ -1,37 +1,44 @@
 /* ====================== ROOT CSS VARIABLES ====================== */
 :root {
-  --primary-color: #3949ab;          /* Deep indigo (more professional & accessible) */
-  --primary-bg: #f4f6fa;             /* Very light cool gray background */
-  --white: #ffffff;                  /* Pure white */
-  --hover-bg: #e8eaf6;               /* Indigo-tinted light hover */
-  --text-dark: #2c2c2c;              /* Dark gray for readability */
-  --text-light: #ffffff;             /* White for text on dark elements */
-  --table-alt-row: #ffffff;          /* Alternating white row */
-  --table-even-row: #f0f1f6;         /* Soft cool gray */
-  --search-bg: #e8eaf6;              /* Same as hover-bg for consistency */
-  --card-hover-shadow: rgba(57, 73, 171, 0.2); /* Shadow with primary color tone */
+  --primary-color: #3949ab;
+  --primary-bg: #f4f6fa;
+  --white: #ffffff;
+  --hover-bg: #e8eaf6;
+  --text-dark: #2c2c2c;
+  --text-light: #ffffff;
+  --table-alt-row: #ffffff;
+  --table-even-row: #f0f1f6;
+  --search-bg: #e8eaf6;
+  --card-hover-shadow: rgba(57, 73, 171, 0.2);
+  --light-bg: #f8f9ff;
+  --card-bg: #fff;
+  --shadow: rgba(0, 0, 0, 0.05);
 }
-
 
 /* ====================== GLOBAL RESET & FONT ====================== */
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   border: none;
   outline: none;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-/* ====================== BODY LAYOUT ====================== */
-body {
-  display: flex;
-  flex-direction: row; /* sidebar + main */
-  margin: 0;
+body, html {
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: var(--light-bg);
 }
 
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
-/* ====================== SIDEBAR STARTS HERE====================== */
+/* ====================== SIDEBAR ====================== */
 .sidebar {
   position: sticky;
   height: 100vh;
@@ -68,7 +75,7 @@ body {
 
 .menu li:hover,
 .active {
-  background-color: var(--hover-bg); /* Highlight item on hover or if active */
+  background-color: var(--hover-bg);
 }
 
 .menu a {
@@ -88,122 +95,344 @@ body {
   font-size: 1.2rem;
 }
 
-/* ====================== LOGOUT POSITIONING ====================== */
 .logout {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-/* ====================== SIDEBAR ENDS HERE====================== */
 
+/* ====================== CONTAINER ====================== */
+.container {
+  display: flex;
+  height: 100vh;
+  padding: 30px;
+  gap: 30px;
+  overflow: hidden;
+}
 
+.right-section {
+  flex: 1;
+  background: #fff;
+  padding: 50px 80px;
+}
 
+/* ====================== LOGO ====================== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 5px;
+}
 
+.logo img {
+  width: 30px;
+}
 
+.logo span {
+  font-size: 20px;
+  font-weight: 600;
+}
 
+/* ====================== HEADINGS ====================== */
+h1 {
+  margin-top: 30px;
+  font-size: 32px;
+}
 
-/*--------------------Profile Content------------------------*/
+.subtext {
+  margin: 10px 0 30px;
+  color: #777;
+}
 
-body {
-  background: #f8f9ff;
-  font-family: "Poppins", sans-serif;
-  }
+.profile-heading {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
 
- .profile-header {
-        position: relative;
-        text-align: center;
-        margin-bottom: 20px;
-      }
+/* ====================== BUTTONS ====================== */
+.submit,
+.sign-in,
+.google-btn {
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+}
 
-      .profile-pic {
-        width: 120px;
-        aspect-ratio: 1 / 1;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid #d6d6ff;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        display: block;
-        margin: 0 auto;
+.submit,
+.sign-in {
+  background: rgba(113, 99, 186, 1);
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit:hover,
+.sign-in:hover {
+  background: rgb(85, 65, 182);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ====================== PROFILE CARD ====================== */
+.main-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.profile-card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px var(--shadow);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #d6d6ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.member-since {
+  font-size: 14px;
+  color: #777;
+}
+
+.profile-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+  margin-top: 30px;
 }
 
 
-      .edit-icon {
-        position: absolute;
-        top: 5px;
-        right: 115px;
-        background: #fff;
-        border-radius: 50%;
-        padding: 6px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-      }
+.profile-row label {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+}
 
-      .edit-icon:hover {
-        background: #efefff;
-      }
+.profile-row p {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #444;
+}
 
-      .profile-info {
-        background: linear-gradient(135deg, #ecebff, #f8f9ff);
-        border-radius: 16px;
-        padding: 25px;
-        margin: 20px 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      }
+.profile-button {
+  text-align: center;
+  margin-top: 30px;
+}
 
-      .profile-info p {
-        font-size: 18px;
-        margin: 18px 0;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
+.edit-btn {
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-      .profile-actions {
-        display: flex;
-        gap: 14px;
-        margin-top: 30px;
-        flex-wrap: wrap;
-      }
+.edit-btn i {
+  margin-right: 6px;
+}
 
-      .sign-in,
-      .google-btn {
-        flex: 1;
-        text-align: center;
-        background: #7f6eff;
-        color: #fff;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: 0.3s;
-        font-size: 16px;
-      }
+.edit-btn:hover {
+  background-color: #2e3d94;
+}
 
-      .sign-in:hover,
-      .google-btn:hover {
-        background: #685bda;
-      }
+/* Horizontal line between top and details */
+.profile-left {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
 
-      .go-dashboard {
-        background: #bdb8ff;
-      }
+/* Two-column layout with vertical divider */
+.profile-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  position: relative;
+}
 
-      .go-dashboard:hover {
-        background: #a9a3f7;
-      }
+.profile-details::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: #e2e2e2;
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
 
+
+/* ====================== RESPONSIVENESS ====================== */
+@media (max-width: 768px) {
   .container {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  }
-
-  .left-section {
-    flex: 1;
+    flex-direction: column;
   }
 
   .right-section {
-    flex: 1;
+    padding: 40px 30px;
   }
-    
+
+  .expenses-card-left,
+  .expenses-card-right {
+    width: 80%;
+    margin: 10px auto;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .right-section {
+    padding: 30px 20px;
+  }
+
+  .logo img {
+    margin-top: 10px;
+    width: 24px;
+  }
+
+  .logo span,
+  h1 {
+    font-size: 16px;
+  }
+
+  .submit,
+  .sign-in,
+  .google-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .expenses-card-left,
+  .expenses-card-right {
+    width: 90%;
+    padding: 14px;
+  }
+
+  .expense-title,
+  .expense-amount,
+  .expense-change,
+  .graph .days {
+    font-size: 12px;
+  }
+}
+
+
+/* ====================== EDIT PROFILE MODAL ====================== */
+#editModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  /* Centering using Flexbox */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#editModal .modal-content {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+#editModal h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+
+#editModal label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+#editModal input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#editModal button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#editModal button[type="submit"]:hover {
+  background-color: #2e3d94;
+}
+
+#editModal .close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+#editModal .close-btn:hover {
+  color: #000;
+}
+

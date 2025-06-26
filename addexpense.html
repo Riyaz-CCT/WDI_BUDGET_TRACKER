@@ -2,29 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>
-        Daily Expense Tracker
-    </title>
+    <title>Daily Expense Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <input type="checkbox" id="show-modal">
-    <div class="modal">
+
+    <!-- Modal -->
+    <div class="modal" id="expense-modal">
         <div class="modal-box">
-            <label for="show-modal" class="close-button">&times;
-            </label>
-            <h2>
-                Add New Expense Details
-            </h2>
-            <form>
-                <label for="expense-date">Date
-                    <span class="required">*
-              </span>
-            </label>
+            <span class="close-button" id="close-modal">&times;</span>
+            <h2>Add New Expense Details</h2>
+            <form id="expense-form">
+                <label for="expense-date">Date <span class="required">*</span></label>
                 <input type="date" id="expense-date" name="expense-date" required>
-                <label for="expense-category">Category 
-                    <span class="required">*</span>
-                </label>
+
+                <label for="expense-category">Category <span class="required">*</span></label>
                 <select id="expense-category" name="expense-category" required>
                     <option value="">Select Category</option>
                     <option value="Food">Food</option>
@@ -35,22 +28,61 @@
                     <option value="Others">Others</option>
                 </select>
                 <a href="#" class="add-category">+ Add New Category</a>
-                <label for="expense-amount">Amount
-                    <span class="required">*</span>
-                </label>
-                <input type="text" id="expense-amount" name="expense-amount" placeholder="amount" required>
+
+                <label for="expense-amount">Amount <span class="required">*</span></label>
+                <input type="number" id="expense-amount" name="expense-amount" placeholder="amount" required>
+
+                <label for="transaction-type">Transaction Type <span class="required">*</span></label>
+                <select id="transaction-type" name="transaction-type" required>
+                    <option value="">Select Type</option>
+                    <option value="Expense">Expense</option>
+                    <option value="Income">Income</option>
+                </select>
+
+                <label for="payment-method">Payment Method <span class="required">*</span></label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="">Select Method</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
+                    <option value="UPI">UPI</option>
+                </select>
+
                 <label for="expense-description">Description</label>
-                <textarea id="expense-description" name="expense-description" placeholder=" description"></textarea>
+                <textarea id="expense-description" name="expense-description" placeholder="description"></textarea>
+
                 <label for="expense-file">Attach File (PDF, JSON, DOCX, TXT)</label>
                 <input type="file" id="expense-file" name="expense-file" accept=".pdf,.json,.docx,.txt">
+
                 <div class="form-buttons">
-                    <label for="show-modal" class="cancel-button">Cancel</label>
-                    <button type="submit" class="save-button">Save </button>
+                    <span class="cancel-button" id="cancel-modal">Cancel</span>
+                    <button type="submit" class="save-button">Save</button>
                 </div>
             </form>
         </div>
     </div>
-    <label for="show-modal" class="open-button">+ Add New Expenses</label>
+
+    <!-- Open Modal Button -->
+    <span class="open-button" id="open-modal">+ Add New Expenses</span>
+
+    <!-- jQuery Script -->
+    <script>
+        $(document).ready(function() {
+            $('#open-modal').click(function() {
+                $('#expense-modal').addClass('show');
+            });
+
+            $('#close-modal, #cancel-modal').click(function() {
+                $('#expense-modal').removeClass('show');
+            });
+
+            $('#expense-form').submit(function(e) {
+                e.preventDefault();
+                alert('Form submitted!');
+                $('#expense-modal').removeClass('show');
+                this.reset();
+            });
+        });
+    </script>
 
 </body>
 </html>

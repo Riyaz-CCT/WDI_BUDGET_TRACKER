@@ -1,0 +1,394 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: sticky;
+  height: 100vh;
+  width: 110px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0 1.7rem;
+  color: rgba(113, 99, 186, 255);
+  overflow: hidden;
+  background-color: #fff;
+  transition: all 0.5s linear;
+}
+
+.sidebar:hover {
+  width: 240px;
+  transition: 0.5s;
+}
+
+.logo {
+  margin: 0.5rem 0.5rem 1rem 0.3rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  height: 35px;
+  width: 35px;
+}
+
+.logo p {
+  font-size: 25px;
+  font-weight: bolder;
+  color: var(--primary-color);
+  overflow: hidden;
+}
+
+.menu {
+  height: 88%;
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu li {
+  padding: 1rem;
+  margin: 8px 0;
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
+}
+
+.menu li:hover,
+.active {
+  background: #dcd8f3;
+}
+
+.menu a {
+  font-size: 14px;
+  text-decoration: none;
+  color: rgba(113, 99, 186, 255);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.menu a span {
+  overflow: hidden;
+}
+
+.menu a i {
+  font-size: 1.2rem;
+}
+
+/* Primary icon color */
+.fa,
+.fas,
+.far,
+.fa-solid,
+.view-btn i,
+.edit-btn i {
+  color: rgba(113, 99, 186, 255);
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* MAIN CONTENT */
+.main--content {
+  position: relative;
+  background: #f5f3ff;
+  width: 100%;
+  padding: 1rem 2.5rem;
+}
+
+.header--wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 2rem;
+  margin-bottom: 1rem;
+}
+
+.header--wrapper img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.header--title {
+  color: rgba(113, 99, 186, 255);
+}
+
+.user--info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search--box {
+  background: #f5f3ff;
+  border-radius: 15px;
+  color: rgba(113, 99, 186, 255);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+}
+
+.search--box input {
+  background: transparent;
+  padding: 10px;
+}
+
+.search--box i {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+
+.search--box i:hover {
+  transform: scale(1.2);
+}
+
+/* EXPENSES */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #3949ab;
+  margin: 0;
+}
+
+.add-expense-btn {
+  background-color: #3949ab;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+}
+
+.add-expense-btn:hover {
+  background-color: #6b77c3;
+}
+
+.plus-icon {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* TABLE STYLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+thead tr {
+  background-color: #4554ac;
+  color: white;
+}
+
+/* Sorting headers */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 25px;
+}
+
+th.sortable::after {
+  content: "⇅";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: white;
+}
+
+th.sortable.sorted-asc::after {
+  content: "▲";
+}
+
+th.sortable.sorted-desc::after {
+  content: "▼";
+}
+
+/* Amount color */
+.amount {
+  color: #3949ab;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 8px;
+}
+
+.edit-btn,
+.view-btn {
+  border: none;
+  margin: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  background: transparent;
+}
+
+.pagination {
+  margin-top: 50px;
+  float: right;
+}
+
+.pagination button {
+  border: none;
+  padding: 8px 12px;
+  margin: 2px;
+  border-radius: 5px;
+  background-color: #3949ab;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pagination button.active {
+  background-color: #fff;
+  color: #3949ab;
+  border: 2px solid #3949ab;
+}
+
+.pagination button:hover {
+  background-color: #fff;
+  color: #3949ab;
+  border: 2px solid #3949ab;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
+  background-color: #fff;
+  padding: 20px;
+  width: 350px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.modal-box h2 {
+  margin-bottom: 15px;
+}
+
+.modal label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.modal .required {
+  color: red;
+}
+
+.modal input[type="date"],
+.modal input[type="text"],
+.modal select,
+.modal textarea,
+.modal input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.modal .add-category {
+  font-size: 12px;
+  color: rgba(113, 99, 186, 255);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.modal .form-buttons {
+  text-align: center;
+}
+
+.modal .cancel-button,
+.modal .save-button {
+  display: inline-block;
+  width: 120px;
+  padding: 8px 14px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #fff;
+}
+
+.modal .cancel-button {
+  background-color: #666;
+}
+
+.modal .save-button {
+  background-color: rgba(113, 99, 186, 255);
+}
+
+.modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+/* Make sort icons white */
+th i.fa-sort,
+th i.fa-sort-up,
+th i.fa-sort-down {
+  color: white !important;
+  margin-left: 5px;
+}

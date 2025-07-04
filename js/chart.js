@@ -9,7 +9,7 @@ $(document).ready(function () {
   const ctx2 = $('#barChart2')[0].getContext('2d');
 
   // Fetch data from JSON
-  $.getJSON('../pages/data.json', function (json) {
+  $.getJSON('data.json', function (json) {
     currentData = json;
     renderLineChart(json.monthly);
     renderPieChart(json.monthly, "summary");

@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinTrack Pro Dashboard</title>
 
-  <link rel="stylesheet" href="/css/dashboard_styles.css" />
-  <link rel="stylesheet" href="/css/responsive_dashboard.css" />
+  <link rel="stylesheet" href="../css/dashboard_styles.css" />
+  <link rel="stylesheet" href="../css/responsive_dashboard.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -16,7 +16,7 @@
   <!-- ===================== SIDEBAR STARTS HERE===================== -->
   <div class="sidebar">
     <div class="logo">
-      <img src="/assests/budget.png" alt="Logo" />
+      <img src="../assests/budget.png" alt="Logo" />
       <p>FinTrack Pro</p>
     </div>
     <ul class="menu">
@@ -44,7 +44,7 @@
         <h1>Dashboard</h1>
       </div>
       <div class="user--info">
-        <a href="profile.html"><img src="/assests/profile.png" alt="profile picture" /></a>
+        <a href="profile.html"><img src="../assests/profile.png" alt="profile picture" /></a>
       </div>
     </div>
 
@@ -67,22 +67,22 @@
           <div class="stats-cards-slider">
             <div class="stats-cards">
               <p>Income</p>
-              <span>$72,450</span>
+              <span id="income-value">$0</span>
               <p class="growth up" style="color:#2e7d32">+1.97%</p>
             </div>
             <div class="stats-cards">
               <p>Expense</p>
-              <span>$48,920</span>
+              <span id="expense-value">$0</span>
               <p class="growth down" style="color:#ef5350">-7.35%</p>
             </div>
             <div class="stats-cards">
               <p>Savings</p>
-              <span>$23,530</span>
+              <span id="savings-value">$0</span>
               <p class="growth up" style="color:#ef5350">-5.30%</p>
             </div>
             <div class="stats-cards">
               <p>Balance</p>
-              <span>$15,000</span>
+              <span id="balance-value">$15,000</span>
               <p class="growth up" style="color:#2e7d32">+1.97%</p>
             </div>
           </div>
@@ -191,8 +191,8 @@
   <!-- Importing Chart.js library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <script src="/js/script.js"></script>
-  <script src="/js/chart.js"></script>
+  <script src="../js/script.js"></script>
+  <script src="../js/chart.js"></script>
 
 
 </body>

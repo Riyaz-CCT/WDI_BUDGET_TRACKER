@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: '../php/get_income.php',
+        url: '../php/get_cards_data.php',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -47,41 +47,41 @@ $(document).ready(function () {
     // });
 
 
-    // Style progress bars based on data attributes
-    $('.progress-bar-fill').each(function () {
-        const $fill = $(this);
-        const percent = parseFloat($fill.data('percent')) || 0;
-        const type = $fill.data('type'); // 'expense' or 'saving'
+    // // Style progress bars based on data attributes
+    // $('.progress-bar-fill').each(function () {
+    //     const $fill = $(this);
+    //     const percent = parseFloat($fill.data('percent')) || 0;
+    //     const type = $fill.data('type'); // 'expense' or 'saving'
 
-        // Clamp percent and apply width
-        $fill.css('width', `${Math.min(percent, 100)}%`);
+    //     // Clamp percent and apply width
+    //     $fill.css('width', `${Math.min(percent, 100)}%`);
 
-        // Remove existing color classes
-        $fill.removeClass('green yellow red');
+    //     // Remove existing color classes
+    //     $fill.removeClass('green yellow red');
 
-        let color;
+    //     let color;
 
-        if (type === 'expense') {
-            if (percent > 70) {
-                color = 'red';
-            } else if (percent >= 45) {
-                color = 'yellow';
-            } else {
-                color = 'green';
-            }
-        } else if (type === 'saving') {
-            if (percent > 70) {
-                color = 'green';
-            } else if (percent >= 45) {
-                color = 'yellow';
-            } else {
-                color = 'red';
-            }
-        }
+    //     if (type === 'expense') {
+    //         if (percent > 70) {
+    //             color = 'red';
+    //         } else if (percent >= 45) {
+    //             color = 'yellow';
+    //         } else {
+    //             color = 'green';
+    //         }
+    //     } else if (type === 'saving') {
+    //         if (percent > 70) {
+    //             color = 'green';
+    //         } else if (percent >= 45) {
+    //             color = 'yellow';
+    //         } else {
+    //             color = 'red';
+    //         }
+    //     }
 
-        // Apply color class
-        $fill.addClass(color);
-    });
+    //     // Apply color class
+    //     $fill.addClass(color);
+    // });
 
 
 

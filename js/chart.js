@@ -1,23 +1,24 @@
 $(document).ready(function () {
-  // Declare chart variables
   let currentData;
   let lineChartInstance, pieChartInstance, barChart2Instance;
 
-  // Get canvas contexts
   const lineCtx = $('#barChart')[0].getContext('2d');
   const summaryPieCtx = $('#summaryPieChart')[0].getContext('2d');
   const ctx2 = $('#barChart2')[0].getContext('2d');
 
-  // Fetch data from JSON
-  $.getJSON('data.json', function (json) {
+  // Fetch JSON data
+  $.getJSON('../php/get_graph_data.php', function (json) {
     currentData = json;
-    renderLineChart(json.monthly);
-    renderPieChart(json.monthly, "summary");
-    renderBarChart2(json.monthly);
+
+    const initialRange = $('#rangeSelect').val();
+    const initialPieType = $('#pieRangeSelect').val();
+
+    renderLineChart(currentData[initialRange]);
+    renderPieChart(currentData["monthly"], initialPieType);
+    renderBarChart2(currentData[initialRange]);
   });
 
-  // ======================= CHART RENDER FUNCTIONS =======================
-
+  // ========== RENDER LINE CHART ==========
   function renderLineChart(data) {
     if (lineChartInstance) lineChartInstance.destroy();
 
@@ -77,6 +78,7 @@ $(document).ready(function () {
     });
   }
 
+  // ========== RENDER PIE CHART ==========
   function renderPieChart(data, type = "summary") {
     if (pieChartInstance) pieChartInstance.destroy();
 
@@ -87,14 +89,25 @@ $(document).ready(function () {
     ];
 
     if (type === "summary") {
+      const currentMonth = new Date().getMonth(); // 0-11
+
+      const income = data.income.trend[currentMonth] || 0;
+      const expense = data.expense.trend[currentMonth] || 0;
+      const saving = income - expense;
+
       labels = ['Income', 'Expenses', 'Savings'];
-      values = [data.income.summary, data.expense.summary, data.saving.summary];
-    } else if (type === "method") {
+      values = [income, expense, saving];
+    } else if (type === "method" && data.expense.method) {
       labels = data.expense.method.labels;
       values = data.expense.method.data;
-    } else if (type === "category") {
+    } else if (type === "category" && data.expense.category) {
       labels = data.expense.category.labels;
       values = data.expense.category.data;
+    }
+
+    if (labels.length === 0 || values.length === 0) {
+      $('#summaryPieChart').replaceWith('<div id="summaryPieChart">No data available</div>');
+      return;
     }
 
     const bgColors = labels.map((_, i) => baseColors[i % baseColors.length]);
@@ -143,6 +156,7 @@ $(document).ready(function () {
     });
   }
 
+  // ========== RENDER BAR CHART ==========
   function renderBarChart2(data) {
     if (barChart2Instance) barChart2Instance.destroy();
 
@@ -196,8 +210,7 @@ $(document).ready(function () {
     });
   }
 
-  // ======================= EVENT HANDLERS IN JQUERY =======================
-
+  // ========== EVENT HANDLERS ==========
   $('#rangeSelect').on("change", function () {
     const range = $(this).val();
     renderLineChart(currentData[range]);
@@ -209,18 +222,7 @@ $(document).ready(function () {
   });
 
   $('#pieRangeSelect').on("change", function () {
-    const val = $(this).val();
-    let chartType = "summary";
-    let dataRange = "monthly";
-
-    if (val === "weekly") {
-      chartType = "method";
-      dataRange = "weekly";
-    } else if (val === "yearly") {
-      chartType = "category";
-      dataRange = "yearly";
-    }
-
-    renderPieChart(currentData[dataRange], chartType);
+    const type = $(this).val(); // summary, method, or category
+    renderPieChart(currentData["monthly"], type); // Always use monthly data
   });
 });

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <!-- ===================== SIDEBAR STARTS HERE===================== -->
+  <!-- ===================== SIDEBAR STARTS HERE ===================== -->
   <div class="sidebar">
     <div class="logo">
       <img src="../assests/budget.png" alt="Logo" />
@@ -36,7 +36,7 @@
   </div>
   <!-- ===================== SIDEBAR ENDS HERE ===================== -->
 
-  <!-- ===================== MAIN STARTS HERE===================== -->
+  <!-- ===================== MAIN STARTS HERE ===================== -->
   <div class="main-container">
     <div class="header--wrapper">
       <button id="toggle-btn">☰</button>
@@ -52,7 +52,6 @@
       <!-- ========== SECTION 1: Stats + Progress Bar ========== -->
       <div class="section-1">
         <div class="stats-cards-container">
-          <!-- New Flexbox Wrapper for Title + Buttons -->
           <div class="stats-top-section">
             <div class="overview-heading">
               <h2 class="card-title">Monthly Overview</h2>
@@ -97,27 +96,27 @@
             <div class="progress-row">
               <div class="progress-info">
                 <p class="progress-title">Expense Budget</p>
-                <span class="progress-percent">93.21%</i></span>
+                <span class="progress-percent" id="progress-expense-value">0%</span>
               </div>
               <div class="progress-bar-container">
-                <div class="progress-bar-fill" style="width: 93.2%;" data-percent="93.21%" data-type="expense"></div>
+                <div class="progress-bar-fill" style="width: 0%;" data-percent="0" data-type="expense"></div>
               </div>
-              <p class="progress-subtext">93.21% of your monthly budget used.</p>
+              <p class="progress-subtext">0% of your monthly budget used.</p>
             </div>
 
             <!-- Savings Target -->
             <div class="progress-row">
               <div class="progress-info">
                 <p class="progress-title">Saving Target</p>
-                <span class="progress-percent">50.21%</i></span>
+                <span class="progress-percent" id="progress-savings-value">0%</span>
               </div>
               <div class="progress-bar-container">
-                <div class="progress-bar-fill" style="width: 50.21%;" data-percent="50.21" data-type="saving"></div>
+                <div class="progress-bar-fill" style="width: 0%;" data-percent="0" data-type="saving"></div>
               </div>
               <p class="progress-subtext">You're halfway to your savings goal.</p>
             </div>
-          </div> <!--✅ ADDED: closing tag for goal-progress-wrapper -->
-        </div> <!-- ✅ ADDED: closing tag for new_section -->
+          </div>
+        </div>
       </div>
       <!-- ========== SECTION 1 ENDS HERE ========== -->
 
@@ -139,17 +138,16 @@
         <div class="graph--container-2">
           <div class="chart-dropdown">
             <select id="pieRangeSelect" onchange="handlePieRangeChange(this.value)">
-              <option value="monthly" selected>Summary</option>
-              <option value="weekly">Method</option>
-              <option value="yearly">Categories</option>
+              <option value="summary" selected>Summary</option>
+              <option value="method">Method</option>
+              <option value="category">Categories</option>
             </select>
           </div>
           <canvas id="summaryPieChart" class="chart-canvas"></canvas>
         </div>
       </div>
-      <!-- ========== SECTION 2 ENDS HERE ========== -->
 
-      <!-- ========== SECTION 3: Chart + Table STARTS HERE ========== -->
+      <!-- ========== SECTION 3: Table ========== -->
       <div class="section-3">
         <div class="graph--container-3">
           <div class="chart-dropdown">
@@ -179,22 +177,16 @@
         </div>
       </div>
       <!-- ========== SECTION 3 ENDS HERE ========== -->
-
-    </div> <!-- .main--content -->
-  </div> <!-- .main-container -->
-  <!-- ===================== MAIN ENDS HERE===================== -->
-
+    </div>
+  </div>
 
   <!-- ===================== SCRIPTS ===================== -->
-   <!-- Importing JQuery library -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-  <!-- Importing Chart.js library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script src="../js/script.js"></script>
   <script src="../js/chart.js"></script>
-
-
+  <script src="../js/goals.js"></script>
 </body>
 
 </html>

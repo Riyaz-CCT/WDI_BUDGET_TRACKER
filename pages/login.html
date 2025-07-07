@@ -66,15 +66,25 @@
         <h1>Welcome To FinTrack Pro!</h1>
         <p class="subtext">Log in to continue your financial journey.</p>
 
-        <form id="login-form">
+        <form id="login-form" action="login.php" method="POST">
           <label>Email <span>*</span></label>
-          <input type="email" placeholder="Type your email Here" required />
+          <input
+            type="email"
+            name="email"
+            placeholder="Type your email here"
+            required
+          />
 
           <label>Password <span>*</span></label>
-          <input type="password" placeholder="Please Enter your Password" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Please enter your password"
+            required
+          />
+
           <a href="forgot-password.html" class="forgot">Forgot Password?</a>
 
-          <!-- Corrected button -->
           <button type="submit" class="sign-in">Sign In</button>
 
           <p class="signup">
@@ -93,11 +103,13 @@
 
     <!-- ✅ JavaScript to handle login redirection -->
     <script>
-      document.getElementById("login-form").addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent form default submission
-        // You can add real authentication here later
-        window.location.href = "dashboard.html"; // Redirect to dashboard
-      });
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent form default submission
+          // You can add real authentication here later
+          window.location.href = "dashboard.html"; // Redirect to dashboard
+        });
     </script>
   </body>
 </html>

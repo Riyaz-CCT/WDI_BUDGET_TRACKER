@@ -2,157 +2,142 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Profile</title>
-    <link rel="stylesheet" href="/css/login_styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro Dashboard</title>
+
+    <link rel="stylesheet" href="/css/profile.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
+
   <body>
-    <div class="container">
-      <!-- Left Section -->
-      <!-- <div class="left-section">
-        <div class="expenses-card-left">
-          <div class="expense-title">
-            <span class="icon">📊</span> May 2025 Expenses
-          </div>
-          <div class="expense-amount">$2,000</div>
-          <div class="expense-change"><span>⬆️</span> 5%</div>
-
-          <div class="graph-container">
-            <div class="bar" style="--height: 60%"></div>
-            <div class="bar" style="--height: 35%"></div>
-            <div class="bar" style="--height: 45%"></div>
-            <div class="bar today" style="--height: 80%"></div>
-            <div class="bar" style="--height: 55%"></div>
-            <div class="bar" style="--height: 30%"></div>
-            <div class="bar" style="--height: 40%"></div>
-          </div>
-
-          <div class="days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
-            <span>Fri</span><span>Sat</span><span>Sun</span>
-          </div>
-        </div>
-      </div> -->
-      <div class="left-section">
-        <div class="expenses-card-left">
-          <div class="expense-title">
-            <span class="icon">📊</span> May 2025 Expenses
-          </div>
-          <div class="expense-amount">$2,000</div>
-          <div class="expense-change"><span>⬆️</span> 5%</div>
-
-          <div class="graph-container">
-            <div class="bar" style="--height: 60%"></div>
-            <div class="bar" style="--height: 35%"></div>
-            <div class="bar" style="--height: 45%"></div>
-            <div class="bar today" style="--height: 80%"></div>
-            <div class="bar" style="--height: 55%"></div>
-            <div class="bar" style="--height: 30%"></div>
-            <div class="bar" style="--height: 40%"></div>
-          </div>
-
-          <div class="days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
-            <span>Fri</span><span>Sat</span><span>Sun</span>
-          </div>
-        </div>
-
-        <div class="expenses-card-right">
-          <div class="expense-title">
-            <span class="icon">📊</span> June 2025 Expenses
-          </div>
-          <div class="expense-amount">$12,000</div>
-          <div class="expense-change"><span>⬆️</span> 12%</div>
-
-          <div class="graph-container">
-            <div class="bar" style="--height: 60%"></div>
-            <div class="bar" style="--height: 35%"></div>
-            <div class="bar" style="--height: 45%"></div>
-            <div class="bar today" style="--height: 80%"></div>
-            <div class="bar" style="--height: 55%"></div>
-            <div class="bar" style="--height: 30%"></div>
-            <div class="bar" style="--height: 40%"></div>
-          </div>
-
-          <div class="days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
-            <span>Fri</span><span>Sat</span><span>Sun</span>
-          </div>
-        </div>
+    <!-- ===================== SIDEBAR ===================== -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="/assests/budget.png" alt="Logo" />
+        <p>FinTrack Pro</p>
       </div>
+      <ul class="menu">
+        <li>
+          <a href="dashboard.html"
+            ><i class="fas fa-chart-line"></i><span>Dashboard</span></a
+          >
+        </li>
+        <li>
+          <a href="categories.html"
+            ><i class="fas fa-list-alt"></i><span>Expenses</span></a
+          >
+        </li>
+        <li class="active">
+          <a href="profile.html"
+            ><i class="fas fa-user"></i><span>My Profile</span></a
+          >
+        </li>
+        <li class="logout">
+          <a href="login.html" id="logout-link"
+            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
+          >
+        </li>
+      </ul>
+    </div>
 
-      <!-- Right Section -->
-      <div class="right-section">
-        <div class="logo" style="margin-bottom: 20px">
-          <img src="/assests/budget.png" alt="logo" />
-          <span style="font-size: 22px; font-weight: 600">FinTrack Pro</span>
-        </div>
-
-        <div class="profile-header">
+    <!-- ===================== MAIN ===================== -->
+    <div class="main-container">
+      <h2 class="profile-heading">Profile</h2>
+      <div class="profile-card">
+        <div class="profile-left">
           <img
             src="/assests/profile.png"
             alt="Profile"
-            class="profile-pic"
-            id="userImage"
+            class="profile-avatar"
           />
-          <div class="edit-icon" onclick="editProfile()">
-            <i class="fa-solid fa-pen"></i>
+          <h3 class="profile-name">John Doe</h3>
+          <p class="member-since">Member since Jan 2024</p>
+
+          <div class="profile-details">
+            <div class="profile-row">
+              <label>Email</label>
+              <p id="profileEmail">john@example.com</p>
+            </div>
+            <div class="profile-row">
+              <label>Phone</label>
+              <p id="profilePhone">+1 98765 123345</p>
+            </div>
+            <div class="profile-row">
+              <label>Monthly Budget</label>
+              <p id="profileBudget">$4,500</p>
+            </div>
+            <div class="profile-row">
+              <label>Preferred Currency</label>
+              <p id="profileCurrency">USD ($)</p>
+            </div>
           </div>
-          <h1 style="margin-top: 12px">
-            Hi, <span id="profileName">User</span>!
-          </h1>
-        </div>
 
-        <div class="profile-info">
-          <p>
-            <i class="fa-solid fa-user"></i>
-            <span id="profileNameDetail">User</span>
-          </p>
-          <p>
-            <i class="fa-solid fa-phone"></i>
-            <span id="profilePhone">+91 0000000000</span>
-          </p>
-          <p>
-            <i class="fa-solid fa-envelope"></i>
-            <span id="profileEmail">user@example.com</span>
-          </p>
-        </div>
-
-        <div class="profile-actions">
-          <button class="sign-in" onclick="editProfile()">Edit Profile</button>
-          <button class="sign-in go-dashboard" onclick="goDashboard()">
-            Go to Dashboard
-          </button>
+          <div class="profile-button">
+            <button class="edit-btn" id="editBtn">
+              <i class="fa-solid fa-pen"></i> Edit Profile
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- ===================== EDIT MODAL ===================== -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Edit Profile</h2>
+        <form id="editProfileForm">
+          <label>Email:</label>
+          <input type="email" id="emailInput" required />
+
+          <label>Phone:</label>
+          <input type="text" id="phoneInput" required />
+
+          <label>Monthly Budget:</label>
+          <input type="text" id="budgetInput" required />
+
+          <label>Preferred Currency:</label>
+          <input type="text" id="currencyInput" required />
+
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const name = urlParams.get("name") || "USER";
-      const phone = urlParams.get("phone") || "+91 1234567890";
-      const email = urlParams.get("email") || "user@example.com";
-      const img = urlParams.get("image");
+      $(document).ready(function () {
+        // Show modal
+        $("#editBtn").click(function () {
+          $("#emailInput").val($("#profileEmail").text());
+          $("#phoneInput").val($("#profilePhone").text());
+          $("#budgetInput").val(
+            $("#profileBudget").text().replace("$", "").replace(",", "")
+          );
+          $("#currencyInput").val($("#profileCurrency").text());
+          $("#editModal").fadeIn();
+        });
 
-      document.getElementById("profileName").innerText = name;
-      document.getElementById("profileNameDetail").innerText = name;
-      document.getElementById("profilePhone").innerText = phone;
-      document.getElementById("profileEmail").innerText = email;
-      if (img) {
-        document.getElementById("UserImage").src = img;
-      }
+        // Close modal
+        $(".close-btn").click(function () {
+          $("#editModal").fadeOut();
+        });
 
-      function editProfile() {
-        alert("Edit Profile feature coming soon!");
-      }
-
-      function goDashboard() {
-        window.location.href = "dashboard.html";
-      }
+        // Update profile details
+        $("#editProfileForm").submit(function (e) {
+          e.preventDefault();
+          $("#profileEmail").text($("#emailInput").val());
+          $("#profilePhone").text($("#phoneInput").val());
+          $("#profileBudget").text(`$${$("#budgetInput").val()}`);
+          $("#profileCurrency").text($("#currencyInput").val());
+          $("#editModal").fadeOut();
+        });
+      });
     </script>
   </body>
 </html>

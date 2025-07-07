@@ -66,22 +66,32 @@
         <h1>Join the FinTrack Pro Family!</h1>
         <p class="subtext">Log in to continue your financial journey.</p>
 
-        <form id="signup-form">
+        <form id="signup-form" action="signup.php" method="POST">
           <div class="input-row">
-            <input type="text" placeholder="Full Name *" required />
-            <input type="text" placeholder="Phone Number *" required />
+            <input type="text" name="name" placeholder="Full Name *" required />
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone Number *"
+              required
+            />
           </div>
-          <input type="email" placeholder="Email *" required />
+          <input type="email" name="email" placeholder="Email *" required />
           <div class="input-row">
-            <input type="password" placeholder="Password *" required />
             <input
               type="password"
+              name="password"
+              placeholder="Password *"
+              required
+            />
+            <input
+              type="password"
+              name="repassword"
               placeholder="Re-enter Your Password *"
               required
             />
           </div>
 
-          <!-- ✅ Correct submit button -->
           <button type="submit" class="sign-in">Sign Up!</button>
 
           <p class="login-text">

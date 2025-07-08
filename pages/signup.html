@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/login_styles.css" />
+    <link rel="stylesheet" href="../css/login_styles.css" />
   </head>
   <body>
     <div class="container">
@@ -107,8 +107,25 @@
         </form>
       </div>
     </div>
+    <script>
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", function (e) {
+          const password = document.querySelector(
+            'input[name="password"]'
+          ).value;
+          const repassword = document.querySelector(
+            'input[name="repassword"]'
+          ).value;
 
-    <!-- ✅ JS: Redirect after form submission -->
+          if (password !== repassword) {
+            e.preventDefault();
+            alert("Passwords do not match!");
+          }
+        });
+    </script>
+
+    <!-- ✅ JS: Redirect after form submission
     <script>
       document
         .getElementById("signup-form")
@@ -117,6 +134,6 @@
           // Optional: Add validation here later
           window.location.href = "dashboard.html";
         });
-    </script>
+    </script> -->
   </body>
 </html>

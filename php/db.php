@@ -1,10 +1,11 @@
 <?php
-$host = "localhost";
-$username = "root";  // default in XAMPP
-$password = "";      // default in XAMPP
-$database = "fintrack_v2";
+$servername = "localhost";
+$username = "root"; // Default for XAMPP
+$password = "";     // Default is empty
+$dbname = "fintrack_v2"; // Your database name
 
-$conn = new mysqli($host, $username, $password, $database);
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {

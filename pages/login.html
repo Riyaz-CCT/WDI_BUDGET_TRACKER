@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FINTrack Pro</title>
-    <link rel="stylesheet" href="/css/login_styles.css" />
+    <title>Fintrack Login</title>
+    <link rel="stylesheet" href="../css/login_styles.css" />
   </head>
   <body>
     <div class="container">
@@ -60,25 +60,27 @@
       <!-- Right Section -->
       <div class="right-section">
         <div class="logo">
-          <img src="/assests/budget.png" alt="logo" />
+          <img src="/assets/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
         <h1>Welcome To FinTrack Pro!</h1>
         <p class="subtext">Log in to continue your financial journey.</p>
 
         <form id="login-form" action="login.php" method="POST">
-          <label>Email <span>*</span></label>
+          <label for="email">Email <span>*</span></label>
           <input
             type="email"
             name="email"
+            id="email"
             placeholder="Type your email here"
             required
           />
 
-          <label>Password <span>*</span></label>
+          <label for="password">Password <span>*</span></label>
           <input
             type="password"
             name="password"
+            id="password"
             placeholder="Please enter your password"
             required
           />
@@ -90,7 +92,12 @@
           <p class="signup">
             Not a member yet? <a href="signup.html">Sign Up</a>
           </p>
-          <button type="button" class="google-btn">
+
+          <button
+            type="button"
+            class="google-btn"
+            onclick="alert('Google Sign-In coming soon!');"
+          >
             <img
               src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
               alt="Google Icon"
@@ -101,15 +108,11 @@
       </div>
     </div>
 
-    <!-- ✅ JavaScript to handle login redirection -->
     <script>
-      document
-        .getElementById("login-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault(); // Prevent form default submission
-          // You can add real authentication here later
-          window.location.href = "dashboard.html"; // Redirect to dashboard
-        });
+      function togglePassword() {
+        const pwd = document.getElementById("password");
+        pwd.type = pwd.type === "password" ? "text" : "password";
+      }
     </script>
   </body>
 </html>

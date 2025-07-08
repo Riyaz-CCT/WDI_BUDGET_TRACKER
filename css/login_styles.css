@@ -655,4 +655,21 @@ body {
       .right-section {
         flex: 1;
       }
-    
+
+      /* LOGIN FA ICON */
+
+      .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .password-wrapper input {
+        width: 100%;
+        padding-right: 35px; /* space for icon */
+      }
+      .password-wrapper i {
+        position: absolute;
+        right: 10px;
+        color: #555;
+        cursor: pointer;
+      }

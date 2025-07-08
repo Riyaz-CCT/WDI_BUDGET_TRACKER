@@ -1,0 +1,50 @@
+{
+    "income": 112750,
+    "expense": 94150,
+    "saving": 18600,
+    "percent_income": 252.34,
+    "percent_expense": 333.87,
+    "percent_saving": 80.58,
+    "recent_transactions": [
+        {
+            "item": "Movie Night",
+            "amount": "700.00"
+        },
+        {
+            "item": "Dinner",
+            "amount": "250.00"
+        },
+        {
+            "item": "Game Purchase",
+            "amount": "3000.00"
+        },
+        {
+            "item": "Flat Rent",
+            "amount": "15000.00"
+        },
+        {
+            "item": "Mouse",
+            "amount": "750.00"
+        },
+        {
+            "item": "Dinner",
+            "amount": "1200.00"
+        },
+        {
+            "item": "Freelance",
+            "amount": "450.00"
+        },
+        {
+            "item": "Lunch at Caf\u00e9",
+            "amount": "450.00"
+        },
+        {
+            "item": "Freelance Income 0",
+            "amount": "1200.00"
+        },
+        {
+            "item": "Electricity Bill",
+            "amount": "2200.00"
+        }
+    ]
+}

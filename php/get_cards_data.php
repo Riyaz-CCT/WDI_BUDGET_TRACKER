@@ -1,9 +1,10 @@
 <?php
 // php/get_dashboard_data.php
-session_start();
-$user_id = 1; // Replace later with $_SESSION['user_id']
-
+include 'auth.php';
 include 'config.php';
+$user_id = $_SESSION['user_id'];  // Replace later with $_SESSION['user_id']
+
+
 
 // ========== Date Variables ==========
 $currentMonth = date('m');

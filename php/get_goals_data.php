@@ -1,7 +1,8 @@
 <?php
-include 'config.php'; // Adjust the path to your DB connection file
 
-$user_id = 1; // Replace with session user_id if needed
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+$user_id = $_SESSION['user_id']; 
 $month = date('Y-m'); // Get current month in 'YYYY-MM' format
 
 $sql = "SELECT target_expense, target_saving FROM goals 

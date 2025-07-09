@@ -1,4 +1,8 @@
-<?php require_once '../php/auth.php'; ?>
+<?php require_once '../php/auth.php'; 
+  // echo "<pre>";
+  // print_r($_SESSION);
+  // echo "</pre>";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,9 +48,20 @@
       <div class="header--title">
         <h1>Dashboard</h1>
       </div>
-      <div class="user--info">
+      <!-- <div class="user--info">
         <a href="profile.php"><img src="../assests/profile.png" alt="profile picture" /></a>
+      </div> -->
+      <div class="user--info">
+
+        <a href="profile.php">
+          <img src="../assests/profile.png" alt="profile picture" />
+        </a>
+
+        <!-- <h3 style="font-size:1.5rem;color:#3949ab">
+          <?php //echo htmlspecialchars($_SESSION['name']); ?> 
+        </h3>   -->
       </div>
+
     </div>
 
     <div class="main--content">
@@ -59,7 +74,11 @@
             </div>
             <div class="action-buttons">
               <button class="rounded-btn">Import Data</button>
+
+              <form method="post" action="../php/get_export_data.php" style="display: inline;">
               <button class="rounded-btn">Export Data</button>
+              </form>
+
               <button class="rounded-btn">Download Reports</button>
             </div>
           </div>

@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // ✅ Store user info in session
             $_SESSION['user_id'] = $row['id'];         // assuming 'id' is the primary key
             $_SESSION['email'] = $row['email'];
+            $_SESSION['name'] = $row['name'];          // ✅ added name here
 
             // Generate OTP (if you need it)
             $otp = rand(100000, 999999);

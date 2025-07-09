@@ -90,7 +90,7 @@
           <button type="submit" class="sign-in">Sign In</button>
 
           <p class="signup">
-            Not a member yet? <a href="signup.html">Sign Up</a>
+            Not a member yet? <a href="signup.php">Sign Up</a>
           </p>
 
           <button

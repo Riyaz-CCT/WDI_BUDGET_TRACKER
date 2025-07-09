@@ -36,12 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('Login successful! Redirecting...');
             </script>";
 
-            // Generate OTP
+            // ✅ Store user info in session
+            $_SESSION['user_id'] = $row['id'];         // assuming 'id' is the primary key
+            $_SESSION['email'] = $row['email'];
+
+            // Generate OTP (if you need it)
             $otp = rand(100000, 999999);
             $_SESSION['otp'] = $otp;
-            $_SESSION['email'] = $email;
 
-            // Send OTP (if needed)
+            // Send OTP if required
             include 'mailer/send_otp.php';
 
             // Redirect to dashboard

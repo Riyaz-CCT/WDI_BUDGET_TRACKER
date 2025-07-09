@@ -1,3 +1,4 @@
+<?php require_once '../php/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,8 @@
     <ul class="menu">
       <li><a href="dashboard.php"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
       <li class="active"><a href="#"><i class="fas fa-list-alt"></i><span>Expenses</span></a></li>
-      <li><a href="#"><i class="fas fa-user"></i><span>My Profile</span></a></li>
-      <li class="logout"><a href="login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+      <li><a href="profile.php"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+      <li class="logout"><a href="../php/logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
     </ul>
   </div>
 
@@ -33,7 +34,8 @@
           <i class="fa fa-search"></i>
           <input type="text" id="searchBox" placeholder="Search transactions..." />
         </div>
-        <img src="../assests/profile.png" />
+        <!-- <img src="../assests/profile.png" /> -->
+        <a href="profile.php"><img src="../assests/profile.png" alt="profile picture" /></a>
       </div>
     </div>
 

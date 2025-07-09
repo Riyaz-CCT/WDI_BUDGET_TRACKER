@@ -1,3 +1,4 @@
+<?php require_once '../php/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,22 +23,22 @@
       </div>
       <ul class="menu">
         <li>
-          <a href="dashboard.html"
+          <a href="dashboard.php"
             ><i class="fas fa-chart-line"></i><span>Dashboard</span></a
           >
         </li>
         <li>
-          <a href="categories.html"
+          <a href="categories.php"
             ><i class="fas fa-list-alt"></i><span>Expenses</span></a
           >
         </li>
         <li class="active">
-          <a href="profile.html"
+          <a href="profile.php"
             ><i class="fas fa-user"></i><span>My Profile</span></a
           >
         </li>
         <li class="logout">
-          <a href="login.html" id="logout-link"
+          <a href="../php/logout.php" id="logout-link"
             ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
           >
         </li>

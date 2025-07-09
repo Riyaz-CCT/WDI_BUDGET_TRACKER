@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkQuery->store_result();
 
     if ($checkQuery->num_rows > 0) {
-        echo "<script>alert('Email already registered. Try logging in.'); window.location.href='login.html';</script>";
+        echo "<script>alert('Email already registered. Try logging in.'); window.location.href='../pages/login.php';</script>";
         $checkQuery->close();
         exit();
     }
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($insertQuery->execute()) {
         // Auto-login after signup (optional)
         $_SESSION['user_id'] = $conn->insert_id;
-        echo "<script>alert('Signup successful!'); window.location.href='dashboard.php';</script>";
+        echo "<script>alert('Signup successful!'); window.location.href='../php/dashboard.php';</script>";
     } else {
         echo "Error: " . $insertQuery->error;
     }

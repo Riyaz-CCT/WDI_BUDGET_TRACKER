@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Verify OTP</title>
     <link rel="stylesheet" href="/css/login_styles.css" />
+    <style>
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -62,15 +69,16 @@
         <h1 class="reset">Verify OTP</h1>
 
         <!-- ✅ OTP verification form -->
-        <form class="reset-form" action="verifyotp.php" method="POST">
+        <form class="reset-form" action="../php/verifyotp.php" method="POST">
           <label>Enter OTP <span>*</span></label>
           <input
-            type="text"
+            type="number"
             name="otp"
-            placeholder="Enter the OTP sent to your email"
+            placeholder="Enter the 6-digit OTP"
             required
+            maxlength="6"
+            minlength="6"
           />
-
           <button type="submit" class="submit">Verify</button>
         </form>
       </div>

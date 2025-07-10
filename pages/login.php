@@ -60,7 +60,7 @@
       <!-- Right Section -->
       <div class="right-section">
         <div class="logo">
-          <img src="/assets/budget.png" alt="logo" />
+          <img src="../assets/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
         <h1>Welcome To FinTrack Pro!</h1>

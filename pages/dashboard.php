@@ -73,10 +73,10 @@
               <h2 class="card-title">Monthly Overview</h2>
             </div>
             <div class="action-buttons">
-              <button class="rounded-btn">Import Data</button>
+              <!-- <button class="rounded-btn">Import Data</button> -->
 
               <form method="post" action="../php/get_export_data.php" style="display: inline;">
-              <button class="rounded-btn">Export Data</button>
+                <button class="rounded-btn">Export Data</button>
               </form>
 
               <button class="rounded-btn">Download Reports</button>
@@ -207,6 +207,7 @@
   <script src="../js/script.js"></script>
   <script src="../js/chart.js"></script>
   <script src="../js/goals.js"></script>
+
 </body>
 
 </html>

@@ -10,29 +10,26 @@ function sendMail($to, $subject, $message) {
     $mail = new PHPMailer(true);
 
     try {
-        // SMTP settings
+        // Server settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'your_email@gmail.com';       // 🔁 Replace this
-        $mail->Password   = 'your_app_password';          // 🔁 Replace with Gmail App Password
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'sephorafernandes.cct@gmail.com';         // ✅ Replace with your Gmail address
+        $mail->Password = 'pfsqgsvpphgejhic ';            // ✅ Replace with your Gmail App Password
         $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $mail->Port = 587;
 
-        // Sender and recipient
-        $mail->setFrom('your_email@gmail.com', 'FinTrack'); // 🔁 Replace this too
+        // Recipients
+        $mail->setFrom('sephorafernandes.cct@gmail.com', 'FinTrack'); // ✅ Replace with same Gmail address
         $mail->addAddress($to);
 
         // Content
-        $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $message;
 
         $mail->send();
         return true;
-
     } catch (Exception $e) {
-        error_log("Mailer Error: " . $mail->ErrorInfo);   // 👈 Log detailed error
         return false;
     }
 }

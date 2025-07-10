@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Ensure OTP and session data exists
     if (!isset($_SESSION['otp'], $_SESSION['otp_expiry'], $_SESSION['signup_data'])) {
-        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/signup.html';</script>";
+        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/signup.php';</script>";
         exit();
     }
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check for OTP expiration
     if (time() > $expiry) {
-        echo "<script>alert('OTP expired. Please sign up again.'); window.location.href='../pages/signup.html';</script>";
+        echo "<script>alert('OTP expired. Please sign up again.'); window.location.href='../pages/signup.php';</script>";
         session_destroy();
         exit();
     }
@@ -35,9 +35,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssss", $name, $phone, $email, $password);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.html';</script>";
+            echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.php';</script>";
         } else {
-            echo "<script>alert('Database error: Unable to register.'); window.location.href='../pages/signup.html';</script>";
+            echo "<script>alert('Database error: Unable to register.'); window.location.href='../pages/signup.php';</script>";
         }
 
         $stmt->close();

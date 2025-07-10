@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = "Hi $name,\n\nYour OTP for FinTrack signup is: $otp\n\nThis OTP is valid for 5 minutes.\n\n- FinTrack Pro Team";
 
     if (sendMail($email, $subject, $message)) {
-        header("Location: ../pages/verify_otp.html");
+        header("Location: ../pages/verifyotp.html");
         exit();
     } else {
         echo "<script>alert('Failed to send OTP. Try again later.'); window.history.back();</script>";

@@ -95,15 +95,15 @@
           <button type="submit" class="sign-in">Sign Up!</button>
 
           <p class="login-text">
-            Already have an account? <a href="login.html">Log In</a>
+            Already have an account? <a href="login.php">Log In</a>
           </p>
-          <button type="button" class="google-btn">
+          <!-- <button type="button" class="google-btn">
             <img
               src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
               alt="Google Icon"
             />
             Sign up with Google
-          </button>
+          </button> -->
         </form>
       </div>
     </div>

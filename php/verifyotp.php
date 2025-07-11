@@ -3,49 +3,45 @@ session_start();
 include('db.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Validate input
     $enteredOtp = trim($_POST['otp']);
 
-    // Ensure OTP and session data exists
-    if (!isset($_SESSION['otp'], $_SESSION['otp_expiry'], $_SESSION['signup_data'])) {
-        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/signup.php';</script>";
+    if (!isset($_SESSION['otp'], $_SESSION['otp_type'], $_SESSION['email'])) {
+        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/login.html';</script>";
         exit();
     }
 
-    $storedOtp = $_SESSION['otp'];
-    $expiry = $_SESSION['otp_expiry'];
+    if ($enteredOtp != $_SESSION['otp']) {
+        echo "<script>alert('Invalid OTP. Please try again.'); window.history.back();</script>";
+        exit();
+    }
 
-    // Check for OTP expiration
-    if (time() > $expiry) {
-        echo "<script>alert('OTP expired. Please sign up again.'); window.location.href='../pages/signup.php';</script>";
+    // OTP matched
+    if ($_SESSION['otp_type'] === 'forgot_password') {
+        // Forward to password reset form
+        header("Location: ../pages/resetpassword.html");
+        exit();
+    }
+
+    // Otherwise it's signup flow
+    if (!isset($_SESSION['signup_data'], $_SESSION['otp_expiry']) || time() > $_SESSION['otp_expiry']) {
+        echo "<script>alert('OTP expired. Please sign up again.'); window.location.href='../pages/signup.html';</script>";
         session_destroy();
         exit();
     }
 
-    // Match OTP
-    if ($enteredOtp == $storedOtp) {
-        $data = $_SESSION['signup_data'];
-        $name = $data['name'];
-        $phone = $data['phone'];
-        $email = $data['email'];
-        $password = $data['password']; // already hashed in signup2.php
+    $data = $_SESSION['signup_data'];
+    $stmt = $conn->prepare("INSERT INTO users (name, phone, email, password) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $data['name'], $data['phone'], $data['email'], $data['password']);
 
-        // Insert user into database using prepared statement
-        $stmt = $conn->prepare("INSERT INTO users (name, phone, email, password) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $name, $phone, $email, $password);
-
-        if ($stmt->execute()) {
-            echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.php';</script>";
-        } else {
-            echo "<script>alert('Database error: Unable to register.'); window.location.href='../pages/signup.php';</script>";
-        }
-
-        $stmt->close();
-        session_destroy(); // ✅ Clean up after success
+    if ($stmt->execute()) {
+        echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.html';</script>";
     } else {
-        echo "<script>alert('Invalid OTP. Please try again.'); window.history.back();</script>";
+        echo "<script>alert('Signup failed. Try again.'); window.location.href='../pages/signup.html';</script>";
     }
+
+    $stmt->close();
+    session_destroy();
 } else {
-    echo "Invalid request method.";
+    echo "Invalid request.";
 }
 ?>

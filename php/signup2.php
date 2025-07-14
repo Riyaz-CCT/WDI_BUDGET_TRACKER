@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkQuery->store_result();
 
     if ($checkQuery->num_rows > 0) {
-        echo "<script>alert('Email already registered. Try logging in.'); window.location.href='../pages/login.html';</script>";
+        echo "<script>alert('Email already registered. Try logging in.'); window.location.href='../pages/login.php';</script>";
         $checkQuery->close();
         exit();
     }
@@ -59,8 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ✅ Generate and store OTP
     $otp = rand(100000, 999999);
     $_SESSION['otp'] = $otp;
-    $_SESSION['otp_expiry'] = time() + 300; // 5 minutes
+    $_SESSION['otp_expiry'] = time() + 300; // valid for 5 mins
+    $_SESSION['otp_type'] = 'signup';
+    $_SESSION['email'] = $email;
 
+    // ✅ Store signup data for later insert after OTP verification
     $_SESSION['signup_data'] = [
         'name'     => $name,
         'phone'    => $phone,
@@ -68,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'password' => $hashed_password
     ];
 
-    // ✅ Send the OTP email
+    // ✅ Send OTP Email
     $subject = "FinTrack Pro - OTP Verification";
     $message = "Hi $name,\n\nYour OTP for FinTrack signup is: $otp\n\nThis OTP is valid for 5 minutes.\n\n- FinTrack Pro Team";
 

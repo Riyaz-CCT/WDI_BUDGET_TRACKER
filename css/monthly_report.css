@@ -1,0 +1,80 @@
+body {
+  background-color: var(--primary-bg);
+  padding: 2rem;
+  color: var(--text-dark);
+  font-family: 'Poppins', sans-serif;
+}
+
+.main--content {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+hr {
+  margin: 2rem 0;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.styled-table thead tr {
+  background-color: var(--hover-bg);
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+/* ✅ New classes for colored progress text (used in goals) */
+.red {
+  color: #e53935 !important;
+}
+
+.yellow {
+  color: #fbc02d !important;
+}
+
+.green {
+  color: #43a047 !important;
+}
+
+.goal-progress {
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.dual-column {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.dual-column > div {
+  flex: 1;
+}
+
+.footer-text {
+  text-align: center;
+  color: #888;
+}

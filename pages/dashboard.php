@@ -79,30 +79,33 @@
                 <button class="rounded-btn">Export Data</button>
               </form>
 
-              <button class="rounded-btn">Download Reports</button>
+              <!-- <button class="rounded-btn" id="download-report-btn">Download Reports</button> -->
+              <a href="monthly_report.php" class="rounded-btn" style="text-decoration:none; display:inline-block;">View Report</a>
+
+
             </div>
           </div>
 
           <div class="stats-cards-slider">
             <div class="stats-cards">
               <p>Income</p>
-              <span id="income-value">$0</span>
+              <span id="income-value">₹0</span>
               <p class="growth up" style="color:#2e7d32">+1.97%</p>
             </div>
             <div class="stats-cards">
               <p>Expense</p>
-              <span id="expense-value">$0</span>
+              <span id="expense-value">₹0</span>
               <p class="growth down" style="color:#ef5350">-7.35%</p>
             </div>
             <div class="stats-cards">
               <p>Savings</p>
-              <span id="savings-value">$0</span>
+              <span id="savings-value">₹0</span>
               <p class="growth up" style="color:#ef5350">-5.30%</p>
             </div>
             <div class="stats-cards">
-              <p>Balance</p>
-              <span id="balance-value">$15,000</span>
-              <p class="growth up" style="color:#2e7d32">+1.97%</p>
+              <p>Debt</p>
+              <span id="balance-value">₹15,000</span>
+              <p class="growth up" style="color:#2e7d32">-1.97%</p>
             </div>
           </div>
         </div>
@@ -121,7 +124,7 @@
               <div class="progress-bar-container">
                 <div class="progress-bar-fill" style="width: 0%;" data-percent="0" data-type="expense"></div>
               </div>
-              <p class="progress-subtext">0% of your monthly budget used.</p>
+              <p class="progress-subtext">This month’s expense progress.</p>
             </div>
 
             <!-- Savings Target -->
@@ -133,7 +136,7 @@
               <div class="progress-bar-container">
                 <div class="progress-bar-fill" style="width: 0%;" data-percent="0" data-type="saving"></div>
               </div>
-              <p class="progress-subtext">You're halfway to your savings goal.</p>
+              <p class="progress-subtext">Progress toward your savings plan.</p>
             </div>
           </div>
         </div>
@@ -204,9 +207,14 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+
   <script src="../js/script.js"></script>
   <script src="../js/chart.js"></script>
   <script src="../js/goals.js"></script>
+
+
+  </script>
 
 </body>
 

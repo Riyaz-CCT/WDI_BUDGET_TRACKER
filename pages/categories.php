@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Categories - Expense Tracker</title>
   <link rel="stylesheet" href="../css/categories_styles.css" />
+  <!-- <link rel="stylesheet" href="../css/dashboard_styles.css" /> -->
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -143,7 +145,7 @@
             <td>${txn.description}</td>
             <td>${txn.item}</td>
             <td>${txn.transaction_type}</td>
-            <td style="color:#3949ab;font-weight:bold;">$${txn.amount.toFixed(2)}</td>
+            <td style="color:#3949ab;font-weight:bold;">₹${txn.amount.toFixed(2)}</td>
             <td>${txn.payment_method}</td>
             <td>
               <button class="view-btn"><i class="fa fa-eye"></i></button>

@@ -5,9 +5,9 @@ $(document).ready(function () {
         dataType: 'json',
         success: function (data) {
             // ========== Update numeric values ==========
-            $('#income-value').text(`$${parseFloat(data.income).toLocaleString()}`);
-            $('#expense-value').text(`$${parseFloat(data.expense).toLocaleString()}`);
-            $('#savings-value').text(`$${parseFloat(data.saving).toLocaleString()}`);
+            $('#income-value').text(`₹${parseFloat(data.income).toLocaleString()}`);
+            $('#expense-value').text(`₹${parseFloat(data.expense).toLocaleString()}`);
+            $('#savings-value').text(`₹${parseFloat(data.saving).toLocaleString()}`);
 
             // ========== Helper function for % display ==========
             function updatePercentage($element, value, isExpense = false) {
@@ -100,7 +100,7 @@ $(document).ready(function () {
         $.each(transactions, function (index, transaction) {
             const $row = $('<tr></tr>');
             const $itemCell = $('<td></td>').text(transaction.item);
-            const $amountCell = $('<td></td>').text(`$${parseFloat(transaction.amount).toFixed(2)}`);
+            const $amountCell = $('<td></td>').text(`₹${parseFloat(transaction.amount).toFixed(2)}`);
 
             $row.append($itemCell, $amountCell);
             $tbody.append($row);
@@ -111,7 +111,7 @@ $(document).ready(function () {
         // Append total row
         const $totalRow = $('<tr></tr>');
         const $totalLabel = $('<td><strong>Recent Total</strong></td>');
-        const $totalValue = $('<td></td>').text(`$${total.toFixed(2)}`);
+        const $totalValue = $('<td></td>').text(`₹${total.toFixed(2)}`);
 
         $totalRow.append($totalLabel, $totalValue);
         $tfoot.append($totalRow);

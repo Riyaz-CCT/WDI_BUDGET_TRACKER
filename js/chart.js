@@ -70,7 +70,7 @@ $(document).ready(function () {
           },
           tooltip: {
             callbacks: {
-              label: ctx => `$${ctx.parsed.y.toFixed(2)}`
+              label: ctx => `₹${ctx.parsed.y.toFixed(2)}`
             }
           }
         }
@@ -147,7 +147,7 @@ $(document).ready(function () {
                 const value = context.parsed;
                 const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
                 const percent = ((value / total) * 100).toFixed(1);
-                return `${context.label}: $${value} (${percent}%)`;
+                return `${context.label}: ₹${value} (${percent}%)`;
               }
             }
           }
@@ -185,7 +185,7 @@ $(document).ready(function () {
         tooltip: {
           callbacks: {
             label: function (context) {
-              return `$${context.parsed.y.toFixed(2)}`;
+              return `₹${context.parsed.y.toFixed(2)}`;
             }
           }
         }

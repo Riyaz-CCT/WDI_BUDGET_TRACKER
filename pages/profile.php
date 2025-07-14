@@ -69,11 +69,11 @@
             </div>
             <div class="profile-row">
               <label>Monthly Budget</label>
-              <p id="profileBudget">$4,500</p>
+              <p id="profileBudget">₹4,500</p>
             </div>
             <div class="profile-row">
               <label>Preferred Currency</label>
-              <p id="profileCurrency">USD ($)</p>
+              <p id="profileCurrency">INR (₹)</p>
             </div>
           </div>
 

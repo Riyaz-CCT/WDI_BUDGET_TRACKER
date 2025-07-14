@@ -60,7 +60,7 @@
       <!-- Right Section -->
       <div class="right-section">
         <div class="logo">
-          <img src="../assets/budget.png" alt="logo" />
+          <img src="../assests/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
         <h1>Welcome To FinTrack Pro!</h1>
@@ -93,7 +93,7 @@
             Not a member yet? <a href="signup.php">Sign Up</a>
           </p>
 
-          <button
+          <!-- <button
             type="button"
             class="google-btn"
             onclick="alert('Google Sign-In coming soon!');"
@@ -103,7 +103,7 @@
               alt="Google Icon"
             />
             Sign In With Google
-          </button>
+          </button> -->
         </form>
       </div>
     </div>

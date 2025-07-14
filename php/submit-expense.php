@@ -4,17 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Start session
-session_start();
-
-// ✅ Require user to be logged in
-if (!isset($_SESSION['user_id'])) {
-    die("❌ User not logged in. Please log in to continue.");
-}
-
-// ✅ Use user_id from session
-$user_id = $_SESSION['user_id'];
-
 // Database config
 $host = "localhost";
 $user = "root";
@@ -27,78 +16,82 @@ if ($conn->connect_error) {
     die("❌ Connection failed: " . $conn->connect_error);
 }
 
-// Check if transactions table exists
-$check = $conn->query("SHOW TABLES LIKE 'transactions'");
-if ($check->num_rows == 0) {
-    die("❌ Table 'transactions' does not exist in database.");
-}
+// Dummy user ID (replace with session login later)
+$user_id = 1;
 
 // Get form inputs
-$date        = $_POST['expense-date'] ?? date('Y-m-d');
-$category    = $_POST['expense-category'] ?? '';
-$amount      = $_POST['expense-amount'] ?? 0;
-$type        = $_POST['transaction-type'] ?? 'Expense';
-$payment     = $_POST['payment-method'] ?? '';
-$description = $_POST['expense-description'] ?? '';
-$item        = $_POST['expense-item'] ?? '';
-$receipt_url = "";
+$date         = $_POST['expense-date'] ?? '';
+$category     = $_POST['expense-category'] ?? '';
+$newCategory  = trim($_POST['new-category'] ?? '');
+$item         = $_POST['expense-item'] ?? '';
+$description  = $_POST['expense-description'] ?? '';
+$type         = $_POST['transaction-type'] ?? '';
+$amount       = floatval($_POST['expense-amount'] ?? 0);
+$payment      = $_POST['payment-method'] ?? '';
+$receiptBlob  = NULL;
 
-// Handle file upload
-if (isset($_FILES['expense-file']) && $_FILES['expense-file']['error'] === 0) {
-    $uploadDir = "uploads/";
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-    $fileName = basename($_FILES['expense-file']['name']);
-    $targetPath = $uploadDir . $fileName;
-    move_uploaded_file($_FILES['expense-file']['tmp_name'], $targetPath);
-    $receipt_url = $targetPath;
+// === Handle Category ===
+if ($category === 'AddNew' && !empty($newCategory)) {
+    // Insert new category if it doesn't exist
+    $stmt = $conn->prepare("INSERT IGNORE INTO categories(name) VALUES (?)");
+    $stmt->bind_param("s", $newCategory);
+    $stmt->execute();
+    $stmt->close();
+
+    // Get the ID of the new or existing category
+    $stmt = $conn->prepare("SELECT id FROM categories WHERE name = ?");
+    $stmt->bind_param("s", $newCategory);
+    $stmt->execute();
+    $stmt->bind_result($category_id);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    // Get ID of selected category
+    $stmt = $conn->prepare("SELECT id FROM categories WHERE name = ?");
+    $stmt->bind_param("s", $category);
+    $stmt->execute();
+    $stmt->bind_result($category_id);
+    $stmt->fetch();
+    $stmt->close();
 }
 
-// Get category_id from category name and type
-$categoryStmt = $conn->prepare("SELECT id FROM categories WHERE name = ? AND type = ?");
-$categoryStmt->bind_param("ss", $category, $type);
-$categoryStmt->execute();
-$categoryResult = $categoryStmt->get_result();
-
-if ($categoryResult->num_rows === 0) {
-    die("❌ Category '$category' of type '$type' not found.");
+// === Handle File Upload ===
+if (isset($_FILES['expense-file']) && $_FILES['expense-file']['error'] == 0) {
+    $receiptBlob = file_get_contents($_FILES['expense-file']['tmp_name']);
 }
 
-$categoryRow = $categoryResult->fetch_assoc();
-$category_id = $categoryRow['id'];
-$categoryStmt->close();
-
-// Insert into transactions
-$sql = "INSERT INTO transactions 
-        (user_id, category_id, item, description, type, amount, date, payment_method, receipt_url)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+// === Insert into transactions table ===
+$sql = "INSERT INTO transactions (
+    user_id, category_id, item, description, type, amount, date, payment_method, receipt
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
     die("❌ Prepare failed: " . $conn->error);
 }
 
-$amount = floatval($amount);
-$stmt->bind_param("iissssdss", $user_id, $category_id, $item, $description, $type, $amount, $date, $payment, $receipt_url);
+$stmt->bind_param(
+    "iisssdsss",
+    $user_id,
+    $category_id,
+    $item,
+    $description,
+    $type,
+    $amount,
+    $date,
+    $payment,
+    $nullBlob
+);
 
-// Optional debug output
-echo "<h3>Debug Info:</h3>";
-echo "User ID: $user_id<br>";
-echo "Date: $date<br>";
-echo "Category ID: $category_id ($category)<br>";
-echo "Amount: $amount<br>";
-echo "Type: $type<br>";
-echo "Payment Method: $payment<br>";
-echo "Item: $item<br>";
-echo "Description: $description<br>";
-echo "Receipt URL: $receipt_url<br>";
+// Handle BLOB binding
+$nullBlob = NULL;
+$stmt->send_long_data(8, $receiptBlob);
 
 // Execute
 if ($stmt->execute()) {
-    echo "<br>✅ Expense saved successfully!";
+    echo "✅ Expense successfully added!";
 } else {
-    echo "<br>❌ Insert failed: " . $stmt->error;
+    echo "❌ Error: " . $stmt->error;
 }
 
 $stmt->close();

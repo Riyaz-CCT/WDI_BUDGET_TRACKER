@@ -1,4 +1,3 @@
-<?php require_once '../php/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Categories - Expense Tracker</title>
   <link rel="stylesheet" href="../css/categories_styles.css" />
-  <!-- <link rel="stylesheet" href="../css/dashboard_styles.css" /> -->
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo">
@@ -20,10 +18,10 @@
       <p>FinTrack Pro</p>
     </div>
     <ul class="menu">
-      <li><a href="dashboard.php"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+      <li><a href="dashboard.html"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
       <li class="active"><a href="#"><i class="fas fa-list-alt"></i><span>Expenses</span></a></li>
-      <li><a href="profile.php"><i class="fas fa-user"></i><span>My Profile</span></a></li>
-      <li class="logout"><a href="../php/logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+      <li><a href="#"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+      <li class="logout"><a href="login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
     </ul>
   </div>
 
@@ -36,8 +34,7 @@
           <i class="fa fa-search"></i>
           <input type="text" id="searchBox" placeholder="Search transactions..." />
         </div>
-        <!-- <img src="../assests/profile.png" /> -->
-        <a href="profile.php"><img src="../assests/profile.png" alt="profile picture" /></a>
+        <img src="../assests/profile.png" />
       </div>
     </div>
 
@@ -48,7 +45,7 @@
           <h2>Recent Expenses</h2>
         </div>
         <div style="display: flex; align-items: center; gap: 12px;">
-          <button class="add-expense-btn" onclick="openModal()">
+          <button class="add-expense-btn" id="open-modal">
             <span class="plus-icon">+</span> <span style="color:white">Add New Expense</span>
           </button>
         </div>
@@ -82,38 +79,87 @@
     </div>
   </div>
 
-  <!-- Modal -->
-  <div class="modal" id="expenseModal">
+  <!-- Add Expense Modal -->
+  <div class="modal" id="expense-modal">
     <div class="modal-box">
-      <span class="close-button" onclick="closeModal()">&times;</span>
+      <span class="close-button" id="close-modal">&times;</span>
       <h2>Add New Expense Details</h2>
-      <form>
-        <label for="expense-date">Date <span class="required">*</span></label>
-        <input type="date" id="expense-date" name="expense-date" required />
 
-        <label for="expense-category">Category <span class="required">*</span></label>
-        <select id="expense-category" name="expense-category" required>
-          <option value="">Select Category</option>
-          <option value="Food">Food</option>
-          <option value="Travel">Travel</option>
-          <option value="Grocery">Grocery</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Education">Education</option>
-          <option value="Others">Others</option>
-        </select>
-        <a href="#" class="add-category">+ Add New Category</a>
+      <form id="expense-form" action="../php/submit-expense.php" method="POST" enctype="multipart/form-data">
+        <div>
+          <label for="expense-date">Date <span class="required">*</span></label>
+          <input type="date" id="expense-date" name="expense-date" max="" required>
+        </div>
 
-        <label for="expense-amount">Amount <span class="required">*</span></label>
-        <input type="text" id="expense-amount" name="expense-amount" placeholder="amount" required />
+        <div>
+          <label for="expense-category">Category <span class="required">*</span></label>
+          <select id="expense-category" name="expense-category" required>
+            <option value="">Select Category</option>
+             <option value="Salary">Salary</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Business">Business</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Medical">Medical</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Rent">Rent</option>
+        <option value="Investment">Investment</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Other">Other</option>
+            <option value="AddNew">+ Add New Category</option>
+          </select>
+        </div>
 
-        <label for="expense-description">Description</label>
-        <textarea id="expense-description" name="expense-description" placeholder="description"></textarea>
+        <!-- Hidden field for new category -->
+        <input type="hidden" id="hidden-new-category" name="new-category">
 
-        <label for="expense-file">Attach File</label>
-        <input type="file" id="expense-file" name="expense-file" accept=".pdf,.json,.docx,.txt" />
+        <!-- Shown when "Add New" is selected -->
+        <div id="new-category-div" style="display: none;">
+          <label for="new-category-input">Enter New Category Name <span class="required">*</span></label>
+          <input type="text" id="new-category-input" placeholder="e.g., Medical, Rent">
+        </div>
+
+        <div>
+          <label for="expense-item">Item <span class="required">*</span></label>
+          <input type="text" id="expense-item" name="expense-item" placeholder="e.g., Pizza, Uber Ride" required>
+        </div>
+
+        <div>
+          <label for="expense-amount">Amount <span class="required">*</span></label>
+          <input type="number" id="expense-amount" name="expense-amount" placeholder="amount" required>
+        </div>
+
+        <div>
+          <label for="transaction-type">Transaction Type <span class="required">*</span></label>
+          <select id="transaction-type" name="transaction-type" required>
+            <option value="">Select Type</option>
+            <option value="Expense">Expense</option>
+            <option value="Income">Income</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="payment-method">Payment Method <span class="required">*</span></label>
+          <select id="payment-method" name="payment-method" required>
+            <option value="">Select Method</option>
+            <option value="Cash">Cash</option>
+            <option value="Card">Card</option>
+            <option value="UPI">UPI</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="expense-file">Attach File (PDF, JSON, DOCX, TXT)</label>
+          <input type="file" id="expense-file" name="expense-file" accept=".pdf,.json,.docx,.txt">
+        </div>
+
+        <div class="full-width">
+          <label for="expense-description">Description</label>
+          <textarea id="expense-description" name="expense-description" placeholder="description"></textarea>
+        </div>
 
         <div class="form-buttons">
-          <button type="button" class="cancel-button" onclick="closeModal()">Cancel</button>
+          <span class="cancel-button" id="cancel-modal">Cancel</span>
           <button type="submit" class="save-button">Save</button>
         </div>
       </form>
@@ -122,13 +168,35 @@
 
   <!-- Script -->
   <script>
-    function openModal() {
-      document.getElementById("expenseModal").classList.add("show");
-    }
+    $(document).ready(function () {
+      $('#open-modal').click(function () {
+        $('#expense-modal').addClass('show');
+      });
 
-    function closeModal() {
-      document.getElementById("expenseModal").classList.remove("show");
-    }
+      $('#close-modal, #cancel-modal').click(function () {
+        $('#expense-modal').removeClass('show');
+      });
+
+      const today = new Date().toISOString().split("T")[0];
+      $('#expense-date').attr("max", today);
+
+      $('#expense-category').on('change', function () {
+        if ($(this).val() === 'AddNew') {
+          $('#new-category-div').show();
+          $('#new-category-input').attr('required', true);
+        } else {
+          $('#new-category-div').hide();
+          $('#new-category-input').removeAttr('required');
+          $('#hidden-new-category').val('');
+        }
+      });
+
+      $('#expense-form').on('submit', function () {
+        if ($('#expense-category').val() === 'AddNew') {
+          $('#hidden-new-category').val($('#new-category-input').val());
+        }
+      });
+    });
 
     const rowsPerPage = 10;
     let allTransactions = [], filteredData = [], currentPage = 1, sortDirection = {}, currentSortKey = "";
@@ -145,7 +213,7 @@
             <td>${txn.description}</td>
             <td>${txn.item}</td>
             <td>${txn.transaction_type}</td>
-            <td style="color:#3949ab;font-weight:bold;">₹${txn.amount.toFixed(2)}</td>
+            <td style="color:#3949ab;font-weight:bold;">$${parseFloat(txn.amount).toFixed(2)}</td>
             <td>${txn.payment_method}</td>
             <td>
               <button class="view-btn"><i class="fa fa-eye"></i></button>
@@ -221,7 +289,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      fetch("transaction_data.json")
+      fetch("../php/fetch-transactions.php")
         .then(res => res.json())
         .then(json => {
           allTransactions = json.recent_transactions;

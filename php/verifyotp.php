@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $enteredOtp = trim($_POST['otp']);
 
     if (!isset($_SESSION['otp'], $_SESSION['otp_type'], $_SESSION['email'])) {
-        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/login.html';</script>";
+        echo "<script>alert('Session expired or invalid access.'); window.location.href='../pages/login.php';</script>";
         exit();
     }
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssss", $data['name'], $data['phone'], $data['email'], $data['password']);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.html';</script>";
+        echo "<script>alert('Signup successful! You can now login.'); window.location.href='../pages/login.php';</script>";
     } else {
         echo "<script>alert('Signup failed. Try again.'); window.location.href='../pages/signup.html';</script>";
     }

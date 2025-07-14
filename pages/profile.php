@@ -12,6 +12,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+
+    <!-- ✅ Force modal to stay hidden initially -->
+    <style>
+      #editModal {
+        display: none !important;
+      }
+    </style>
   </head>
 
   <body>
@@ -87,7 +94,7 @@
     </div>
 
     <!-- ===================== EDIT MODAL ===================== -->
-    <div id="editModal" class="modal">
+    <div id="editModal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h2>Edit Profile</h2>
@@ -129,7 +136,7 @@
           $("#editModal").fadeOut();
         });
 
-        // Update profile details
+        // Save changes
         $("#editProfileForm").submit(function (e) {
           e.preventDefault();
           $("#profileEmail").text($("#emailInput").val());

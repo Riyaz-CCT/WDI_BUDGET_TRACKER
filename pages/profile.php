@@ -51,25 +51,25 @@
       <div class="profile-card">
         <div class="profile-left">
           <img src="../assests/profile.png" alt="Profile" class="profile-avatar" />
-          <h3 class="profile-name">John Doe</h3>
-          <p class="member-since">Member since Jan 2024</p>
+          <h3 class="profile-name">Loading...</h3>
+          <p class="member-since">Member since --</p>
 
           <div class="profile-details">
             <div class="profile-row">
               <label>Email</label>
-              <p id="profileEmail">john@example.com</p>
+              <p id="profileEmail">Loading...</p>
             </div>
             <div class="profile-row">
               <label>Phone</label>
-              <p id="profilePhone">+1 98765 123345</p>
+              <p id="profilePhone">Loading...</p>
             </div>
             <div class="profile-row">
-              <label>Monthly Budget</label>
-              <p id="profileBudget">$4,500</p>
+              <label>Target Expense</label>
+              <p id="profileBudget">₹0.00</p>
             </div>
-            <div class="profile-row">
-              <label>Preferred Currency</label>
-              <p id="profileCurrency">USD ($)</p>
+            <div class="profile-row"> 
+              <label>Debt</label> 
+              <p id="profileDebt">₹0.00</p>
             </div>
           </div>
 
@@ -97,8 +97,8 @@
           <label>Monthly Budget:</label>
           <input type="text" id="budgetInput" required />
 
-          <label>Preferred Currency:</label>
-          <input type="text" id="currencyInput" required />
+          <label>Debt:</label>
+          <input type="text" id="debtInput" required />
 
           <button type="submit">Save Changes</button>
         </form>
@@ -109,14 +109,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
+        // Fetch profile + goals data
+        $.ajax({
+          url: "../php/get_profile_data.php",
+          method: "GET",
+          dataType: "json",
+          success: function (data) {
+            if (data.error) {
+              alert(data.error);
+              return;
+            }
+
+            // Populate profile info
+            $(".profile-name").text(data.name);
+            $("#profileEmail").text(data.email);
+            $("#profilePhone").text(data.phone);
+            $("#profileBudget").text(`₹${data.target_expense}`);
+            $("#profileDebt").text(`₹${data.debt}`);
+            $(".member-since").text(`Member since ${data.member_since}`);
+          },
+          error: function () {
+            alert("Failed to load profile data.");
+          }
+        });
+
         // Show modal
         $("#editBtn").click(function () {
           $("#emailInput").val($("#profileEmail").text());
           $("#phoneInput").val($("#profilePhone").text());
-          $("#budgetInput").val(
-            $("#profileBudget").text().replace("$", "").replace(",", "")
-          );
-          $("#currencyInput").val($("#profileCurrency").text());
+          $("#budgetInput").val($("#profileBudget").text().replace("₹", ""));
+          $("#debtInput").val($("#profileDebt").text().replace("₹", ""));
           $("#editModal").addClass("show");
         });
 
@@ -125,13 +147,13 @@
           $("#editModal").removeClass("show");
         });
 
-        // Save changes
+        // Save changes (frontend only for now)
         $("#editProfileForm").submit(function (e) {
           e.preventDefault();
           $("#profileEmail").text($("#emailInput").val());
           $("#profilePhone").text($("#phoneInput").val());
-          $("#profileBudget").text(`$${$("#budgetInput").val()}`);
-          $("#profileCurrency").text($("#currencyInput").val());
+          $("#profileBudget").text(`₹${$("#budgetInput").val()}`);
+          $("#profileDebt").text(`₹${$("#debtInput").val()}`);
           $("#editModal").removeClass("show");
         });
       });

@@ -23,24 +23,24 @@
       </div>
       <ul class="menu">
         <li>
-          <a href="dashboard.php"
-            ><i class="fas fa-chart-line"></i><span>Dashboard</span></a
-          >
+          <a href="dashboard.php">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
         </li>
         <li>
-          <a href="categories.php"
-            ><i class="fas fa-list-alt"></i><span>Expenses</span></a
-          >
+          <a href="categories.php">
+            <i class="fas fa-list-alt"></i><span>Expenses</span>
+          </a>
         </li>
         <li class="active">
-          <a href="profile.php"
-            ><i class="fas fa-user"></i><span>My Profile</span></a
-          >
+          <a href="profile.php">
+            <i class="fas fa-user"></i><span>My Profile</span>
+          </a>
         </li>
         <li class="logout">
-          <a href="../php/logout.php" id="logout-link"
-            ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a
-          >
+          <a href="../php/logout.php" id="logout-link">
+            <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -50,11 +50,7 @@
       <h2 class="profile-heading">Profile</h2>
       <div class="profile-card">
         <div class="profile-left">
-          <img
-            src="../assests/profile.png"
-            alt="Profile"
-            class="profile-avatar"
-          />
+          <img src="../assests/profile.png" alt="Profile" class="profile-avatar" />
           <h3 class="profile-name">John Doe</h3>
           <p class="member-since">Member since Jan 2024</p>
 
@@ -69,11 +65,11 @@
             </div>
             <div class="profile-row">
               <label>Monthly Budget</label>
-              <p id="profileBudget">₹4,500</p>
+              <p id="profileBudget">$4,500</p>
             </div>
             <div class="profile-row">
               <label>Preferred Currency</label>
-              <p id="profileCurrency">INR (₹)</p>
+              <p id="profileCurrency">USD ($)</p>
             </div>
           </div>
 
@@ -87,7 +83,7 @@
     </div>
 
     <!-- ===================== EDIT MODAL ===================== -->
-    <div id="editModal" class="modal">
+    <div id="editModal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h2>Edit Profile</h2>
@@ -121,22 +117,22 @@
             $("#profileBudget").text().replace("$", "").replace(",", "")
           );
           $("#currencyInput").val($("#profileCurrency").text());
-          $("#editModal").fadeIn();
+          $("#editModal").addClass("show");
         });
 
         // Close modal
         $(".close-btn").click(function () {
-          $("#editModal").fadeOut();
+          $("#editModal").removeClass("show");
         });
 
-        // Update profile details
+        // Save changes
         $("#editProfileForm").submit(function (e) {
           e.preventDefault();
           $("#profileEmail").text($("#emailInput").val());
           $("#profilePhone").text($("#phoneInput").val());
           $("#profileBudget").text(`$${$("#budgetInput").val()}`);
           $("#profileCurrency").text($("#currencyInput").val());
-          $("#editModal").fadeOut();
+          $("#editModal").removeClass("show");
         });
       });
     </script>

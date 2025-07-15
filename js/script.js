@@ -8,6 +8,7 @@ $(document).ready(function () {
             $('#income-value').text(`₹${parseFloat(data.income).toLocaleString()}`);
             $('#expense-value').text(`₹${parseFloat(data.expense).toLocaleString()}`);
             $('#savings-value').text(`₹${parseFloat(data.saving).toLocaleString()}`);
+            $('#debt-value').text(`₹${parseFloat(data.debt).toLocaleString()}`); // ✅ corrected ID
 
             // ========== Helper function for % display ==========
             function updatePercentage($element, value, isExpense = false) {
@@ -30,6 +31,20 @@ $(document).ready(function () {
             updatePercentage($('#expense-value').next('.growth'), data.percent_expense, true);
             updatePercentage($('#savings-value').next('.growth'), data.percent_saving, false);
 
+            // ✅ Custom logic for debt percent: + = more debt (red), – = less debt (green)
+            const percentDebt = parseFloat(data.percent_debt || 0).toFixed(2);
+            const $debtGrowth = $('#debt-value').next('.growth'); // ✅ corrected ID
+            const isDebtIncreased = percentDebt > 0;
+            const debtSign = isDebtIncreased ? '+' : '–';
+            const debtColor = isDebtIncreased ? '#ef5350' : '#2e7d32';
+            const debtClass = isDebtIncreased ? 'up' : 'down';
+
+            $debtGrowth
+                .text(`${debtSign}${Math.abs(percentDebt)}%`)
+                .css('color', debtColor)
+                .removeClass('up down')
+                .addClass(debtClass);
+
             // ========== Populate table ==========
             populateTable(data.recent_transactions);
         },
@@ -37,54 +52,6 @@ $(document).ready(function () {
             console.error('Failed to fetch dashboard data.');
         }
     });
-    // Load data from JSON and populate the table
-    // $.getJSON('../pages/data.json', function (data) {
-    //     const transactions = data.recent_transactions;
-    //     populateTable(transactions);
-    // }).fail(function (jqxhr, textStatus, error) {
-    //     console.error('Failed to load transaction data:', textStatus, error);
-    //     $('.table--container table tbody').html('<tr><td colspan="2">Error loading data</td></tr>');
-    // });
-
-
-    // // Style progress bars based on data attributes
-    // $('.progress-bar-fill').each(function () {
-    //     const $fill = $(this);
-    //     const percent = parseFloat($fill.data('percent')) || 0;
-    //     const type = $fill.data('type'); // 'expense' or 'saving'
-
-    //     // Clamp percent and apply width
-    //     $fill.css('width', `${Math.min(percent, 100)}%`);
-
-    //     // Remove existing color classes
-    //     $fill.removeClass('green yellow red');
-
-    //     let color;
-
-    //     if (type === 'expense') {
-    //         if (percent > 70) {
-    //             color = 'red';
-    //         } else if (percent >= 45) {
-    //             color = 'yellow';
-    //         } else {
-    //             color = 'green';
-    //         }
-    //     } else if (type === 'saving') {
-    //         if (percent > 70) {
-    //             color = 'green';
-    //         } else if (percent >= 45) {
-    //             color = 'yellow';
-    //         } else {
-    //             color = 'red';
-    //         }
-    //     }
-
-    //     // Apply color class
-    //     $fill.addClass(color);
-    // });
-
-
-
 
     // Function to populate the table and total row
     function populateTable(transactions) {
@@ -92,11 +59,9 @@ $(document).ready(function () {
         const $tfoot = $('.table--container table tfoot');
         let total = 0;
 
-        // Clear existing content
         $tbody.empty();
         $tfoot.empty();
 
-        // Populate table rows
         $.each(transactions, function (index, transaction) {
             const $row = $('<tr></tr>');
             const $itemCell = $('<td></td>').text(transaction.item);
@@ -108,15 +73,11 @@ $(document).ready(function () {
             total += parseFloat(transaction.amount);
         });
 
-        // Append total row
         const $totalRow = $('<tr></tr>');
         const $totalLabel = $('<td><strong>Recent Total</strong></td>');
         const $totalValue = $('<td></td>').text(`₹${total.toFixed(2)}`);
 
         $totalRow.append($totalLabel, $totalValue);
         $tfoot.append($totalRow);
-
     }
-
-
 });

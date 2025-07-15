@@ -5,7 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/login_styles.css" />
+    <style>
+      /* Optional fade animation for popup */
+      #password-popup {
+        display: none;
+        background-color: #f9f9f8ff;
+        color: #9b0101ff;
+        border: 1px solid #430101ff;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        position: fixed;
+        z-index: 1000;
+        max-width: 300px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+    </style>
   </head>
+
   <body>
     <div class="container">
       <!-- Left Section -->
@@ -69,71 +88,88 @@
         <form id="signup-form" action="../php/signup2.php" method="POST">
           <div class="input-row">
             <input type="text" name="name" placeholder="Full Name *" required />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number *"
-              required
-            />
+            <input type="text" name="phone" placeholder="Phone Number *" required />
           </div>
           <input type="email" name="email" placeholder="Email *" required />
           <div class="input-row">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password *"
-              required
-            />
-            <input
-              type="password"
-              name="repassword"
-              placeholder="Re-enter Your Password *"
-              required
-            />
+            <input type="password" name="password" placeholder="Password *" required />
+            <input type="password" name="repassword" placeholder="Re-enter Your Password *" required />
           </div>
 
-          <button type="submit" class="sign-in">Sign Up!</button>
+          <!-- Popup for password validation -->
+          <div id="password-popup"></div>
 
-          <p class="login-text">
-            Already have an account? <a href="login.html">Log In</a>
-          </p>
-          <!-- <button type="button" class="google-btn">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-              alt="Google Icon"
-            />
-            Sign up with Google
-          </button> -->
+          <button type="submit" class="sign-in">Sign Up!</button>
+          <p class="login-text">Already have an account? <a href="login.php">Log In</a></p>
         </form>
       </div>
     </div>
-    <script>
-      document
-        .getElementById("signup-form")
-        .addEventListener("submit", function (e) {
-          const password = document.querySelector(
-            'input[name="password"]'
-          ).value;
-          const repassword = document.querySelector(
-            'input[name="repassword"]'
-          ).value;
 
-          if (password !== repassword) {
-            e.preventDefault();
-            alert("Passwords do not match!");
-          }
-        });
-    </script>
-
-    <!-- ✅ JS: Redirect after form submission
+    <!-- JavaScript -->
     <script>
-      document
-        .getElementById("signup-form")
-        .addEventListener("submit", function (e) {
+      const passwordInput = document.querySelector('input[name="password"]');
+      const repasswordInput = document.querySelector('input[name="repassword"]');
+      const form = document.getElementById("signup-form");
+      const popup = document.getElementById("password-popup");
+
+      function getPasswordIssues(pw) {
+        const issues = [];
+        if (!/[A-Z]/.test(pw)) issues.push("Must include at least 1 uppercase letter.");
+        if (!/[a-z]/.test(pw)) issues.push("Must include at least 1 lowercase letter.");
+        if (!/[!@$&]/.test(pw)) issues.push("Must include 1 special character (!, @, $, &).");
+        if (pw.length < 8) issues.push("Must be at least 8 characters long.");
+        return issues;
+      }
+
+      function showPopup(issues, inputField) {
+        const rect = inputField.getBoundingClientRect();
+        popup.innerHTML = issues.join("<br>");
+        popup.style.display = "block";
+        popup.style.opacity = "1";
+        popup.style.top = `${rect.bottom + 10}px`;
+        popup.style.left = `${rect.left}px`;
+      }
+
+      function hidePopup() {
+        popup.style.opacity = "0";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 300);
+      }
+
+      passwordInput.addEventListener("blur", () => {
+        const pw = passwordInput.value;
+        const issues = getPasswordIssues(pw);
+        if (issues.length > 0) {
+          showPopup(issues, passwordInput);
+        } else {
+          hidePopup();
+        }
+      });
+
+      passwordInput.addEventListener("input", () => {
+        hidePopup();
+      });
+
+      form.addEventListener("submit", function (e) {
+        const password = passwordInput.value;
+        const repassword = repasswordInput.value;
+
+        if (password !== repassword) {
           e.preventDefault();
-          // Optional: Add validation here later
-          window.location.href = "dashboard.html";
-        });
-    </script> -->
+          alert("Passwords do not match!");
+          return;
+        }
+
+        const issues = getPasswordIssues(password);
+        if (issues.length > 0) {
+          e.preventDefault();
+          showPopup(issues, passwordInput);
+          return;
+        }
+
+        hidePopup();
+      });
+    </script>
   </body>
 </html>

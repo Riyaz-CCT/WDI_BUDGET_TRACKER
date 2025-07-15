@@ -1,8 +1,4 @@
-<?php require_once '../php/auth.php'; 
-  // echo "<pre>";
-  // print_r($_SESSION);
-  // echo "</pre>";
-?>
+<?php require_once '../php/auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,32 +10,13 @@
 
   <link rel="stylesheet" href="../css/dashboard_styles.css" />
   <link rel="stylesheet" href="../css/responsive_dashboard.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" /> <!-- ✅ Include sidebar styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
-  <!-- ===================== SIDEBAR STARTS HERE ===================== -->
-  <div class="sidebar">
-    <div class="logo">
-      <img src="../assests/budget.png" alt="Logo" />
-      <p>FinTrack Pro</p>
-    </div>
-    <ul class="menu">
-      <li class="active">
-        <a href="#"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
-      </li>
-      <li>
-        <a href="categories.php"><i class="fas fa-list-alt"></i><span>Expenses</span></a>
-      </li>
-      <li>
-        <a href="profile.php"><i class="fas fa-user"></i><span>My Profile</span></a>
-      </li>
-      <li class="logout">
-        <a href="../php/logout.php" id="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-      </li>
-    </ul>
-  </div>
-  <!-- ===================== SIDEBAR ENDS HERE ===================== -->
+  <!-- ===================== SIDEBAR (Reusable) ===================== -->
+  <?php include '../components/sidebar.php'; ?>
 
   <!-- ===================== MAIN STARTS HERE ===================== -->
   <div class="main-container">
@@ -48,20 +25,11 @@
       <div class="header--title">
         <h1>Dashboard</h1>
       </div>
-      <!-- <div class="user--info">
-        <a href="profile.php"><img src="../assests/profile.png" alt="profile picture" /></a>
-      </div> -->
       <div class="user--info">
-
         <a href="profile.php">
           <img src="../assests/profile.png" alt="profile picture" />
         </a>
-
-        <!-- <h3 style="font-size:1.5rem;color:#3949ab">
-          <?php //echo htmlspecialchars($_SESSION['name']); ?> 
-        </h3>   -->
       </div>
-
     </div>
 
     <div class="main--content">
@@ -73,16 +41,10 @@
               <h2 class="card-title">Monthly Overview</h2>
             </div>
             <div class="action-buttons">
-              <!-- <button class="rounded-btn">Import Data</button> -->
-
               <form method="post" action="../php/get_export_data.php" style="display: inline;">
                 <button class="rounded-btn">Export Data</button>
               </form>
-
-              <!-- <button class="rounded-btn" id="download-report-btn">Download Reports</button> -->
               <a href="monthly_report.php" class="rounded-btn" style="text-decoration:none; display:inline-block;">View Report</a>
-
-
             </div>
           </div>
 
@@ -104,18 +66,16 @@
             </div>
             <div class="stats-cards">
               <p>Debt</p>
-              <span id="balance-value">₹15,000</span>
+              <span id="debt-value">₹15,000</span>
               <p class="growth up" style="color:#2e7d32">-1.97%</p>
             </div>
           </div>
         </div>
 
-        <!-- ========== New Section: Progress Bars ========== -->
+        <!-- ========== Progress Bars ========== -->
         <div class="progress-bar-section">
           <h3 class="progress-header">Goal Progress</h3>
-
           <div class="goal-progress-wrapper">
-            <!-- Budget Goal -->
             <div class="progress-row">
               <div class="progress-info">
                 <p class="progress-title">Expense Budget</p>
@@ -127,7 +87,6 @@
               <p class="progress-subtext">This month’s expense progress.</p>
             </div>
 
-            <!-- Savings Target -->
             <div class="progress-row">
               <div class="progress-info">
                 <p class="progress-title">Saving Target</p>
@@ -141,7 +100,6 @@
           </div>
         </div>
       </div>
-      <!-- ========== SECTION 1 ENDS HERE ========== -->
 
       <!-- ========== SECTION 2: Charts ========== -->
       <div class="section-2">
@@ -199,23 +157,15 @@
           </div>
         </div>
       </div>
-      <!-- ========== SECTION 3 ENDS HERE ========== -->
     </div>
   </div>
 
   <!-- ===================== SCRIPTS ===================== -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
   <script src="../js/script.js"></script>
   <script src="../js/chart.js"></script>
   <script src="../js/goals.js"></script>
-
-
-  </script>
-
 </body>
 
 </html>

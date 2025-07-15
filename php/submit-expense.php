@@ -70,6 +70,7 @@ if (!$stmt) {
     die("❌ Prepare failed: " . $conn->error);
 }
 
+// Bind real BLOB variable
 $stmt->bind_param(
     "iisssdsss",
     $user_id,
@@ -80,14 +81,15 @@ $stmt->bind_param(
     $amount,
     $date,
     $payment,
-    $nullBlob
+    $receiptBlob // ✅ Use actual BLOB here
 );
 
-// Handle BLOB binding
-$nullBlob = NULL;
-$stmt->send_long_data(8, $receiptBlob);
+// ✅ Only send file data if present
+if (!empty($receiptBlob)) {
+    $stmt->send_long_data(8, $receiptBlob); // index 8 = 9th param (0-based)
+}
 
-// Execute
+// Execute and respond
 if ($stmt->execute()) {
     echo "✅ Expense successfully added!";
 } else {

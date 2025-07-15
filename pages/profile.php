@@ -47,7 +47,10 @@
 
     <!-- ===================== MAIN ===================== -->
     <div class="main-container">
-      <h2 class="profile-heading">Profile</h2>
+      <div class="header--wrapper">
+        <div class="header--title"><h2>My Profile</h2></div>
+      </div>
+
       <div class="profile-card">
         <div class="profile-left">
           <img src="../assests/profile.png" alt="Profile" class="profile-avatar" />
@@ -67,8 +70,8 @@
               <label>Target Expense</label>
               <p id="profileBudget">₹0.00</p>
             </div>
-            <div class="profile-row"> 
-              <label>Debt</label> 
+            <div class="profile-row">
+              <label>Debt</label>
               <p id="profileDebt">₹0.00</p>
             </div>
           </div>
@@ -76,6 +79,10 @@
           <div class="profile-button">
             <button class="edit-btn" id="editBtn">
               <i class="fa-solid fa-pen"></i> Edit Profile
+            </button>
+
+            <button class="delete-btn" id="deleteBtn">
+              <i class="fa-solid fa-trash"></i> Delete Account
             </button>
           </div>
         </div>
@@ -88,17 +95,17 @@
         <span class="close-btn">&times;</span>
         <h2>Edit Profile</h2>
         <form id="editProfileForm">
-          <label>Email:</label>
-          <input type="email" id="emailInput" required />
+          <label>Username:</label>
+          <input type="text" id="usernameInput" required />
 
           <label>Phone:</label>
           <input type="text" id="phoneInput" required />
 
-          <label>Monthly Budget:</label>
-          <input type="text" id="budgetInput" required />
+          <label>Target Expense:</label>
+          <input type="number" id="budgetInput" required />
 
           <label>Debt:</label>
-          <input type="text" id="debtInput" required />
+          <input type="number" id="debtInput" required />
 
           <button type="submit">Save Changes</button>
         </form>
@@ -109,7 +116,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-        // Fetch profile + goals data
+        // Fetch profile data
         $.ajax({
           url: "../php/get_profile_data.php",
           method: "GET",
@@ -133,9 +140,9 @@
           }
         });
 
-        // Show modal
+        // Show edit modal
         $("#editBtn").click(function () {
-          $("#emailInput").val($("#profileEmail").text());
+          $("#usernameInput").val($(".profile-name").text());
           $("#phoneInput").val($("#profilePhone").text());
           $("#budgetInput").val($("#profileBudget").text().replace("₹", ""));
           $("#debtInput").val($("#profileDebt").text().replace("₹", ""));
@@ -150,11 +157,19 @@
         // Save changes (frontend only for now)
         $("#editProfileForm").submit(function (e) {
           e.preventDefault();
-          $("#profileEmail").text($("#emailInput").val());
+          $(".profile-name").text($("#usernameInput").val());
           $("#profilePhone").text($("#phoneInput").val());
           $("#profileBudget").text(`₹${$("#budgetInput").val()}`);
           $("#profileDebt").text(`₹${$("#debtInput").val()}`);
           $("#editModal").removeClass("show");
+        });
+
+        // Confirm delete action
+        $("#deleteBtn").click(function () {
+          const confirmed = confirm("⚠️ Are you sure you want to delete your account? This action cannot be undone.");
+          if (confirmed) {
+            window.location.href = "../php/delete_account.php";
+          }
         });
       });
     </script>

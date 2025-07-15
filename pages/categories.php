@@ -18,7 +18,7 @@
       <p>FinTrack Pro</p>
     </div>
     <ul class="menu">
-      <li><a href="dashboard.html"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+      <li><a href="dashboard.php"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
       <li class="active"><a href="#"><i class="fas fa-list-alt"></i><span>Expenses</span></a></li>
       <li><a href="#"><i class="fas fa-user"></i><span>My Profile</span></a></li>
       <li class="logout"><a href="login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>

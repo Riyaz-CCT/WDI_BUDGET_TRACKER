@@ -100,7 +100,61 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
+
+
 }
+/* DELETE BUTTON */
+.delete-btn {
+  background-color: transparent;
+  color: #ff4d4f;
+  border: 2px solid #ff4d4f;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+}
+
+.delete-btn i {
+  margin-right: 6px;
+}
+
+.delete-btn:hover {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+
+/* HEADER MY PROFILE */
+.header--wrapper {
+  position: sticky; /* Or use fixed for always visible header */
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--white);
+  border-radius: 0; /* Remove rounded corners if sticking to top */
+  padding: 10px 2rem;
+  margin: 0; /* REMOVE margin to stick to the top */
+}
+
+.header--wrapper img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.header--title {
+  color: var(--primary-color);
+}
+
+
+
 
 /* ====================== CONTAINER ====================== */
 .container {
@@ -193,7 +247,11 @@ h1 {
   text-align: center;
   max-width: 700px;
   margin: 0 auto;
+  margin-top: 20px; /* Ensures it's not hidden behind sticky header */
 }
+
+
+
 
 .profile-header {
   position: relative;

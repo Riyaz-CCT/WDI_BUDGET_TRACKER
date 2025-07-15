@@ -2,312 +2,272 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Categories - Expense Tracker</title>
+  <title>Categories - FinTrack</title>
   <link rel="stylesheet" href="categories_styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="logo">
-      <img src="assests/budget.png" alt="Logo">
-      <p>FinTrack Pro</p>
-    </div>
-    <ul class="menu">
-      <li><a href="dashboard.html"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
-      <li class="active"><a href="#"><i class="fas fa-list-alt"></i><span>Expenses</span></a></li>
-      <li><a href="#"><i class="fas fa-user"></i><span>My Profile</span></a></li>
-      <li class="logout"><a href="login.html"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
-    </ul>
+<div class="sidebar">
+  <div class="logo">
+    <img src="../assests/budget.png" alt="Logo">
+    <p>FinTrack Pro</p>
   </div>
+  <ul class="menu">
+    <li class="active"><a href="#"><i class="fas fa-chart-line"></i><span>Dashboard</span></a></li>
+    <li><a href="#"><i class="fas fa-user"></i><span>My Profile</span></a></li>
+    <li class="logout"><a href="../php/logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+  </ul>
+</div>
 
-  <!-- Main Content -->
-  <div class="main--content">
-    <div class="header--wrapper">
-      <div class="header--title"><h2>Categories</h2></div>
-      <div class="user--info">
-        <div class="search--box">
-          <i class="fa fa-search"></i>
-          <input type="text" id="searchBox" placeholder="Search transactions..." />
-        </div>
-        <img src="assests/profile.png" />
+<div class="main--content">
+  <div class="header--wrapper">
+    <div class="header--title"><h2>Categories</h2></div>
+    <div class="user--info">
+      <div class="search--box">
+        <i class="fa fa-search"></i>
+        <input type="text" id="searchBox" placeholder="Search transactions..." />
       </div>
-    </div>
-
-    <!-- Top Bar -->
-    <div class="container">
-      <div class="top-bar">
-        <div style="display: flex; flex-direction: column;">
-          <h2>Recent Expenses</h2>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <button class="add-expense-btn" id="open-modal">
-            <span class="plus-icon">+</span> <span style="color:white">Add New Expense</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Table -->
-      <table id="transactionTable">
-        <thead>
-          <tr>
-            <th data-sort="date">Date <i class="fa fa-sort"></i></th>
-            <th data-sort="category">Category <i class="fa fa-sort"></i></th>
-            <th>Description</th>
-            <th>Item</th>
-            <th>Type</th>
-            <th data-sort="amount">Amount <i class="fa fa-sort"></i></th>
-            <th>Payment</th>
-            <th>Receipt</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-
-      <!-- Pagination -->
-      <div class="pagination" id="pagination-controls">
-        <button id="firstPageBtn">&laquo;</button>
-        <button id="prevPageBtn">&lt;</button>
-        <span id="pageButtons"></span>
-        <button id="nextPageBtn">&gt;</button>
-        <button id="lastPageBtn">&raquo;</button>
-      </div>
+      <a href="#"><img src="../assests/profile.png" alt="profile picture" /></a>
     </div>
   </div>
 
-  <!-- Add Expense Modal -->
-  <div class="modal" id="expense-modal">
-    <div class="modal-box">
-      <span class="close-button" id="close-modal">&times;</span>
-      <h2>Add New Expense Details</h2>
+  <div class="container">
+    <div class="top-bar">
+      <h2>Recent Expenses</h2>
+      <button class="add-expense-btn" id="open-modal">
+        <span class="plus-icon">+</span> <span style="color:white">Add New Expense</span>
+      </button>
+    </div>
 
-      <form id="expense-form" action="submit-expense.php" method="POST" enctype="multipart/form-data">
-        <div>
-          <label for="expense-date">Date <span class="required">*</span></label>
-          <input type="date" id="expense-date" name="expense-date" max="" required>
-        </div>
+    <table id="transactionTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Item</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Payment</th>
+          <th>Receipt</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-        <div>
-          <label for="expense-category">Category <span class="required">*</span></label>
-          <select id="expense-category" name="expense-category" required>
-            <option value="">Select Category</option>
-             <option value="Salary">Salary</option>
-        <option value="Freelance">Freelance</option>
-        <option value="Business">Business</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Medical">Medical</option>
-        <option value="Food">Food</option>
-        <option value="Transport">Transport</option>
-        <option value="Rent">Rent</option>
-        <option value="Investment">Investment</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Other">Other</option>
-            <option value="AddNew">+ Add New Category</option>
-          </select>
-        </div>
-
-        <!-- Hidden field for new category -->
-        <input type="hidden" id="hidden-new-category" name="new-category">
-
-        <!-- Shown when "Add New" is selected -->
-        <div id="new-category-div" style="display: none;">
-          <label for="new-category-input">Enter New Category Name <span class="required">*</span></label>
-          <input type="text" id="new-category-input" placeholder="e.g., Medical, Rent">
-        </div>
-
-        <div>
-          <label for="expense-item">Item <span class="required">*</span></label>
-          <input type="text" id="expense-item" name="expense-item" placeholder="e.g., Pizza, Uber Ride" required>
-        </div>
-
-        <div>
-          <label for="expense-amount">Amount <span class="required">*</span></label>
-          <input type="number" id="expense-amount" name="expense-amount" placeholder="amount" required>
-        </div>
-
-        <div>
-          <label for="transaction-type">Transaction Type <span class="required">*</span></label>
-          <select id="transaction-type" name="transaction-type" required>
-            <option value="">Select Type</option>
-            <option value="Expense">Expense</option>
-            <option value="Income">Income</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="payment-method">Payment Method <span class="required">*</span></label>
-          <select id="payment-method" name="payment-method" required>
-            <option value="">Select Method</option>
-            <option value="Cash">Cash</option>
-            <option value="Card">Card</option>
-            <option value="UPI">UPI</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="expense-file">Attach File (PDF, JSON, DOCX, TXT)</label>
-          <input type="file" id="expense-file" name="expense-file" accept=".pdf,.json,.docx,.txt">
-        </div>
-
-        <div class="full-width">
-          <label for="expense-description">Description</label>
-          <textarea id="expense-description" name="expense-description" placeholder="description"></textarea>
-        </div>
-
-        <div class="form-buttons">
-          <span class="cancel-button" id="cancel-modal">Cancel</span>
-          <button type="submit" class="save-button">Save</button>
-        </div>
-      </form>
+    <div class="pagination">
+      <button id="firstPageBtn">First</button>
+      <button id="prevPageBtn">Prev</button>
+      <span id="pageButtons"></span>
+      <button id="nextPageBtn">Next</button>
+      <button id="lastPageBtn">Last</button>
     </div>
   </div>
+</div>
 
-  <!-- Script -->
-  <script>
-    $(document).ready(function () {
-      $('#open-modal').click(function () {
-        $('#expense-modal').addClass('show');
-      });
+<!-- Add Expense Modal (Updated structure only) -->
+<div class="modal" id="expense-modal">
+  <div class="modal-box">
+    <span class="close-button" id="close-modal">&times;</span>
+    <h2>Add New Expense Details</h2>
 
-      $('#close-modal, #cancel-modal').click(function () {
-        $('#expense-modal').removeClass('show');
-      });
+    <form id="expense-form" action="submit-expense.php" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="expense-date">Date <span class="required">*</span></label>
+        <input type="date" id="expense-date" name="expense-date" max="" required>
+      </div>
 
-      const today = new Date().toISOString().split("T")[0];
-      $('#expense-date').attr("max", today);
+      <div>
+        <label for="expense-category">Category <span class="required">*</span></label>
+        <select id="expense-category" name="expense-category" required>
+          <option value="">Select Category</option>
+          <optgroup label="Top Categories" id="top-categories-group"></optgroup>
+          <optgroup label="More Categories" id="more-categories-group" style="display:none;"></optgroup>
+          <option value="ShowMore">More...</option>
+          <option value="AddNew">+ Add New Category</option>
+        </select>
+      </div>
 
-      $('#expense-category').on('change', function () {
-        if ($(this).val() === 'AddNew') {
-          $('#new-category-div').show();
-          $('#new-category-input').attr('required', true);
-        } else {
-          $('#new-category-div').hide();
-          $('#new-category-input').removeAttr('required');
-          $('#hidden-new-category').val('');
-        }
-      });
+      <input type="hidden" id="hidden-new-category" name="new-category">
+      <div id="new-category-div" style="display: none;">
+        <label for="new-category-input">Enter New Category Name <span class="required">*</span></label>
+        <input type="text" id="new-category-input" placeholder="e.g., Medical, Rent">
+      </div>
 
-      $('#expense-form').on('submit', function () {
-        if ($('#expense-category').val() === 'AddNew') {
-          $('#hidden-new-category').val($('#new-category-input').val());
-        }
-      });
-    });
+      <div>
+        <label for="expense-item">Item <span class="required">*</span></label>
+        <input type="text" id="expense-item" name="expense-item" placeholder="e.g., Pizza, Uber Ride" required>
+      </div>
 
-    const rowsPerPage = 10;
-    let allTransactions = [], filteredData = [], currentPage = 1, sortDirection = {}, currentSortKey = "";
+      <div>
+        <label for="expense-amount">Amount <span class="required">*</span></label>
+        <input type="number" id="expense-amount" name="expense-amount" placeholder="amount" required>
+      </div>
 
-    function renderTableRows(data) {
-      const tbody = document.querySelector("#transactionTable tbody");
-      tbody.innerHTML = "";
-      const pageData = data.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-      pageData.forEach(txn => {
-        const row = `
-          <tr>
-            <td>${txn.date}</td>
-            <td>${txn.category}</td>
-            <td>${txn.description}</td>
-            <td>${txn.item}</td>
-            <td>${txn.transaction_type}</td>
-            <td style="color:#3949ab;font-weight:bold;">$${parseFloat(txn.amount).toFixed(2)}</td>
-            <td>${txn.payment_method}</td>
-            <td>
-              <button class="view-btn"><i class="fa fa-eye"></i></button>
-              <button class="edit-btn"><i class="fa fa-download"></i></button>
-            </td>
-          </tr>`;
-        tbody.insertAdjacentHTML("beforeend", row);
-      });
+      <div>
+        <label for="transaction-type">Transaction Type <span class="required">*</span></label>
+        <select id="transaction-type" name="transaction-type" required>
+          <option value="">Select Type</option>
+          <option value="Expense">Expense</option>
+          <option value="Income">Income</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="payment-method">Payment Method <span class="required">*</span></label>
+        <select id="payment-method" name="payment-method" required>
+          <option value="">Select Method</option>
+          <option value="Cash">Cash</option>
+          <option value="Credit card">Credit Card</option>
+          <option value="Debit Card">Debit Card</option>
+          <option value="Bank">Bank</option>
+          <option value="UPI">UPI</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="expense-file">Attach File</label>
+        <input type="file" id="expense-file" name="expense-file" accept=".pdf,.json,.docx,.txt,.jpg,.jpeg,.png,.gif">
+      </div>
+
+      <div class="full-width">
+        <label for="expense-description">Description</label>
+        <textarea id="expense-description" name="expense-description" placeholder="description"></textarea>
+      </div>
+
+      <div class="form-buttons">
+        <span class="cancel-button" id="cancel-modal">Cancel</span>
+        <button type="submit" class="save-button">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+let data = [], filtered = [], currentPage = 1, rowsPerPage = 10;
+
+function renderRows(list) {
+  const tbody = $("#transactionTable tbody").empty();
+  const page = list.slice((currentPage-1)*rowsPerPage, currentPage*rowsPerPage);
+  page.forEach(txn => {
+    tbody.append(`
+      <tr>
+        <td>${txn.date}</td>
+        <td>${txn.category}</td>
+        <td>${txn.description}</td>
+        <td>${txn.item}</td>
+        <td>${txn.transaction_type}</td>
+        <td style="color:#3949ab;font-weight:bold;">$${parseFloat(txn.amount).toFixed(2)}</td>
+        <td>${txn.payment_method}</td>
+        <td>
+          ${txn.has_receipt ? `
+            <button class="view-btn" data-id="${txn.id}"><i class="fa fa-eye"></i></button>
+            <button class="download-btn" data-id="${txn.id}"><i class="fa fa-download"></i></button>` : ''}
+        </td>
+      </tr>`);
+  });
+
+  $(".view-btn").click(e => window.open(`view_receipt.php?id=${e.currentTarget.dataset.id}`, '_blank'));
+  $(".download-btn").click(e => window.location.href = `download_receipt.php?id=${e.currentTarget.dataset.id}`);
+}
+
+function renderPagination(list) {
+  const totalPages = Math.ceil(list.length / rowsPerPage);
+  const btns = $("#pageButtons").empty();
+  for (let i = 1; i <= totalPages; i++) {
+    $("<button>").text(i).toggleClass("active", i === currentPage).click(() => { currentPage = i; update(); }).appendTo(btns);
+  }
+  $("#firstPageBtn").click(() => { currentPage = 1; update(); });
+  $("#prevPageBtn").click(() => { currentPage = Math.max(1, currentPage - 1); update(); });
+  $("#nextPageBtn").click(() => { currentPage = Math.min(totalPages, currentPage + 1); update(); });
+  $("#lastPageBtn").click(() => { currentPage = totalPages; update(); });
+}
+
+function applySearch(q) {
+  filtered = data.filter(txn =>
+    txn.date.includes(q) ||
+    txn.category.toLowerCase().includes(q) ||
+    txn.description.toLowerCase().includes(q) ||
+    txn.item.toLowerCase().includes(q) ||
+    txn.transaction_type.toLowerCase().includes(q) ||
+    txn.payment_method.toLowerCase().includes(q)
+  );
+  currentPage = 1;
+  update();
+}
+
+function update() {
+  renderRows(filtered);
+  renderPagination(filtered);
+}
+
+$(function () {
+  const today = new Date().toISOString().split("T")[0];
+  $('#expense-date').attr("max", today);
+
+  $.getJSON('fetch-transactions.php', res => {
+    data = res.recent_transactions;
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
+    filtered = data;
+    update();
+  });
+
+  $.getJSON('fetch-categories.php', res => {
+    const cats = res.categories;
+    $('#top-categories-group').html(cats.slice(0, 3).map(cat => `<option value="${cat}">${cat}</option>`));
+    $('#more-categories-group').html(cats.slice(3).map(cat => `<option value="${cat}">${cat}</option>`));
+  });
+
+  $('#searchBox').on("input", () => applySearch($('#searchBox').val().toLowerCase()));
+  $('#open-modal').click(() => $('#expense-modal').addClass('show'));
+  $('#close-modal, #cancel-modal').click(() => $('#expense-modal').removeClass('show'));
+
+  $('#expense-category').change(function () {
+    const selected = $(this).val();
+    if (selected === "AddNew") {
+      $('#new-category-div').show();
+      $('#new-category-input').attr('required', true);
+    } else if (selected === "ShowMore") {
+      $('#more-categories-group').toggle();
+      $(this).val('');
+    } else {
+      $('#new-category-div').hide();
+      $('#new-category-input').val('');
+      $('#hidden-new-category').val('');
     }
+  });
 
-    function updatePaginationControls(data) {
-      const totalPages = Math.ceil(data.length / rowsPerPage);
-      const container = document.getElementById("pageButtons");
-      container.innerHTML = "";
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement("button");
-        btn.textContent = i;
-        if (i === currentPage) btn.classList.add("active");
-        btn.onclick = () => {
-          currentPage = i;
-          renderTableRows(filteredData);
-          updatePaginationControls(filteredData);
-        };
-        container.appendChild(btn);
+  $('#expense-form').submit(function (e) {
+    if ($('#expense-category').val() === "AddNew") {
+      const newCat = $('#new-category-input').val().trim();
+      if (newCat === "") {
+        alert("Please enter a category name.");
+        e.preventDefault();
+        return;
       }
 
-      document.getElementById("firstPageBtn").onclick = () => { currentPage = 1; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("prevPageBtn").onclick = () => { if (currentPage > 1) currentPage--; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("nextPageBtn").onclick = () => { if (currentPage < totalPages) currentPage++; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("lastPageBtn").onclick = () => { currentPage = totalPages; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-    }
+      $('#hidden-new-category').val(newCat);
 
-    function sortData(key) {
-      if (currentSortKey === key) sortDirection[key] = !sortDirection[key];
-      else { sortDirection = {}; sortDirection[key] = true; currentSortKey = key; }
-
-      filteredData.sort((a, b) => {
-        const valA = a[key], valB = b[key];
-        if (key === "date") return sortDirection[key] ? new Date(valA) - new Date(valB) : new Date(valB) - new Date(valA);
-        if (typeof valA === "number") return sortDirection[key] ? valA - valB : valB - valA;
-        return sortDirection[key] ? valA.localeCompare(valB) : valB.localeCompare(valA);
-      });
-
-      renderTableRows(filteredData);
-      updatePaginationControls(filteredData);
-      updateSortIcons(key);
-    }
-
-    function updateSortIcons(activeKey) {
-      document.querySelectorAll("#transactionTable thead th").forEach(th => {
-        const icon = th.querySelector("i");
-        const key = th.dataset.sort;
-        if (!key || !icon) return;
-        icon.className = "fa fa-sort";
-        if (key === activeKey) {
-          icon.className = sortDirection[key] ? "fa fa-sort-up" : "fa fa-sort-down";
+      $.post('categories.php', { add_category_ajax: 1, name: newCat }, res => {
+        try {
+          const json = typeof res === 'string' ? JSON.parse(res) : res;
+          if (json.success) {
+            alert("Category added. Please reselect and submit.");
+            location.reload();
+          } else {
+            alert("Error: " + json.error);
+          }
+        } catch {
+          alert("Invalid server response.");
         }
       });
+
+      e.preventDefault();
     }
-
-    function applySearch(query) {
-      filteredData = allTransactions.filter(txn =>
-        txn.date.includes(query) ||
-        txn.category.toLowerCase().includes(query) ||
-        txn.description.toLowerCase().includes(query) ||
-        txn.item.toLowerCase().includes(query) ||
-        txn.transaction_type.toLowerCase().includes(query) ||
-        txn.payment_method.toLowerCase().includes(query)
-      );
-      currentPage = 1;
-      renderTableRows(filteredData);
-      updatePaginationControls(filteredData);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("fetch-transactions.php")
-        .then(res => res.json())
-        .then(json => {
-          allTransactions = json.recent_transactions;
-          filteredData = [...allTransactions];
-          renderTableRows(filteredData);
-          updatePaginationControls(filteredData);
-        });
-
-      document.getElementById("searchBox").addEventListener("input", e => {
-        applySearch(e.target.value.toLowerCase());
-      });
-
-      document.querySelectorAll("#transactionTable thead th[data-sort]").forEach(th => {
-        th.addEventListener("click", () => {
-          sortData(th.dataset.sort);
-        });
-      });
-    });
-  </script>
+  });
+});
+</script>
 </body>
 </html>

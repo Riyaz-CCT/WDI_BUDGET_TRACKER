@@ -5,8 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/login_styles.css" />
-    
+    <style>
+      /* Optional fade animation for popup */
+      #password-popup {
+        display: none;
+        background-color: #f9f9f8ff;
+        color: #9b0101ff;
+        border: 1px solid #430101ff;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        position: fixed;
+        z-index: 1000;
+        max-width: 300px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+    </style>
   </head>
+
   <body>
     <div class="container">
       <!-- Left Section -->
@@ -70,47 +88,19 @@
         <form id="signup-form" action="../php/signup2.php" method="POST">
           <div class="input-row">
             <input type="text" name="name" placeholder="Full Name *" required />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number *"
-              required
-            />
+            <input type="text" name="phone" placeholder="Phone Number *" required />
           </div>
           <input type="email" name="email" placeholder="Email *" required />
           <div class="input-row">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password *"
-              required
-            />
-            <input
-              type="password"
-              name="repassword"
-              placeholder="Re-enter Your Password *"
-              required
-            />
+            <input type="password" name="password" placeholder="Password *" required />
+            <input type="password" name="repassword" placeholder="Re-enter Your Password *" required />
           </div>
 
-          <div class="password-rules" id="password-rules">
-            <p>Password must include:</p>
-            <ul>
-              <li id="rule-upper">*At least 1 uppercase letter</li>
-              <li id="rule-lower">*At least 1 lowercase letter</li>
-              <li id="rule-special">*One special character (!@$&)</li>
-              <li id="rule-length">*Minimum 8 characters</li>
-            </ul>
-            <p id="password-error" style="color: red; display: none;">
-              Please enter a valid password!
-            </p>
-          </div>
+          <!-- Popup for password validation -->
+          <div id="password-popup"></div>
 
           <button type="submit" class="sign-in">Sign Up!</button>
-
-          <p class="login-text">
-            Already have an account? <a href="login.php">Log In</a>
-          </p>
+          <p class="login-text">Already have an account? <a href="login.php">Log In</a></p>
         </form>
       </div>
     </div>
@@ -120,34 +110,45 @@
       const passwordInput = document.querySelector('input[name="password"]');
       const repasswordInput = document.querySelector('input[name="repassword"]');
       const form = document.getElementById("signup-form");
+      const popup = document.getElementById("password-popup");
 
-      const rules = {
-        upper: document.getElementById("rule-upper"),
-        lower: document.getElementById("rule-lower"),
-        special: document.getElementById("rule-special"),
-        length: document.getElementById("rule-length"),
-      };
-
-      const errorText = document.getElementById("password-error");
-
-      function validatePassword(pw) {
-        const hasUpper = /[A-Z]/.test(pw);
-        const hasLower = /[a-z]/.test(pw);
-        const hasSpecial = /[!@$&]/.test(pw);
-        const hasLength = pw.length >= 8;
-
-        // Update UI
-        rules.upper.style.color = hasUpper ? "green" : "gray";
-        rules.lower.style.color = hasLower ? "green" : "gray";
-        rules.special.style.color = hasSpecial ? "green" : "gray";
-        rules.length.style.color = hasLength ? "green" : "gray";
-
-        return hasUpper && hasLower && hasSpecial && hasLength;
+      function getPasswordIssues(pw) {
+        const issues = [];
+        if (!/[A-Z]/.test(pw)) issues.push("Must include at least 1 uppercase letter.");
+        if (!/[a-z]/.test(pw)) issues.push("Must include at least 1 lowercase letter.");
+        if (!/[!@$&]/.test(pw)) issues.push("Must include 1 special character (!, @, $, &).");
+        if (pw.length < 8) issues.push("Must be at least 8 characters long.");
+        return issues;
       }
 
-      passwordInput.addEventListener("input", () => {
+      function showPopup(issues, inputField) {
+        const rect = inputField.getBoundingClientRect();
+        popup.innerHTML = issues.join("<br>");
+        popup.style.display = "block";
+        popup.style.opacity = "1";
+        popup.style.top = `${rect.bottom + 10}px`;
+        popup.style.left = `${rect.left}px`;
+      }
+
+      function hidePopup() {
+        popup.style.opacity = "0";
+        setTimeout(() => {
+          popup.style.display = "none";
+        }, 300);
+      }
+
+      passwordInput.addEventListener("blur", () => {
         const pw = passwordInput.value;
-        validatePassword(pw);
+        const issues = getPasswordIssues(pw);
+        if (issues.length > 0) {
+          showPopup(issues, passwordInput);
+        } else {
+          hidePopup();
+        }
+      });
+
+      passwordInput.addEventListener("input", () => {
+        hidePopup();
       });
 
       form.addEventListener("submit", function (e) {
@@ -160,13 +161,14 @@
           return;
         }
 
-        if (!validatePassword(password)) {
+        const issues = getPasswordIssues(password);
+        if (issues.length > 0) {
           e.preventDefault();
-          errorText.style.display = "block";
+          showPopup(issues, passwordInput);
           return;
         }
 
-        errorText.style.display = "none";
+        hidePopup();
       });
     </script>
   </body>

@@ -184,7 +184,49 @@ margin-top: 50px;
   width: 18px;
 }
 
+/* Back to login button */
+.backtologin {
+  background-color: transparent;
+  color: #3817af;
+  border: 2px solid#3817af;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 0px;
+  transition: all 0.3s ease;
+}
 
+.backtologin i {
+  margin-right: 6px;
+}
+
+.backtologin:hover {
+  background-color: #3817af;
+  color: white;
+}
+
+
+
+/* PASSWORD RULES */
+
+.password-rules {
+  font-size: 0.85rem;
+  color: gray;
+  margin-top: 10px;
+  margin-bottom: 3.5px;
+}
+
+.password-rules ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.password-rules li::before {
+  content: '✔ ';
+  color: lightgray;
+}
 
 
 /*Sign- up form */

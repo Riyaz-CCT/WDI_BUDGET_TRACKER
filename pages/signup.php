@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/login_styles.css" />
+    
   </head>
   <body>
     <div class="container">
@@ -92,48 +93,81 @@
             />
           </div>
 
+          <div class="password-rules" id="password-rules">
+            <p>Password must include:</p>
+            <ul>
+              <li id="rule-upper">*At least 1 uppercase letter</li>
+              <li id="rule-lower">*At least 1 lowercase letter</li>
+              <li id="rule-special">*One special character (!@$&)</li>
+              <li id="rule-length">*Minimum 8 characters</li>
+            </ul>
+            <p id="password-error" style="color: red; display: none;">
+              Please enter a valid password!
+            </p>
+          </div>
+
           <button type="submit" class="sign-in">Sign Up!</button>
 
           <p class="login-text">
-            Already have an account? <a href="login.html">Log In</a>
+            Already have an account? <a href="login.php">Log In</a>
           </p>
-          <!-- <button type="button" class="google-btn">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-              alt="Google Icon"
-            />
-            Sign up with Google
-          </button> -->
         </form>
       </div>
     </div>
-    <script>
-      document
-        .getElementById("signup-form")
-        .addEventListener("submit", function (e) {
-          const password = document.querySelector(
-            'input[name="password"]'
-          ).value;
-          const repassword = document.querySelector(
-            'input[name="repassword"]'
-          ).value;
 
-          if (password !== repassword) {
-            e.preventDefault();
-            alert("Passwords do not match!");
-          }
-        });
-    </script>
-
-    <!-- ✅ JS: Redirect after form submission
+    <!-- JavaScript -->
     <script>
-      document
-        .getElementById("signup-form")
-        .addEventListener("submit", function (e) {
+      const passwordInput = document.querySelector('input[name="password"]');
+      const repasswordInput = document.querySelector('input[name="repassword"]');
+      const form = document.getElementById("signup-form");
+
+      const rules = {
+        upper: document.getElementById("rule-upper"),
+        lower: document.getElementById("rule-lower"),
+        special: document.getElementById("rule-special"),
+        length: document.getElementById("rule-length"),
+      };
+
+      const errorText = document.getElementById("password-error");
+
+      function validatePassword(pw) {
+        const hasUpper = /[A-Z]/.test(pw);
+        const hasLower = /[a-z]/.test(pw);
+        const hasSpecial = /[!@$&]/.test(pw);
+        const hasLength = pw.length >= 8;
+
+        // Update UI
+        rules.upper.style.color = hasUpper ? "green" : "gray";
+        rules.lower.style.color = hasLower ? "green" : "gray";
+        rules.special.style.color = hasSpecial ? "green" : "gray";
+        rules.length.style.color = hasLength ? "green" : "gray";
+
+        return hasUpper && hasLower && hasSpecial && hasLength;
+      }
+
+      passwordInput.addEventListener("input", () => {
+        const pw = passwordInput.value;
+        validatePassword(pw);
+      });
+
+      form.addEventListener("submit", function (e) {
+        const password = passwordInput.value;
+        const repassword = repasswordInput.value;
+
+        if (password !== repassword) {
           e.preventDefault();
-          // Optional: Add validation here later
-          window.location.href = "dashboard.html";
-        });
-    </script> -->
+          alert("Passwords do not match!");
+          return;
+        }
+
+        if (!validatePassword(password)) {
+          e.preventDefault();
+          errorText.style.display = "block";
+          return;
+        }
+
+        errorText.style.display = "none";
+      });
+    </script>
   </body>
 </html>

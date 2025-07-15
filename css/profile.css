@@ -39,6 +39,14 @@ body {
 }
 
 /* ====================== SIDEBAR ====================== */
+
+.sidebar .logo p {
+  color: #3949ab;       
+  font-weight: 600;     /* Use 700 or 'bold' for even thicker */
+  font-size: 1.3rem;
+  margin-top: 0.5rem;
+}
+
 .sidebar {
   position: sticky;
   height: 100vh;
@@ -125,6 +133,9 @@ body {
   background-color: #ff4d4f;
   color: white;
 }
+
+
+
 
 
 /* HEADER MY PROFILE */

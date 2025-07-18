@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Categories - FinTrack</title>
-  <link rel="stylesheet" href="categories_styles.css" />
+  <link rel="stylesheet" href="../css/categories_styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
@@ -46,7 +46,7 @@
 <!-- ✅ Sidebar -->
 <div class="sidebar">
   <div class="logo">
-    <img src="assests/budget.png" alt="Logo">
+    <img src="../assests/budget.png" alt="Logo">
     <p>FinTrack Pro</p>
   </div>
   <ul class="menu">
@@ -65,7 +65,7 @@
         <i class="fa fa-search"></i>
         <input type="text" id="searchBox" placeholder="Search transactions..." />
       </div>
-      <a href="#"><img src="assests/profile.png" alt="profile picture" /></a>
+      <a href="#"><img src="../assests/profile.png" alt="profile picture" /></a>
     </div>
   </div>
 
@@ -108,7 +108,7 @@
     <span class="close-button" id="close-modal">&times;</span>
     <h2>Add New Expense Details</h2>
 
-    <form id="expense-form" action="submit-expense.php" method="POST" enctype="multipart/form-data">
+    <form id="expense-form" action="../php/submit-expense.php" method="POST" enctype="multipart/form-data">
       <div>
         <label for="expense-date">Date <span class="required">*</span></label>
         <input type="date" id="expense-date" name="expense-date" max="" required>
@@ -232,14 +232,14 @@ $(function () {
   const today = new Date().toISOString().split("T")[0];
   $('#expense-date').attr("max", today);
 
-  $.getJSON('fetch-transactions.php', res => {
+  $.getJSON('../php/fetch-transactions.php', res => {
     data = res.recent_transactions;
     data.sort((a, b) => new Date(b.date) - new Date(a.date));
     filtered = data;
     update();
   });
 
-  $.getJSON('fetch-categories.php', res => {
+  $.getJSON('../php/fetch-categories.php', res => {
     const categories = res.categories || [];
     const $options = $('#customCategoryOptions').empty();
 
@@ -300,7 +300,7 @@ $(function () {
         return;
       }
       $('#hidden-new-category').val(newCat);
-      $.post('categories.php', { add_category_ajax: 1, name: newCat }, res => {
+      $.post('../php/categories2.php', { add_category_ajax: 1, name: newCat }, res => {
         try {
           const json = typeof res === 'string' ? JSON.parse(res) : res;
           if (json.success) {

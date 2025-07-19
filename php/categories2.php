@@ -1,7 +1,7 @@
 <?php
 require_once '../php/auth.php';
 
-// Database connection
+// DB connection
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -51,6 +51,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->send_long_data(8, $receiptBlob);
     $stmt->execute();
     $stmt->close();
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 $query = "SELECT t.id, c.name AS category, t.item, t.description, t.type AS transaction_type, t.amount, t.date, t.payment_method FROM transactions t JOIN categories c ON t.category_id = c.id WHERE t.user_id = ? ORDER BY t.date DESC";
@@ -63,7 +66,6 @@ while ($row = $result->fetch_assoc()) {
     $transactions[] = $row;
 }
 $stmt->close();
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +77,8 @@ $conn->close();
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
+<!-- Sidebar -->
 <div class="sidebar">
   <div class="logo">
     <img src="../assests/budget.png" alt="Logo">
@@ -86,6 +90,8 @@ $conn->close();
     <li class="logout"><a href="../php/logout.php"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
   </ul>
 </div>
+
+<!-- Main Content -->
 <div class="main--content">
   <div class="header--wrapper">
     <div class="header--title"><h2>Categories</h2></div>
@@ -97,6 +103,7 @@ $conn->close();
       <a href="#"><img src="../assests/profile.png" alt="profile picture" /></a>
     </div>
   </div>
+
   <div class="container">
     <div class="top-bar">
       <h2>Recent Expenses</h2>
@@ -134,6 +141,8 @@ $conn->close();
     </table>
   </div>
 </div>
+
+<!-- Modal Form -->
 <div class="modal" id="expense-modal">
   <div class="modal-box">
     <span class="close-button" id="close-modal">&times;</span>
@@ -141,36 +150,37 @@ $conn->close();
     <form method="POST" enctype="multipart/form-data">
       <label for="expense-date">Date *</label>
       <input type="date" name="expense-date" id="expense-date" required max="<?= date('Y-m-d') ?>">
+
       <label for="expense-category">Category *</label>
       <select name="expense-category" id="expense-category" required>
         <option value="">Select Category</option>
-        <option value="Salary">Salary</option>
-        <option value="Freelance">Freelance</option>
-        <option value="Business">Business</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Medical">Medical</option>
-        <option value="Food">Food</option>
-        <option value="Transport">Transport</option>
-        <option value="Rent">Rent</option>
-        <option value="Investment">Investment</option>
-        <option value="Entertainment">Entertainment</option>
-        <option value="Other">Other</option>
+        <?php
+          $catRes = $conn->query("SELECT name FROM categories ORDER BY name ASC");
+          while ($cat = $catRes->fetch_assoc()) {
+            echo '<option value="' . htmlspecialchars($cat['name']) . '">' . htmlspecialchars($cat['name']) . '</option>';
+          }
+        ?>
         <option value="AddNew">+ Add New Category</option>
       </select>
+
       <div id="new-category-div" style="display:none;">
         <input type="text" id="new-category-input" placeholder="New Category Name">
         <input type="hidden" name="new-category" id="hidden-new-category">
       </div>
+
       <label for="expense-item">Item *</label>
       <input type="text" name="expense-item" id="expense-item" required>
+
       <label for="expense-amount">Amount *</label>
       <input type="number" name="expense-amount" id="expense-amount" required>
+
       <label for="transaction-type">Transaction Type *</label>
       <select name="transaction-type" id="transaction-type" required>
         <option value="">Select Type</option>
         <option value="Expense">Expense</option>
         <option value="Income">Income</option>
       </select>
+
       <label for="payment-method">Payment Method *</label>
       <select name="payment-method" id="payment-method" required>
         <option value="">Select Method</option>
@@ -178,10 +188,13 @@ $conn->close();
         <option value="Card">Card</option>
         <option value="UPI">UPI</option>
       </select>
+
       <label for="expense-file">Attach File</label>
       <input type="file" name="expense-file" id="expense-file" accept=".pdf,.json,.docx,.txt">
+
       <label for="expense-description">Description</label>
       <textarea name="expense-description" id="expense-description"></textarea>
+
       <div class="form-buttons">
         <button type="submit" class="save-button">Save</button>
         <button type="button" class="cancel-button" id="cancel-modal">Cancel</button>
@@ -189,6 +202,7 @@ $conn->close();
     </form>
   </div>
 </div>
+
 <script>
   $(function () {
     $('#open-modal').click(() => $('#expense-modal').addClass('show'));

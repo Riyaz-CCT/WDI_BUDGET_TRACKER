@@ -1,4 +1,3 @@
-
 <?php
 header('Content-Type: application/json');
 
@@ -33,7 +32,7 @@ $query = "SELECT
           FROM transactions t
           JOIN categories c ON t.category_id = c.id
           WHERE t.user_id = ?
-          ORDER BY t.date DESC";
+          ORDER BY t.date DESC, t.id DESC";
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);

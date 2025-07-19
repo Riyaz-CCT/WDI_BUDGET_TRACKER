@@ -74,19 +74,19 @@
         <h2>Edit Profile</h2>
         <form id="editProfileForm">
           <label>Username:</label>
-          <input type="text" id="usernameInput" required />
+          <input type="text" id="usernameInput"/>
 
           <label>Phone:</label>
-          <input type="text" id="phoneInput" required />
+          <input type="text" id="phoneInput"  />
 
           <label>Target Expense:</label>
-          <input type="number" id="budgetInput" required />
+          <input type="number" id="budgetInput"  />
 
           <label>Target Saving:</label>
-          <input type="number" id="savingInput" required />
+          <input type="number" id="savingInput"  />
 
           <label>Debt:</label>
-          <input type="number" id="debtInput" required />
+          <input type="number" id="debtInput"  />
 
           <button type="submit">Save Changes</button>
         </form>

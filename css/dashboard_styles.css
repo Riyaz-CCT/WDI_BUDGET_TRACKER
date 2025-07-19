@@ -1,4 +1,3 @@
-/* ====================== ROOT CSS VARIABLES ====================== */
 :root {
   --primary-color: #3949ab;          /* Deep indigo (more professional & accessible) */
   --primary-bg: #f4f6fa;             /* Very light cool gray background */
@@ -616,18 +615,38 @@ tfoot td {
   padding: 12px 8px;
   color: var(--primary-color);
 }
-
-@media (max-width: 768px) {
-  .section-3 {
+/* ====================== RESPONSIVE DESIGN ====================== */
+@media (max-width: 1200px) {
+  .section-1, .section-2, .section-3 {
     flex-direction: column;
   }
-
+  
+  .stats-cards-container,
+  .progress-bar-section,
+  .new_section,
+  .graph--container-1,
+  .graph--container-2,
   .graph--container-3,
   .tabular--wrapper {
     width: 100%;
   }
 }
-/* ====================== SECTION 3:TABLE WRAPPER ENDS HERE ====================== */
-/* ====================== SECTION 3 ENDS HERE ====================== */
 
-/* ====================== MAIN CONTENT ENDS HERE====================== */
+@media (max-width: 768px) {
+  .main--content {
+    padding: 1rem;
+  }
+  
+  
+  .header--wrapper {
+    padding: 12px 1rem;
+  }
+  
+  .sidebar {
+    width: 80px;
+  }
+  
+  .sidebar:hover {
+    width: 200px;
+  }
+} 

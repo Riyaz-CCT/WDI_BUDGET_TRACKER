@@ -31,11 +31,11 @@ $(document).ready(function () {
             updatePercentage($('#expense-value').next('.growth'), data.percent_expense, true);
             updatePercentage($('#savings-value').next('.growth'), data.percent_saving, false);
 
-            // ✅ Custom logic for debt percent: + = more debt (red), – = less debt (green)
+            // ✅ Custom logic for debt percent: + = more debt (red), – = less debt (green), no sign for 0
             const percentDebt = parseFloat(data.percent_debt || 0).toFixed(2);
             const $debtGrowth = $('#debt-value').next('.growth'); // ✅ corrected ID
             const isDebtIncreased = percentDebt > 0;
-            const debtSign = isDebtIncreased ? '+' : '–';
+            const debtSign = percentDebt == 0 ? '' : (isDebtIncreased ? '+' : '–');
             const debtColor = isDebtIncreased ? '#ef5350' : '#2e7d32';
             const debtClass = isDebtIncreased ? 'up' : 'down';
 

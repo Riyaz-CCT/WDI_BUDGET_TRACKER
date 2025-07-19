@@ -10,16 +10,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database config
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "fintrack_v2";
+// $host = "localhost";
+// $user = "root";
+// $pass = "";
+// $db   = "fintrack_v2";
 
 // Connect
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
-}
+// $conn = new mysqli($host, $user, $pass, $db);
+// if ($conn->connect_error) {
+//     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
+// }
 
 $user_id = 18; // Replace with session user ID later
 //$user_id = $_SESSION['user_id']; 

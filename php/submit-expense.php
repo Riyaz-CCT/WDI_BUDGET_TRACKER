@@ -8,16 +8,16 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database config
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "fintrack_v2";
+// $host = "localhost";
+// $user = "root";
+// $pass = "";
+// $db   = "fintrack_v2";
 
 // Connect to MySQL
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die("❌ Connection failed: " . $conn->connect_error);
-}
+// $conn = new mysqli($host, $user, $pass, $db);
+// if ($conn->connect_error) {
+//     die("❌ Connection failed: " . $conn->connect_error);
+// }
 
 // Dummy user ID (replace with session login later)
 //$user_id = 1;
@@ -89,7 +89,8 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    echo "✅ Expense successfully added!";
+    header("Location: ../pages/categories.php");
+    exit;
 } else {
     echo "❌ Error: " . $stmt->error;
 }

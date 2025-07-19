@@ -1,6 +1,7 @@
 <?php
 include 'auth.php';
 include 'config.php'; // Adjust the path to your DB connection file
+$user_id = $_SESSION['user_id']; 
 
 // Enable error reporting
 ini_set('display_errors', 1);
@@ -8,20 +9,21 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database config (same as submit-expense.php)
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "fintrack_v2";
+// $host = "localhost";
+// $user = "root";
+// $pass = "";
+// $db   = "fintrack_v2";
 
 // Connect to MySQL
-$conn = new mysqli($host, $user, $pass, $db);
-if ($conn->connect_error) {
-    die(json_encode(["success" => false, "error" => "Connection failed: " . $conn->connect_error]));
-}
+// $conn = new mysqli($host, $user, $pass, $db);
+// if ($conn->connect_error) {
+//     die(json_encode(["success" => false, "error" => "Connection failed: " . $conn->connect_error]));
+// }
 
 // Dummy user ID (you can use session later)
 //$user_id = 1;
-$user_id = $_SESSION['user_id']; 
+
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

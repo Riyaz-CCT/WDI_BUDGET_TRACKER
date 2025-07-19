@@ -4,11 +4,12 @@ include 'config.php'; // Adjust the path to your DB connection file
 $user_id = $_SESSION['user_id']; 
 
 header('Content-Type: application/json');
-$conn = new mysqli("localhost", "root", "", "fintrack_v2");
-if ($conn->connect_error) {
-    echo json_encode(["error" => "Connection failed"]);
-    exit;
-}
+// $conn = new mysqli("localhost", "root", "", "fintrack_v2");
+// if ($conn->connect_error) {
+//     echo json_encode(["error" => "Connection failed"]);
+//     exit;
+// }
+
 
 $categories = [];
 $res = $conn->query("SELECT name FROM categories ORDER BY name ASC");

@@ -85,7 +85,7 @@
             required
           />
 
-          <a href="forgot-password.html" class="forgot">Forgot Password?</a>
+          <a href="forgot-password.php" class="forgot">Forgot Password?</a>
 
           <button type="submit" class="sign-in">Sign In</button>
 

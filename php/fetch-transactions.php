@@ -1,4 +1,7 @@
 <?php
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+
 header('Content-Type: application/json');
 
 // Enable error reporting
@@ -18,7 +21,9 @@ if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-$user_id = 1; // Replace with session user ID later
+$user_id = 18; // Replace with session user ID later
+//$user_id = $_SESSION['user_id']; 
+
 
 $query = "SELECT 
             t.id, 

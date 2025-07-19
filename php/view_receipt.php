@@ -1,4 +1,8 @@
 <?php
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+$user_id = $_SESSION['user_id']; 
+
 // view_receipt.php
 $host = "localhost";
 $user = "root";

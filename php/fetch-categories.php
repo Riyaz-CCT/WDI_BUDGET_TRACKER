@@ -1,4 +1,8 @@
 <?php
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+$user_id = $_SESSION['user_id']; 
+
 header('Content-Type: application/json');
 $conn = new mysqli("localhost", "root", "", "fintrack_v2");
 if ($conn->connect_error) {

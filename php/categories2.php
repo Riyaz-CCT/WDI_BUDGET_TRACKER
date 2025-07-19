@@ -1,5 +1,8 @@
 <?php
-require_once '../php/auth.php';
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+$user_id = $_SESSION['user_id']; 
+
 
 // DB connection
 $host = "localhost";

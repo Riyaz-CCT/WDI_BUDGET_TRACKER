@@ -1,4 +1,7 @@
 <?php
+include 'auth.php';
+include 'config.php'; // Adjust the path to your DB connection file
+
 // Enable error reporting
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -17,7 +20,8 @@ if ($conn->connect_error) {
 }
 
 // Dummy user ID (replace with session login later)
-$user_id = 1;
+//$user_id = 1;
+$user_id = $_SESSION['user_id']; 
 
 // Get form inputs
 $date         = $_POST['expense-date'] ?? '';

@@ -21,9 +21,9 @@
 
     <!-- ===================== MAIN ===================== -->
     <div class="main-container">
-      <div class="header--wrapper">
+      <!-- <div class="header--wrapper">
         <div class="header--title"><h2>My Profile</h2></div>
-      </div>
+      </div> -->
 
       <div class="profile-card">
         <div class="profile-left">

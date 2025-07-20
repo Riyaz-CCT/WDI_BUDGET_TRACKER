@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Categories - Expense Tracker</title>
   <link rel="stylesheet" href="../css/categories_styles.css" />
+  <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -72,7 +73,9 @@
           <i class="fa fa-search"></i>
           <input type="text" id="searchBox" placeholder="Search transactions..." />
         </div>
+        <a href="profile.php">
         <img src="../assests/profile.png" />
+        </a>
       </div>
     </div>
 
@@ -102,7 +105,7 @@
     <th data-sort="amount">Amount <i class="fa fa-sort"></i></th>
     <th>Payment</th>
     <th>Receipt</th>
-    <th>Action</th> <!-- NEW -->
+    <th></th> <!-- NEW -->
   </tr>
 </thead>
         <tbody></tbody>
@@ -135,7 +138,7 @@
   <label for="expense-category">Category <span class="required">*</span></label>
   <div class="custom-select-wrapper">
     <div class="custom-select" id="category-display">Select Category</div>
-    <div class="custom-options" id="category-options" style="display: none;">
+    <!-- <div class="custom-options" id="category-options" style="display: none;">
       <div data-value="Salary">Salary</div>
       <div data-value="Freelance">Freelance</div>
       <div data-value="Business">Business</div>
@@ -148,7 +151,9 @@
       <div data-value="Entertainment">Entertainment</div>
       <div data-value="Other">Other</div>
       <div data-value="AddNew">+ Add New Category</div>
-    </div>
+    </div> -->
+    <div class="custom-options" id="category-options" style="display: none;"></div>
+
     
     <!-- Hidden input to submit selected category -->
     <input type="hidden" id="expense-category" name="expense-category" required>
@@ -223,225 +228,241 @@
     </div>
   </div>
 
-  <!-- Script -->
-  <script>
-    $(document).ready(function () {
-      $('#open-modal').click(function () {
-        $('#expense-modal').addClass('show');
-      });
-
-      $('#close-modal, #cancel-modal').click(function () {
-        $('#expense-modal').removeClass('show');
-      });
-
-      const today = new Date().toISOString().split("T")[0];
-      $('#expense-date').attr("max", today);
-
-      $('#expense-category').on('change', function () {
-        if ($(this).val() === 'AddNew') {
-          $('#new-category-div').show();
-          $('#new-category-input').attr('required', true);
-        } else {
-          $('#new-category-div').hide();
-          $('#new-category-input').removeAttr('required');
-          $('#hidden-new-category').val('');
-        }
-      });
-      $(document).ready(function () {
-    // Toggle category dropdown
-    $('#category-display').click(function () {
-      $('#category-options').toggle();
-    });
-
-    // Select a category
-    $('#category-options div').click(function () {
-      const value = $(this).data('value');
-      $('#expense-category').val(value);
-      $('#category-display').text($(this).text());
-      $('#category-options').hide();
-
-      if (value === 'AddNew') {
-        $('#new-category-div').show();
-        $('#new-category-input').attr('required', true);
-      } else {
-        $('#new-category-div').hide();
-        $('#new-category-input').removeAttr('required');
-        $('#hidden-new-category').val('');
-      }
-    });
-
-    // When submitting, set hidden new-category if "AddNew"
-    $('#expense-form').on('submit', function () {
-      if ($('#expense-category').val() === 'AddNew') {
-        $('#hidden-new-category').val($('#new-category-input').val());
-      }
-    });
-
-    // Hide dropdown if clicking outside
-    $(document).on('click', function (e) {
-      if (!$(e.target).closest('.custom-select-wrapper').length) {
-        $('#category-options').hide();
-      }
-    });
+<!-- Script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+  // ===== Modal Open/Close =====
+  $('#open-modal').click(function () {
+    $('#expense-modal').addClass('show');
   });
 
-      $('#expense-form').on('submit', function () {
-        if ($('#expense-category').val() === 'AddNew') {
-          $('#hidden-new-category').val($('#new-category-input').val());
-        }
+  $('#close-modal, #cancel-modal').click(function () {
+    $('#expense-modal').removeClass('show');
+  });
+
+  // ===== Set today's date as max =====
+  const today = new Date().toISOString().split("T")[0];
+  $('#expense-date').attr("max", today);
+
+  // ===== Load Categories from fetch-categories.php =====
+  $.ajax({
+    url: '../php/fetch-categories.php',
+    method: 'GET',
+    dataType: 'json',
+    success: function (response) {
+      const $options = $('#category-options');
+      $options.empty();
+
+      response.categories.forEach(function (category) {
+        const categoryDiv = $('<div></div>')
+          .text(category)
+          .attr('data-value', category);
+        $options.append(categoryDiv);
       });
+
+      $options.append('<div data-value="AddNew">+ Add New Category</div>');
+    },
+    error: function () {
+      console.error('Failed to fetch categories.');
+    }
+  });
+
+  // ===== Toggle Dropdown =====
+  $('#category-display').click(function () {
+    $('#category-options').toggle();
+  });
+
+  // ===== Select Category =====
+  $('#category-options').on('click', 'div', function () {
+    const value = $(this).data('value');
+    $('#expense-category').val(value);
+    $('#category-display').text($(this).text());
+    $('#category-options').hide();
+
+    if (value === 'AddNew') {
+      $('#new-category-div').show();
+      $('#new-category-input').attr('required', true);
+    } else {
+      $('#new-category-div').hide();
+      $('#new-category-input').removeAttr('required');
+      $('#hidden-new-category').val('');
+    }
+  });
+
+  // ===== Handle Category Input =====
+  $('#expense-category').on('change', function () {
+    if ($(this).val() === 'AddNew') {
+      $('#new-category-div').show();
+      $('#new-category-input').attr('required', true);
+    } else {
+      $('#new-category-div').hide();
+      $('#new-category-input').removeAttr('required');
+      $('#hidden-new-category').val('');
+    }
+  });
+
+  // ===== On Form Submit - Add New Category Value =====
+  $('#expense-form').on('submit', function () {
+    if ($('#expense-category').val() === 'AddNew') {
+      $('#hidden-new-category').val($('#new-category-input').val());
+    }
+  });
+
+  // ===== Hide dropdown when clicking outside =====
+  $(document).on('click', function (e) {
+    if (!$(e.target).closest('.custom-select-wrapper').length) {
+      $('#category-options').hide();
+    }
+  });
+
+  // ======= Transactions Table Logic =======
+  const rowsPerPage = 10;
+  let allTransactions = [], filteredData = [], currentPage = 1, sortDirection = {}, currentSortKey = "";
+
+  function renderTableRows(data) {
+    const tbody = document.querySelector("#transactionTable tbody");
+    tbody.innerHTML = "";
+    const pageData = data.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+    pageData.forEach(txn => {
+      const row = `
+        <tr data-id="${txn.id}">
+          <td>${txn.date}</td>
+          <td>${txn.category}</td>
+          <td>${txn.description}</td>
+          <td>${txn.item}</td>
+          <td>${txn.transaction_type}</td>
+          <td style="color:#3949ab;font-weight:bold;">₹${parseFloat(txn.amount).toFixed(2)}</td>
+          <td>${txn.payment_method}</td>
+          <td>
+            <a href="../php/view_receipt.php?id=${txn.id}" target="_blank" class="view-btn" title="View"><i class="fa fa-eye"></i></a>
+            <a href="../php/download_receipt.php?id=${txn.id}" class="edit-btn" title="Download"><i class="fa fa-download"></i></a>
+          </td>
+          <td>
+            <i class="fa fa-trash delete-btn" style="color:red; cursor:pointer;" title="Delete"></i>
+          </td>
+        </tr>`;
+      tbody.insertAdjacentHTML("beforeend", row);
+    });
+  }
+
+  function updatePaginationControls(data) {
+    const totalPages = Math.ceil(data.length / rowsPerPage);
+    const container = document.getElementById("pageButtons");
+    container.innerHTML = "";
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      if (i === currentPage) btn.classList.add("active");
+      btn.onclick = () => {
+        currentPage = i;
+        renderTableRows(filteredData);
+        updatePaginationControls(filteredData);
+      };
+      container.appendChild(btn);
+    }
+
+    document.getElementById("firstPageBtn").onclick = () => { currentPage = 1; renderTableRows(filteredData); updatePaginationControls(filteredData); };
+    document.getElementById("prevPageBtn").onclick = () => { if (currentPage > 1) currentPage--; renderTableRows(filteredData); updatePaginationControls(filteredData); };
+    document.getElementById("nextPageBtn").onclick = () => { if (currentPage < totalPages) currentPage++; renderTableRows(filteredData); updatePaginationControls(filteredData); };
+    document.getElementById("lastPageBtn").onclick = () => { currentPage = totalPages; renderTableRows(filteredData); updatePaginationControls(filteredData); };
+  }
+
+  function sortData(key) {
+    if (currentSortKey === key) sortDirection[key] = !sortDirection[key];
+    else { sortDirection = {}; sortDirection[key] = true; currentSortKey = key; }
+
+    filteredData.sort((a, b) => {
+      const valA = a[key], valB = b[key];
+      if (key === "date") return sortDirection[key] ? new Date(valA) - new Date(valB) : new Date(valB) - new Date(valA);
+      if (typeof valA === "number") return sortDirection[key] ? valA - valB : valB - valA;
+      return sortDirection[key] ? valA.localeCompare(valB) : valB.localeCompare(valA);
     });
 
-    const rowsPerPage = 10;
-    let allTransactions = [], filteredData = [], currentPage = 1, sortDirection = {}, currentSortKey = "";
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+    updateSortIcons(key);
+  }
 
-    function renderTableRows(data) {
-      const tbody = document.querySelector("#transactionTable tbody");
-      tbody.innerHTML = "";
-      const pageData = data.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-      pageData.forEach(txn => {
-       const row = `
-            <tr data-id="${txn.id}">
-            <td>${txn.date}</td>
-            <td>${txn.category}</td>
-            <td>${txn.description}</td>
-            <td>${txn.item}</td>
-            <td>${txn.transaction_type}</td>
-            <td style="color:#3949ab;font-weight:bold;">$${parseFloat(txn.amount).toFixed(2)}</td>
-             <td>${txn.payment_method}</td>
-              <td>
-             <a href="../php/view_receipt.php?id=${txn.id}" target="_blank" class="view-btn" title="View"><i class="fa fa-eye"></i></a>
-             <a href="../php/download_receipt.php?id=${txn.id}" class="edit-btn" title="Download"><i class="fa fa-download"></i></a>
-             </td>
-           <td>
-             <i class="fa fa-trash delete-btn" style="color:red; cursor:pointer;" title="Delete"></i>
-           </td>
-       </tr>`;
-
-        tbody.insertAdjacentHTML("beforeend", row);
-      });
-    }
-
-    function updatePaginationControls(data) {
-      const totalPages = Math.ceil(data.length / rowsPerPage);
-      const container = document.getElementById("pageButtons");
-      container.innerHTML = "";
-      for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement("button");
-        btn.textContent = i;
-        if (i === currentPage) btn.classList.add("active");
-        btn.onclick = () => {
-          currentPage = i;
-          renderTableRows(filteredData);
-          updatePaginationControls(filteredData);
-        };
-        container.appendChild(btn);
-      }
-
-      document.getElementById("firstPageBtn").onclick = () => { currentPage = 1; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("prevPageBtn").onclick = () => { if (currentPage > 1) currentPage--; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("nextPageBtn").onclick = () => { if (currentPage < totalPages) currentPage++; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-      document.getElementById("lastPageBtn").onclick = () => { currentPage = totalPages; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-    }
-
-    function sortData(key) {
-      if (currentSortKey === key) sortDirection[key] = !sortDirection[key];
-      else { sortDirection = {}; sortDirection[key] = true; currentSortKey = key; }
-
-      filteredData.sort((a, b) => {
-        const valA = a[key], valB = b[key];
-        if (key === "date") return sortDirection[key] ? new Date(valA) - new Date(valB) : new Date(valB) - new Date(valA);
-        if (typeof valA === "number") return sortDirection[key] ? valA - valB : valB - valA;
-        return sortDirection[key] ? valA.localeCompare(valB) : valB.localeCompare(valA);
-      });
-
-      renderTableRows(filteredData);
-      updatePaginationControls(filteredData);
-      updateSortIcons(key);
-    }
-
-    function updateSortIcons(activeKey) {
-      document.querySelectorAll("#transactionTable thead th").forEach(th => {
-        const icon = th.querySelector("i");
-        const key = th.dataset.sort;
-        if (!key || !icon) return;
-        icon.className = "fa fa-sort";
-        if (key === activeKey) {
-          icon.className = sortDirection[key] ? "fa fa-sort-up" : "fa fa-sort-down";
-        }
-      });
-    }
-
-    function applySearch(query) {
-      filteredData = allTransactions.filter(txn => {
-        // Check if transaction object and properties exist before searching
-        return (txn.date && txn.date.toString().toLowerCase().includes(query)) ||
-               (txn.category && txn.category.toString().toLowerCase().includes(query)) ||
-               (txn.description && txn.description.toString().toLowerCase().includes(query)) ||
-               (txn.item && txn.item.toString().toLowerCase().includes(query)) ||
-               (txn.transaction_type && txn.transaction_type.toString().toLowerCase().includes(query)) ||
-               (txn.payment_method && txn.payment_method.toString().toLowerCase().includes(query)) ||
-               (txn.amount && txn.amount.toString().toLowerCase().includes(query));
-      });
-      currentPage = 1;
-      renderTableRows(filteredData);
-      updatePaginationControls(filteredData);
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("../php/fetch-transactions.php")
-        .then(res => res.json())
-        .then(json => {
-          allTransactions = json.recent_transactions;
-          filteredData = [...allTransactions];
-          renderTableRows(filteredData);
-          updatePaginationControls(filteredData);
-        });
-
-      document.getElementById("searchBox").addEventListener("input", e => {
-        applySearch(e.target.value.toLowerCase());
-      });
-
-      document.querySelectorAll("#transactionTable thead th[data-sort]").forEach(th => {
-        th.addEventListener("click", () => {
-          sortData(th.dataset.sort);
-        });
-      });
-    });
-    // Handle delete transaction
-$(document).on("click", ".delete-btn", function () {
-  const row = $(this).closest("tr");
-  const id = row.data("id");
-
-  if (confirm("Are you sure you want to delete this transaction?")) {
-    $.ajax({
-      url: "../php/delete-transaction.php",
-      type: "POST",
-      data: { id },
-      success: function (res) {
-        console.log("Server response:", res);  // Debug log
-        try {
-          const json = JSON.parse(res);
-          if (json.success) {
-            row.remove();
-            allTransactions = allTransactions.filter(txn => txn.id !== id);
-            filteredData = filteredData.filter(txn => txn.id !== id);
-            renderTableRows(filteredData);
-            updatePaginationControls(filteredData);
-          } else {
-            alert("Error: " + json.error);
-          }
-        } catch (e) {
-          alert("Unexpected server response.");
-        }
-      },
-      error: function () {
-        alert("Failed to connect to the server.");
+  function updateSortIcons(activeKey) {
+    document.querySelectorAll("#transactionTable thead th").forEach(th => {
+      const icon = th.querySelector("i");
+      const key = th.dataset.sort;
+      if (!key || !icon) return;
+      icon.className = "fa fa-sort";
+      if (key === activeKey) {
+        icon.className = sortDirection[key] ? "fa fa-sort-up" : "fa fa-sort-down";
       }
     });
   }
-});
 
-  </script>
+  function applySearch(query) {
+    filteredData = allTransactions.filter(txn => {
+      return (txn.date && txn.date.toLowerCase().includes(query)) ||
+             (txn.category && txn.category.toLowerCase().includes(query)) ||
+             (txn.description && txn.description.toLowerCase().includes(query)) ||
+             (txn.item && txn.item.toLowerCase().includes(query)) ||
+             (txn.transaction_type && txn.transaction_type.toLowerCase().includes(query)) ||
+             (txn.payment_method && txn.payment_method.toLowerCase().includes(query)) ||
+             (txn.amount && txn.amount.toString().toLowerCase().includes(query));
+    });
+    currentPage = 1;
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+  }
+
+  fetch("../php/fetch-transactions.php")
+    .then(res => res.json())
+    .then(json => {
+      allTransactions = json.recent_transactions;
+      filteredData = [...allTransactions];
+      renderTableRows(filteredData);
+      updatePaginationControls(filteredData);
+    });
+
+  document.getElementById("searchBox").addEventListener("input", e => {
+    applySearch(e.target.value.toLowerCase());
+  });
+
+  document.querySelectorAll("#transactionTable thead th[data-sort]").forEach(th => {
+    th.addEventListener("click", () => {
+      sortData(th.dataset.sort);
+    });
+  });
+
+  // ===== Handle Delete Transaction =====
+  $(document).on("click", ".delete-btn", function () {
+    const row = $(this).closest("tr");
+    const id = row.data("id");
+
+    if (confirm("Are you sure you want to delete this transaction?")) {
+      $.ajax({
+        url: "../php/delete-transaction.php",
+        type: "POST",
+        data: { id },
+        success: function (res) {
+          try {
+            const json = JSON.parse(res);
+            if (json.success) {
+              row.remove();
+              allTransactions = allTransactions.filter(txn => txn.id !== id);
+              filteredData = filteredData.filter(txn => txn.id !== id);
+              renderTableRows(filteredData);
+              updatePaginationControls(filteredData);
+            } else {
+              alert("Error: " + json.error);
+            }
+          } catch (e) {
+            alert("Unexpected server response.");
+          }
+        },
+        error: function () {
+          alert("Failed to connect to the server.");
+        }
+      });
+    }
+  });
+});
+</script>
 </body>
 </html>

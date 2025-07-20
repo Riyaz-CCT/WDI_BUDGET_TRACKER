@@ -66,7 +66,7 @@
             </div>
             <div class="stats-cards">
               <p>Debt</p>
-              <span id="debt-value">₹15,000</span>
+              <span id="debt-value">₹0</span>
               <p class="growth up" style="color:#2e7d32">-1.97%</p>
             </div>
           </div>

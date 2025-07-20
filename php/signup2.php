@@ -34,22 +34,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // 🔐 Strong Password Check (Optional, comment out if not needed)
+    // 🔐 Strong Password Check
     if (strlen($password) < 6) {
         echo "<script>alert('Password must be at least 6 characters long.'); window.history.back();</script>";
         exit();
     }
 
-    // ✅ Check if user already exists
-    $checkQuery = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $checkQuery->bind_param("s", $email);
+    // ✅ Check if email or phone already exists
+    $checkQuery = $conn->prepare("SELECT email, phone FROM users WHERE email = ? OR phone = ?");
+    $checkQuery->bind_param("ss", $email, $phone);
     $checkQuery->execute();
     $checkQuery->store_result();
 
     if ($checkQuery->num_rows > 0) {
-        echo "<script>alert('Email already registered. Try logging in.'); window.location.href='../pages/login.php';</script>";
-        $checkQuery->close();
-        exit();
+        $checkQuery->bind_result($existingEmail, $existingPhone);
+        while ($checkQuery->fetch()) {
+            if ($existingEmail === $email) {
+                echo "<script>alert('Email already registered.'); window.history.back();</script>";
+                exit();
+            }
+            if ($existingPhone === $phone) {
+                echo "<script>alert('Phone number already registered.'); window.history.back();</script>";
+                exit();
+            }
+        }
     }
     $checkQuery->close();
 

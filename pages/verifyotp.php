@@ -63,7 +63,7 @@
       <!-- Right Section -->
       <div class="right-section">
         <div class="logo">
-          <img src="img/money-bag.png" alt="logo" />
+          <img src="../assests/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
         <h1 class="reset">Verify OTP</h1>

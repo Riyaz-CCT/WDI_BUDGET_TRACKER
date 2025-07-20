@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // OTP matched
     if ($_SESSION['otp_type'] === 'forgot_password') {
-        header("Location: ../pages/resetpassword.php");
+        header("Location: ../pages/resetpassword.html");
         exit();
     }
 

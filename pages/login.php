@@ -14,7 +14,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> May 2025 Expenses
           </div>
-          <div class="expense-amount">$2,000</div>
+          <div class="expense-amount">₹2,000</div>
           <div class="expense-change"><span>⬆️</span> 5%</div>
 
           <div class="graph-container">
@@ -37,7 +37,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> June 2025 Expenses
           </div>
-          <div class="expense-amount">$12,000</div>
+          <div class="expense-amount">₹12,000</div>
           <div class="expense-change"><span>⬆️</span> 12%</div>
 
           <div class="graph-container">

@@ -21,8 +21,8 @@ error_reporting(E_ALL);
 //     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 // }
 
-$user_id = 18; // Replace with session user ID later
-//$user_id = $_SESSION['user_id']; 
+//$user_id = 18; // Replace with session user ID later
+$user_id = $_SESSION['user_id']; 
 
 
 $query = "SELECT 

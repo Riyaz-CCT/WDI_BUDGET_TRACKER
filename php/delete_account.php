@@ -22,7 +22,7 @@ try {
     $stmt = $conn->prepare("DELETE FROM transactions WHERE user_id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
-    $stmt->close();
+    $stmt->close();//one query for all
 
     // ✅ Finally delete user
     $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");

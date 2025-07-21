@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Categories - Expense Tracker</title>
+  <title>FinTrack Pro Categories</title>
   <link rel="stylesheet" href="../css/categories_styles.css" />
   <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -98,9 +98,9 @@
           <thead>
   <tr>
     <th data-sort="date">Date <i class="fa fa-sort"></i></th>
+    <th>Item</th>
     <th data-sort="category">Category <i class="fa fa-sort"></i></th>
     <th>Description</th>
-    <th>Item</th>
     <th>Type</th>
     <th data-sort="amount">Amount <i class="fa fa-sort"></i></th>
     <th>Payment</th>
@@ -328,9 +328,9 @@ $(document).ready(function () {
       const row = `
         <tr data-id="${txn.id}">
           <td>${txn.date}</td>
+          <td>${txn.item}</td>
           <td>${txn.category}</td>
           <td>${txn.description}</td>
-          <td>${txn.item}</td>
           <td>${txn.transaction_type}</td>
           <td style="color:#3949ab;font-weight:bold;">₹${parseFloat(txn.amount).toFixed(2)}</td>
           <td>${txn.payment_method}</td>

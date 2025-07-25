@@ -64,7 +64,7 @@
     </ul>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Content = -->
   <div class="main--content">
     <div class="header--wrapper">
       <div class="header--title"><h2>Categories</h2></div>

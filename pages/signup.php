@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign Up</title>
     <link rel="stylesheet" href="../css/login_styles.css" />
+    <!-- Font Awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <style>
       /* Optional fade animation for popup */
       #password-popup {
@@ -90,17 +96,47 @@
             <input type="text" name="name" placeholder="Full Name *" required />
             <input type="text" name="phone" placeholder="Phone Number *" required />
           </div>
+
           <input type="email" name="email" placeholder="Email *" required />
+
           <div class="input-row">
-            <input type="password" name="password" placeholder="Password *" required />
-            <input type="password" name="repassword" placeholder="Re-enter Your Password *" required />
+            <div style="position: relative; width: 100%;">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password *"
+                required
+                style="width: 100%; padding-right: 40px;"
+              />
+              <i
+                class="fa-solid fa-eye toggle-password"
+                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                data-target="password"
+              ></i>
+            </div>
+            <div style="position: relative; width: 100%;">
+              <input
+                type="password"
+                name="repassword"
+                placeholder="Re-enter Your Password *"
+                required
+                style="width: 100%; padding-right: 40px;"
+              />
+              <i
+                class="fa-solid fa-eye toggle-password"
+                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                data-target="repassword"
+              ></i>
+            </div>
           </div>
 
           <!-- Popup for password validation -->
           <div id="password-popup"></div>
 
           <button type="submit" class="sign-in">Sign Up!</button>
-          <p class="login-text">Already have an account? <a href="login.php">Log In</a></p>
+          <p class="login-text">
+            Already have an account? <a href="login.php">Log In</a>
+          </p>
         </form>
       </div>
     </div>
@@ -169,6 +205,25 @@
         }
 
         hidePopup();
+      });
+
+      const toggleIcons = document.querySelectorAll(".toggle-password");
+
+      toggleIcons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+          const targetName = icon.getAttribute("data-target");
+          const input = document.querySelector(`input[name="${targetName}"]`);
+
+          if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+          } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+          }
+        });
       });
     </script>
   </body>

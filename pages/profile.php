@@ -160,8 +160,10 @@
         $("#deleteBtn").click(function () {
           const confirmed = confirm("⚠️ Are you sure you want to delete your account? This action cannot be undone.");
           if (confirmed) {
-            window.location.href = "../php/delete_account.php";
+            window.location.href = "../php/send_delete_otp.php";
+;
           }
+          
         });
       });
     </script>

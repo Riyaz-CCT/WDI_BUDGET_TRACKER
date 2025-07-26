@@ -5,9 +5,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FinTrack Pro Dashboard</title>
+    <title>FinTrack Pro Profile</title>
 
     <link rel="stylesheet" href="../css/profile.css" />
+    <link rel="stylesheet" href="../css/sidebar.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -16,33 +17,10 @@
 
   <body>
     <!-- ===================== SIDEBAR ===================== -->
-    <div class="sidebar">
-    <div class="logo">
-      <img src="../assests/budget.png" alt="Logo" />
-      <p>FinTrack Pro</p>
-    </div>
-    <ul class="menu">
-      <li >
-        <a href="dashboard.php"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
-      </li>
-      <li>
-        <a href="categories.php"><i class="fas fa-list-alt"></i><span>Expenses</span></a>
-      </li>
-      <li class="active">
-        <a href="#"><i class="fas fa-user"></i><span>My Profile</span></a>
-      </li>
-      <li class="logout">
-        <a href="../php/logout.php" id="logout-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-      </li>
-    </ul>
-  </div>
+    <?php include '../components/sidebar.php'; ?>
 
     <!-- ===================== MAIN ===================== -->
     <div class="main-container">
-      <!-- <div class="header--wrapper">
-        <div class="header--title"><h2>My Profile</h2></div>
-      </div> -->
-
       <div class="profile-card">
         <div class="profile-left">
           <img src="../assests/profile.png" alt="Profile" class="profile-avatar" />
@@ -63,9 +41,13 @@
               <p id="profileBudget">₹0.00</p>
             </div>
             <div class="profile-row">
+              <label>Target Saving</label>
+              <p id="profileSaving">₹0.00</p>
+            </div>
+            <!-- <div class="profile-row">
               <label>Debt</label>
               <p id="profileDebt">₹0.00</p>
-            </div>
+            </div> -->
           </div>
 
           <div class="profile-button">
@@ -88,16 +70,19 @@
         <h2>Edit Profile</h2>
         <form id="editProfileForm">
           <label>Username:</label>
-          <input type="text" id="usernameInput" required />
+          <input type="text" id="usernameInput"/>
 
           <label>Phone:</label>
-          <input type="text" id="phoneInput" required />
+          <input type="text" id="phoneInput" />
 
           <label>Target Expense:</label>
-          <input type="number" id="budgetInput" required />
+          <input type="number" id="budgetInput" />
+
+          <label>Target Saving:</label>
+          <input type="number" id="savingInput" />
 
           <label>Debt:</label>
-          <input type="number" id="debtInput" required />
+          <input type="number" id="debtInput" />
 
           <button type="submit">Save Changes</button>
         </form>
@@ -108,6 +93,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
+        let originalValues = {};
+
         // Fetch profile data
         $.ajax({
           url: "../php/get_profile_data.php",
@@ -119,13 +106,21 @@
               return;
             }
 
-            // Populate profile info
             $(".profile-name").text(data.name);
             $("#profileEmail").text(data.email);
             $("#profilePhone").text(data.phone);
             $("#profileBudget").text(`₹${data.target_expense}`);
+            $("#profileSaving").text(`₹${data.target_saving}`);
             $("#profileDebt").text(`₹${data.debt}`);
             $(".member-since").text(`Member since ${data.member_since}`);
+
+            originalValues = {
+              name: data.name,
+              phone: data.phone,
+              target_expense: data.target_expense,
+              target_saving: data.target_saving,
+              debt: data.debt
+            };
           },
           error: function () {
             alert("Failed to load profile data.");
@@ -137,6 +132,7 @@
           $("#usernameInput").val($(".profile-name").text());
           $("#phoneInput").val($("#profilePhone").text());
           $("#budgetInput").val($("#profileBudget").text().replace("₹", ""));
+          $("#savingInput").val($("#profileSaving").text().replace("₹", ""));
           $("#debtInput").val($("#profileDebt").text().replace("₹", ""));
           $("#editModal").addClass("show");
         });
@@ -146,24 +142,64 @@
           $("#editModal").removeClass("show");
         });
 
-        // Save changes (frontend only for now)
+        // Save changes — only send changed fields
         $("#editProfileForm").submit(function (e) {
           e.preventDefault();
-          $(".profile-name").text($("#usernameInput").val());
-          $("#profilePhone").text($("#phoneInput").val());
-          $("#profileBudget").text(`₹${$("#budgetInput").val()}`);
-          $("#profileDebt").text(`₹${$("#debtInput").val()}`);
-          $("#editModal").removeClass("show");
+
+          const currentValues = {
+            name: $("#usernameInput").val(),
+            phone: $("#phoneInput").val(),
+            target_expense: $("#budgetInput").val(),
+            target_saving: $("#savingInput").val(),
+            debt: $("#debtInput").val()
+          };
+
+          const updatedData = {};
+          for (const key in currentValues) {
+            const original = originalValues[key]?.toString().trim();
+            const current = currentValues[key]?.toString().trim();
+            if (current !== "" && current !== original) {
+              updatedData[key] = current;
+            }
+          }
+
+          if (Object.keys(updatedData).length === 0) {
+            alert("⚠️ No changes detected.");
+            return;
+          }
+
+          $.ajax({
+            url: "../php/update_profile.php",
+            method: "POST",
+            dataType: "json",
+            data: updatedData,
+            success: function (response) {
+              if (response.success) {
+                alert("✅ Profile updated successfully.");
+
+                if (updatedData.name) $(".profile-name").text(updatedData.name);
+                if (updatedData.phone) $("#profilePhone").text(updatedData.phone);
+                if (updatedData.target_expense) $("#profileBudget").text(`₹${updatedData.target_expense}`);
+                if (updatedData.target_saving) $("#profileSaving").text(`₹${updatedData.target_saving}`);
+                if (updatedData.debt) $("#profileDebt").text(`₹${updatedData.debt}`);
+
+                $("#editModal").removeClass("show");
+              } else {
+                alert("⚠️ No updates applied.");
+              }
+            },
+            error: function () {
+              alert("❌ Failed to send changes.");
+            }
+          });
         });
 
-        // Confirm delete action
+        // Confirm delete with OTP redirection
         $("#deleteBtn").click(function () {
           const confirmed = confirm("⚠️ Are you sure you want to delete your account? This action cannot be undone.");
           if (confirmed) {
             window.location.href = "../php/send_delete_otp.php";
-;
           }
-          
         });
       });
     </script>

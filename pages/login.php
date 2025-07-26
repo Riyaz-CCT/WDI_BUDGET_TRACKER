@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fintrack Login</title>
     <link rel="stylesheet" href="../css/login_styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="container">
@@ -14,7 +18,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> May 2025 Expenses
           </div>
-          <div class="expense-amount">₹2,000</div>
+          <div class="expense-amount">$2,000</div>
           <div class="expense-change"><span>⬆️</span> 5%</div>
 
           <div class="graph-container">
@@ -37,7 +41,7 @@
           <div class="expense-title">
             <span class="icon">📊</span> June 2025 Expenses
           </div>
-          <div class="expense-amount">₹12,000</div>
+          <div class="expense-amount">$12,000</div>
           <div class="expense-change"><span>⬆️</span> 12%</div>
 
           <div class="graph-container">
@@ -63,6 +67,7 @@
           <img src="../assests/budget.png" alt="logo" />
           <span>FinTrack Pro</span>
         </div>
+
         <h1>Welcome To FinTrack Pro!</h1>
         <p class="subtext">Log in to continue your financial journey.</p>
 
@@ -77,13 +82,21 @@
           />
 
           <label for="password">Password <span>*</span></label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Please enter your password"
-            required
-          />
+          <div style="position: relative; width: 100%;">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Please enter your password"
+              required
+              style="width: 100%; padding-right: 40px;"
+            />
+            <i
+              class="fa-solid fa-eye toggle-password"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+              onclick="togglePassword()"
+            ></i>
+          </div>
 
           <a href="forgot-password.php" class="forgot">Forgot Password?</a>
 
@@ -92,18 +105,6 @@
           <p class="signup">
             Not a member yet? <a href="signup.php">Sign Up</a>
           </p>
-
-          <!-- <button
-            type="button"
-            class="google-btn"
-            onclick="alert('Google Sign-In coming soon!');"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/300/300221.png"
-              alt="Google Icon"
-            />
-            Sign In With Google
-          </button> -->
         </form>
       </div>
     </div>
@@ -111,7 +112,17 @@
     <script>
       function togglePassword() {
         const pwd = document.getElementById("password");
-        pwd.type = pwd.type === "password" ? "text" : "password";
+        const icon = document.querySelector(".toggle-password");
+
+        if (pwd.type === "password") {
+          pwd.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          pwd.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
       }
     </script>
   </body>

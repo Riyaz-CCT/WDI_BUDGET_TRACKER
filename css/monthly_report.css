@@ -78,3 +78,25 @@ hr {
   text-align: center;
   color: #888;
 }
+
+.temp{
+display: flex;
+
+
+}
+
+
+.back-arrow {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 20px;
+  color: #3f51b5;
+  text-decoration: none;
+  z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.back-arrow:hover {
+  color: #303f9f;
+}

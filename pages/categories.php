@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FinTrack Pro Categories</title>
+  <title>Categories - Expense Tracker</title>
   <link rel="stylesheet" href="../css/categories_styles.css" />
   <link rel="stylesheet" href="../css/sidebar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -64,7 +64,7 @@
     </ul>
   </div>
 
-  <!-- Main Content = -->
+  <!-- Main Content -->
   <div class="main--content">
     <div class="header--wrapper">
       <div class="header--title"><h2>Categories</h2></div>
@@ -98,9 +98,9 @@
           <thead>
   <tr>
     <th data-sort="date">Date <i class="fa fa-sort"></i></th>
-    <th>Item</th>
     <th data-sort="category">Category <i class="fa fa-sort"></i></th>
     <th>Description</th>
+    <th>Item</th>
     <th>Type</th>
     <th data-sort="amount">Amount <i class="fa fa-sort"></i></th>
     <th>Payment</th>
@@ -328,9 +328,9 @@ $(document).ready(function () {
       const row = `
         <tr data-id="${txn.id}">
           <td>${txn.date}</td>
-          <td>${txn.item}</td>
           <td>${txn.category}</td>
           <td>${txn.description}</td>
+          <td>${txn.item}</td>
           <td>${txn.transaction_type}</td>
           <td style="color:#3949ab;font-weight:bold;">₹${parseFloat(txn.amount).toFixed(2)}</td>
           <td>${txn.payment_method}</td>
@@ -347,28 +347,72 @@ $(document).ready(function () {
   }
 
   function updatePaginationControls(data) {
-    const totalPages = Math.ceil(data.length / rowsPerPage);
-    const container = document.getElementById("pageButtons");
-    container.innerHTML = "";
+  const totalPages = Math.ceil(data.length / rowsPerPage);
+  const container = document.getElementById("pageButtons");
+  container.innerHTML = "";
+
+  const createButton = (page) => {
+    const btn = document.createElement("button");
+    btn.textContent = page;
+    if (page === currentPage) btn.classList.add("active");
+    btn.onclick = () => {
+      currentPage = page;
+      renderTableRows(filteredData);
+      updatePaginationControls(filteredData);
+    };
+    return btn;
+  };
+
+  const addEllipsis = () => {
+    const dots = document.createElement("span");
+    dots.textContent = "...";
+    dots.style.padding = "0 8px";
+    container.appendChild(dots);
+  };
+
+  if (totalPages <= 6) {
     for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = i;
-      if (i === currentPage) btn.classList.add("active");
-      btn.onclick = () => {
-        currentPage = i;
-        renderTableRows(filteredData);
-        updatePaginationControls(filteredData);
-      };
-      container.appendChild(btn);
+      container.appendChild(createButton(i));
+    }
+  } else {
+    // Show first 3
+    for (let i = 1; i <= 3; i++) {
+      container.appendChild(createButton(i));
     }
 
-    document.getElementById("firstPageBtn").onclick = () => { currentPage = 1; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-    document.getElementById("prevPageBtn").onclick = () => { if (currentPage > 1) currentPage--; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-    document.getElementById("nextPageBtn").onclick = () => { if (currentPage < totalPages) currentPage++; renderTableRows(filteredData); updatePaginationControls(filteredData); };
-    document.getElementById("lastPageBtn").onclick = () => { currentPage = totalPages; renderTableRows(filteredData); updatePaginationControls(filteredData); };
+    // Add ellipsis if not near end
+    if (currentPage < totalPages - 3) {
+      addEllipsis();
+    }
+
+    // Show last 3 pages
+    for (let i = totalPages - 2; i <= totalPages; i++) {
+      container.appendChild(createButton(i));
+    }
   }
 
-  function sortData(key) {
+  document.getElementById("firstPageBtn").onclick = () => {
+    currentPage = 1;
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+  };
+  document.getElementById("prevPageBtn").onclick = () => {
+    if (currentPage > 1) currentPage--;
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+  };
+  document.getElementById("nextPageBtn").onclick = () => {
+    if (currentPage < totalPages) currentPage++;
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+  };
+  document.getElementById("lastPageBtn").onclick = () => {
+    currentPage = totalPages;
+    renderTableRows(filteredData);
+    updatePaginationControls(filteredData);
+  };
+}
+function sortData(key) {
     if (currentSortKey === key) sortDirection[key] = !sortDirection[key];
     else { sortDirection = {}; sortDirection[key] = true; currentSortKey = key; }
 

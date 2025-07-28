@@ -1,19 +1,20 @@
 <?php
 include 'auth.php';
-include 'config.php'; // Adjust the path to your DB connection file
+include 'config.php';
+
 $user_id = $_SESSION['user_id']; 
 
 header('Content-Type: application/json');
-// $conn = new mysqli("localhost", "root", "", "fintrack_v2");
-// if ($conn->connect_error) {
-//     echo json_encode(["error" => "Connection failed"]);
-//     exit;
-// }
-
 
 $categories = [];
-$res = $conn->query("SELECT name FROM categories ORDER BY name ASC");
-while ($row = $res->fetch_assoc()) {
+
+// Fetch categories that are either global (user_id IS NULL) or specific to the current user
+$stmt = $conn->prepare("SELECT name FROM categories WHERE user_id IS NULL OR user_id = ? ORDER BY name ASC");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
     $categories[] = $row['name'];
 }
 

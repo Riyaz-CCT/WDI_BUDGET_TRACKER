@@ -12,6 +12,7 @@
         margin: 0;
       }
     </style>
+    <link rel="icon" type="image/png" href="../assests/budget.png">
   </head>
   <body>
     <div class="container">

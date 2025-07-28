@@ -5,6 +5,7 @@ $month = date('F Y'); // Example: July 2025
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,11 +14,19 @@ $month = date('F Y'); // Example: July 2025
   <link rel="stylesheet" href="../css/responsive_dashboard.css" />
   <link rel="stylesheet" href="../css/monthly_report.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="icon" type="image/png" href="../assests/budget.png">
 </head>
+
 <body>
-  <div class="main--content" >
+
+  <div class="main--content">
+    <a href="../pages/dashboard.php" class="back-button"><i class="fas fa-arrow-left"></i></a>
     <h1>Monthly Financial Report</h1>
-    <p><strong>Name:</strong> <?= htmlspecialchars($name) ?><br><strong>Month:</strong> <?= htmlspecialchars($month) ?></p>
+
+    <p><strong>Name:</strong>
+      <?= htmlspecialchars($name) ?><br><strong>Month:</strong>
+      <?= htmlspecialchars($month) ?>
+    </p>
     <hr>
 
     <h2 class="main--title">Overview Summary</h2>
@@ -58,7 +67,11 @@ $month = date('F Y'); // Example: July 2025
         <h2 class="main--title">Expenses by Category</h2>
         <table class="styled-table">
           <thead>
-            <tr><th>Category</th><th>Amount</th><th>Percent</th></tr>
+            <tr>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Percent</th>
+            </tr>
           </thead>
           <tbody>
             <!-- Filled by JS -->
@@ -69,7 +82,11 @@ $month = date('F Y'); // Example: July 2025
         <h2 class="main--title">Expenses by Payment Method</h2>
         <table class="styled-table">
           <thead>
-            <tr><th>Method</th><th>Amount</th><th>Percent</th></tr>
+            <tr>
+              <th>Method</th>
+              <th>Amount</th>
+              <th>Percent</th>
+            </tr>
           </thead>
           <tbody>
             <!-- Filled by JS -->
@@ -83,7 +100,10 @@ $month = date('F Y'); // Example: July 2025
     <h2 class="main--title">Top 10 Expenses</h2>
     <table class="styled-table" id="top-transactions-table">
       <thead>
-        <tr><th>Item</th><th>Amount</th></tr>
+        <tr>
+          <th>Item</th>
+          <th>Amount</th>
+        </tr>
       </thead>
       <tbody>
         <!-- Filled by JS -->
@@ -232,5 +252,5 @@ $month = date('F Y'); // Example: July 2025
     });
   </script>
 </body>
+
 </html>
-    

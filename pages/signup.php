@@ -29,6 +29,7 @@
         transition: opacity 0.3s ease-in-out;
       }
     </style>
+    <link rel="icon" type="image/png" href="../assests/budget.png">
   </head>
 
   <body>
